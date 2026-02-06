@@ -1,0 +1,7 @@
+{
+  "name": "DermaTrichology Hub",
+  "description": "Comprehensive management system for dermatology and trichology clinics, featuring patient tracking, specialized clinical histories, session evolution, and AI-powered lab analysis.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
