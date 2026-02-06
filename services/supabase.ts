@@ -21,6 +21,14 @@ const createSafeClient = () => {
                 },
                 signOut: async () => { },
                 getSession: async () => ({ data: { session: null }, error: null }),
+                signInWithPassword: async () => {
+                    console.error('Supabase credentials missing.');
+                    return { data: null, error: { message: 'Error de configuración: Faltan credenciales de Supabase (VITE_SUPABASE_URL)' } };
+                },
+                signUp: async () => {
+                    console.error('Supabase credentials missing.');
+                    return { data: null, error: { message: 'Error de configuración: Faltan credenciales de Supabase' } };
+                },
             },
             from: () => ({
                 select: () => ({
