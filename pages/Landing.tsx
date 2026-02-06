@@ -1,7 +1,7 @@
 
 import React from 'react';
-import { DB, AppSettings } from '../services/db';
-import { AppointmentRequest } from '../types';
+import { DB } from '../services/db';
+import { AppointmentRequest, AppSettings } from '../types';
 import {
   Calendar,
   Stethoscope,
@@ -25,13 +25,13 @@ import {
 
 const Landing: React.FC = () => {
   const [settings, setSettings] = React.useState<AppSettings>({
-    appName: 'DermaTrich',
-    logoUrl: '',
-    logoWidth: 220,
-    logoHeight: 100,
-    doctorName: 'Cargando...',
-    doctorProfession: '...',
-    doctorPhoto: ''
+    app_name: 'DermaTrich',
+    logo_url: '',
+    logo_width: 220,
+    logo_height: 100,
+    doctor_name: 'Cargando...',
+    doctor_profession: '...',
+    doctor_photo_url: ''
   });
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const [showSuccess, setShowSuccess] = React.useState(false);
@@ -148,21 +148,21 @@ const Landing: React.FC = () => {
       <header className="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md border-b border-slate-100 z-50">
         <div className="max-w-7xl mx-auto px-6 h-28 flex items-center justify-center md:justify-between">
           <div className="flex items-center gap-3">
-            {settings.logoUrl ? (
+            {settings.logo_url ? (
               <img
-                src={settings.logoUrl}
+                src={settings.logo_url}
                 style={{
                   width: 'auto',
-                  height: settings.logoHeight * 0.7,
-                  maxWidth: settings.logoWidth * 0.9,
+                  height: settings.logo_height * 0.7,
+                  maxWidth: settings.logo_width * 0.9,
                   objectFit: 'contain'
                 }}
                 alt="Logo"
               />
             ) : (
               <>
-                <div className="w-12 h-12 bg-[#d3b3a8] rounded-xl flex items-center justify-center text-white font-black text-2xl">{settings.appName[0]}</div>
-                <span className="font-black text-2xl tracking-tighter">{settings.appName}</span>
+                <div className="w-12 h-12 bg-[#d3b3a8] rounded-xl flex items-center justify-center text-white font-black text-2xl">{settings.app_name?.[0] || 'D'}</div>
+                <span className="font-black text-2xl tracking-tighter">{settings.app_name || 'DermaTrich'}</span>
               </>
             )}
           </div>
