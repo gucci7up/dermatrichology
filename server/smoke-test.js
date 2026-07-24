@@ -106,9 +106,16 @@ const run = async () => {
   assert.deepEqual(trichList.body[0].examen_fisico, trichPayload.examen_fisico);
   console.log('JSONB round-trip passed (nested objects survived insert + read)');
 
-  const tooLong = await call('/patients', { method: 'POST', body: JSON.stringify({ id: crypto.randomUUID(), nombre_completo: 'a'.repeat(20001) }) }, token);
+  const tooLong = await call('/appointments', { method: 'POST', body: JSON.stringify({ id: crypto.randomUUID(), paciente_nombre: 'a'.repeat(20001) }) }, token);
   assert.equal(tooLong.status, 400, 'oversized field should be rejected');
   console.log('input length validation works');
+
+  const bigImage = 'data:image/png;base64,' + 'A'.repeat(50000);
+  const photoUpdate = await call(`/patients/${patientId}`, { method: 'PATCH', body: JSON.stringify({ foto_perfil: bigImage }) }, token);
+  assert.equal(photoUpdate.status, 204, 'legitimate base64 image should be accepted');
+  const settingsUpdate = await call('/settings', { method: 'PUT', body: JSON.stringify({ app_name: 'DermaTrich', logo_url: bigImage }) }, token);
+  assert.equal(settingsUpdate.status, 204, 'legitimate base64 logo image should be accepted');
+  console.log('base64 image upload accepted');
 
   const del = await call(`/patients/${patientId}`, { method: 'DELETE' }, token);
   assert.equal(del.status, 204);

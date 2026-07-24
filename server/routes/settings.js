@@ -26,7 +26,7 @@ router.get('/', asyncHandler(async (req, res) => {
 }));
 
 router.put('/', asyncHandler(async (req, res) => {
-  assertLengths(req.body);
+  assertLengths(req.body, 8_000_000);
   const keys = SETTINGS_COLUMNS.filter((c) => req.body[c] !== undefined);
   if (keys.length === 0) return res.status(400).json({ error: 'No fields to update' });
 
