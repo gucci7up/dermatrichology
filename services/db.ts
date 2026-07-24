@@ -71,6 +71,9 @@ export const DB = {
     },
     save: async (app: AppointmentRequest) => {
       await api('/appointments', { method: 'POST', body: JSON.stringify(app) });
+    },
+    updateStatus: async (id: string, estado: 'pendiente' | 'confirmada' | 'cancelada') => {
+      await api(`/appointments/${id}`, { method: 'PATCH', body: JSON.stringify({ estado }) });
     }
   },
 

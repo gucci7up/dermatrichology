@@ -16,52 +16,105 @@ import {
 import { DB } from '../services/db';
 import { Patient, Session, AppointmentRequest } from '../types';
 import { useNavigate, Link } from 'react-router-dom';
+import { useToast } from '../context/ToastContext';
+
+const emptyAppointmentForm = {
+  paciente_nombre: '',
+  paciente_telefono: '',
+  especialidad: 'derm' as 'derm' | 'trich',
+  fecha_preferida: '',
+  hora_preferida: '',
+  motivo: ''
+};
+
+const estadoBadgeClasses: Record<AppointmentRequest['estado'], string> = {
+  pendiente: 'bg-amber-100 text-amber-700',
+  confirmada: 'bg-emerald-100 text-emerald-700',
+  cancelada: 'bg-red-100 text-red-700'
+};
 
 const Consultations: React.FC = () => {
   const navigate = useNavigate();
+  const { notify } = useToast();
   const [searchTerm, setSearchTerm] = React.useState('');
   const [recentSessions, setRecentSessions] = React.useState<any[]>([]);
   const [appointments, setAppointments] = React.useState<AppointmentRequest[]>([]);
   const [patients, setPatients] = React.useState<Patient[]>([]);
+  const [appointmentForm, setAppointmentForm] = React.useState(emptyAppointmentForm);
+  const [savingAppointment, setSavingAppointment] = React.useState(false);
+
+  const loadData = React.useCallback(async () => {
+    try {
+      const allPatients = await DB.patients.getAll();
+      setPatients(allPatients);
+
+      const allSessions: any[] = [];
+      // Fetch sessions for each patient concurrently
+      await Promise.all(allPatients.map(async p => {
+        const pSessions = await DB.sessions.getByPatient(p.id);
+        pSessions.forEach(s => {
+          allSessions.push({
+            ...s,
+            patientName: p.nombre_completo,
+            patientPhoto: p.foto_perfil,
+            patientId: p.id
+          });
+        });
+      }));
+
+      setRecentSessions(allSessions.sort((a, b) => b.fecha.localeCompare(a.fecha)));
+
+      // Load real appointments
+      const allAppointmentsRes = await DB.appointments.getAll();
+      const filteredAppointments = allAppointmentsRes
+        .filter(a => a.estado !== 'cancelada')
+        .sort((a, b) => {
+          const dateCompare = a.fecha_preferida.localeCompare(b.fecha_preferida);
+          if (dateCompare !== 0) return dateCompare;
+          return a.hora_preferida.localeCompare(b.hora_preferida);
+        });
+      setAppointments(filteredAppointments);
+    } catch (error) {
+      console.error("Error loading consultations data:", error);
+    }
+  }, []);
 
   React.useEffect(() => {
-    const loadData = async () => {
-      try {
-        const allPatients = await DB.patients.getAll();
-        setPatients(allPatients);
-
-        const allSessions: any[] = [];
-        // Fetch sessions for each patient concurrently
-        await Promise.all(allPatients.map(async p => {
-          const pSessions = await DB.sessions.getByPatient(p.id);
-          pSessions.forEach(s => {
-            allSessions.push({
-              ...s,
-              patientName: p.nombre_completo,
-              patientPhoto: p.foto_perfil,
-              patientId: p.id
-            });
-          });
-        }));
-
-        setRecentSessions(allSessions.sort((a, b) => b.fecha.localeCompare(a.fecha)));
-
-        // Load real appointments
-        const allAppointmentsRes = await DB.appointments.getAll();
-        const filteredAppointments = allAppointmentsRes
-          .filter(a => a.estado !== 'cancelada')
-          .sort((a, b) => {
-            const dateCompare = a.fecha_preferida.localeCompare(b.fecha_preferida);
-            if (dateCompare !== 0) return dateCompare;
-            return a.hora_preferida.localeCompare(b.hora_preferida);
-          });
-        setAppointments(filteredAppointments);
-      } catch (error) {
-        console.error("Error loading consultations data:", error);
-      }
-    };
     loadData();
-  }, []);
+  }, [loadData]);
+
+  const handleCreateAppointment = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setSavingAppointment(true);
+    try {
+      await DB.appointments.save({
+        id: crypto.randomUUID(),
+        estado: 'pendiente',
+        created_at: new Date().toISOString(),
+        paciente_correo: '',
+        ...appointmentForm
+      });
+      setAppointmentForm(emptyAppointmentForm);
+      await loadData();
+      notify('Cita creada correctamente', 'success');
+    } catch (error) {
+      console.error('Error creating appointment:', error);
+      notify('No se pudo crear la cita', 'error');
+    } finally {
+      setSavingAppointment(false);
+    }
+  };
+
+  const handleUpdateStatus = async (id: string, estado: 'confirmada' | 'cancelada') => {
+    try {
+      await DB.appointments.updateStatus(id, estado);
+      await loadData();
+      notify(estado === 'confirmada' ? 'Cita confirmada' : 'Cita cancelada', 'success');
+    } catch (error) {
+      console.error('Error updating appointment status:', error);
+      notify('No se pudo actualizar la cita', 'error');
+    }
+  };
 
   const filteredPatients = patients.filter(p =>
     p.nombre_completo.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -93,7 +146,6 @@ const Consultations: React.FC = () => {
                 </div>
                 <h3 className="font-black text-lg text-slate-900">Actividad Clínica Reciente</h3>
               </div>
-              <button className="text-[10px] font-black text-blue-600 uppercase tracking-widest hover:underline">Ver Historial Completo</button>
             </div>
 
             <div className="divide-y divide-slate-200">
@@ -188,6 +240,77 @@ const Consultations: React.FC = () => {
             </div>
           </section>
 
+          {/* NUEVA CITA - Alta manual desde el consultorio */}
+          <section className="bg-slate-900 rounded-[2.5rem] p-8 text-white shadow-2xl relative overflow-hidden group">
+            <div className="absolute -right-6 -top-6 opacity-10 group-hover:scale-110 transition-transform duration-700">
+              <CalendarIcon className="w-40 h-40" />
+            </div>
+
+            <div className="relative z-10 space-y-5">
+              <div>
+                <h3 className="text-xl font-black mb-2">Nueva Cita</h3>
+                <p className="text-slate-400 text-xs font-bold leading-relaxed">Registra una cita directamente desde el consultorio.</p>
+              </div>
+
+              <form onSubmit={handleCreateAppointment} className="space-y-3">
+                <input
+                  type="text"
+                  required
+                  placeholder="Nombre del paciente"
+                  value={appointmentForm.paciente_nombre}
+                  onChange={(e) => setAppointmentForm({ ...appointmentForm, paciente_nombre: e.target.value })}
+                  className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-2xl text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all placeholder-slate-500 font-bold"
+                />
+                <input
+                  type="tel"
+                  required
+                  placeholder="Teléfono"
+                  value={appointmentForm.paciente_telefono}
+                  onChange={(e) => setAppointmentForm({ ...appointmentForm, paciente_telefono: e.target.value })}
+                  className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-2xl text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all placeholder-slate-500 font-bold"
+                />
+                <select
+                  value={appointmentForm.especialidad}
+                  onChange={(e) => setAppointmentForm({ ...appointmentForm, especialidad: e.target.value as 'derm' | 'trich' })}
+                  className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-2xl text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all font-bold"
+                >
+                  <option value="derm">Dermatología</option>
+                  <option value="trich">Tricología</option>
+                </select>
+                <div className="grid grid-cols-2 gap-3">
+                  <input
+                    type="date"
+                    required
+                    value={appointmentForm.fecha_preferida}
+                    onChange={(e) => setAppointmentForm({ ...appointmentForm, fecha_preferida: e.target.value })}
+                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-2xl text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all font-bold"
+                  />
+                  <input
+                    type="time"
+                    required
+                    value={appointmentForm.hora_preferida}
+                    onChange={(e) => setAppointmentForm({ ...appointmentForm, hora_preferida: e.target.value })}
+                    className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-2xl text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all font-bold"
+                  />
+                </div>
+                <textarea
+                  placeholder="Motivo de la consulta"
+                  value={appointmentForm.motivo}
+                  onChange={(e) => setAppointmentForm({ ...appointmentForm, motivo: e.target.value })}
+                  rows={2}
+                  className="w-full px-4 py-3 bg-slate-800 border border-slate-700 rounded-2xl text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all placeholder-slate-500 font-bold resize-none"
+                />
+                <button
+                  type="submit"
+                  disabled={savingAppointment}
+                  className="w-full flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed text-white px-6 py-3.5 rounded-2xl font-black text-xs uppercase tracking-widest transition-all shadow-xl active:scale-95"
+                >
+                  <Plus className="w-4 h-4" /> {savingAppointment ? 'Guardando...' : 'Crear Cita'}
+                </button>
+              </form>
+            </div>
+          </section>
+
           {/* AGENDA PRÓXIMA DINÁMICA - Diseño según imagen */}
           <section className={`${cardClasses} p-6 shadow-xl border-2 border-slate-200`}>
             <div className="flex items-center gap-3 mb-6">
@@ -198,50 +321,55 @@ const Consultations: React.FC = () => {
             <div className="space-y-4">
               {appointments.length > 0 ? (
                 appointments.slice(0, 5).map((app) => (
-                  <div key={app.id} className="flex gap-4 p-4 bg-white rounded-3xl border border-slate-200 shadow-sm hover:border-blue-400 transition-all group relative">
-                    <div className="font-black text-blue-600 text-sm py-1 border-r border-slate-200 pr-4 flex items-center justify-center min-w-[60px]">
-                      {app.hora_preferida}
+                  <div key={app.id} className="flex flex-col gap-3 p-4 bg-white rounded-3xl border border-slate-200 shadow-sm hover:border-blue-400 transition-all group">
+                    <div className="flex gap-4">
+                      <div className="font-black text-blue-600 text-sm py-1 border-r border-slate-200 pr-4 flex items-center justify-center min-w-[60px]">
+                        {app.hora_preferida}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <p className="text-sm font-black text-slate-900 group-hover:text-blue-700 transition-colors">{app.paciente_nombre}</p>
+                          <span className={`text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full ${estadoBadgeClasses[app.estado]}`}>
+                            {app.estado}
+                          </span>
+                        </div>
+                        <p className="text-[10px] font-black text-slate-400 uppercase tracking-tighter">
+                          {app.especialidad === 'derm' ? 'DERMATOLOGÍA' : 'TRICOLOGÍA'} - {new Date(app.fecha_preferida).toLocaleDateString()}
+                        </p>
+                      </div>
                     </div>
-                    <div className="flex-1 pr-10">
-                      <p className="text-sm font-black text-slate-900 group-hover:text-blue-700 transition-colors">{app.paciente_nombre}</p>
-                      <p className="text-[10px] font-black text-slate-400 uppercase tracking-tighter">
-                        {app.especialidad === 'derm' ? 'DERMATOLOGÍA' : 'TRICOLOGÍA'} - {new Date(app.fecha_preferida).toLocaleDateString()}
-                      </p>
-                    </div>
-                    {/* Since we don't have patientId directly in AppointmentRequest easily mapped (it stores name string), 
-                        we might need to search for it or just go to patient creation if name not found.
-                        For now, assume manual search is preferred or we'd need to match strings.
-                        Actually, let's keep it simple: "Atender" goes to patients list or search in this page.
-                        But wait, the user wants "Logic". Let's assume we can match by name or phone if we really wanted to.
-                        However, simplistically, let's just make the item clickable to search/filter in the search bar above?
-                        Better: Add a button to "Registrar" if new, or "Atender" if existing.
-                        Let's just change the click to navigate to NewConsultation if feasible, but we lack ID.
-                        Okay, I'll assume for now these are "Solicitudes" mainly for new patients or existing.
-                        Let's adding a generic "Atender" button that populates the SEARCH bar?
-                        No, that's clunky.
-                        Let's just leave the appointment display as is but allow clicking to copy name to clipboard?
-                        Actually, existing code didn't have actions. I will add a small "Atender" button that just alerts for now 
-                        OR better, tries to find patient. 
-                        Let's stick to the prompt: "Consultations page... logic".
-                        I will make the SEARCH bar the primary way to start.
-                    */}
-                    <button
-                      onClick={() => navigate('/patients/new', {
-                        state: {
-                          prefill: {
-                            nombre_completo: app.paciente_nombre,
-                            telefono: app.paciente_telefono,
-                            correo: app.paciente_correo,
-                            motivo: app.motivo,
-                            specialty: app.especialidad,
-                            fecha_nacimiento: app.fecha_nacimiento
+                    <div className="flex items-center gap-2 flex-wrap">
+                      <button
+                        onClick={() => handleUpdateStatus(app.id, 'confirmada')}
+                        disabled={app.estado === 'confirmada'}
+                        className="px-3 py-1.5 bg-emerald-600 text-white rounded-lg font-black text-[10px] uppercase tracking-widest hover:bg-emerald-700 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+                      >
+                        Confirmar
+                      </button>
+                      <button
+                        onClick={() => handleUpdateStatus(app.id, 'cancelada')}
+                        className="px-3 py-1.5 bg-red-600 text-white rounded-lg font-black text-[10px] uppercase tracking-widest hover:bg-red-700 transition-all"
+                      >
+                        Cancelar
+                      </button>
+                      <button
+                        onClick={() => navigate('/patients/new', {
+                          state: {
+                            prefill: {
+                              nombre_completo: app.paciente_nombre,
+                              telefono: app.paciente_telefono,
+                              correo: app.paciente_correo,
+                              motivo: app.motivo,
+                              specialty: app.especialidad,
+                              fecha_nacimiento: app.fecha_nacimiento
+                            }
                           }
-                        }
-                      })}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 px-4 py-2 bg-slate-900 text-white rounded-xl opacity-0 group-hover:opacity-100 transition-all font-black text-[10px] uppercase tracking-widest hover:bg-black shadow-lg translate-x-4 group-hover:translate-x-0"
-                    >
-                      Registrar y Atender
-                    </button>
+                        })}
+                        className="px-3 py-1.5 bg-slate-900 text-white rounded-lg font-black text-[10px] uppercase tracking-widest hover:bg-black transition-all ml-auto"
+                      >
+                        Registrar y Atender
+                      </button>
+                    </div>
                   </div>
                 ))
               ) : (
@@ -250,10 +378,6 @@ const Consultations: React.FC = () => {
                 </div>
               )}
             </div>
-
-            <button className="w-full mt-8 py-4 border-2 border-slate-900 rounded-2xl text-[11px] font-black text-slate-900 uppercase tracking-[0.15em] hover:bg-slate-900 hover:text-white transition-all shadow-md">
-              Configurar Agenda Externa
-            </button>
           </section>
         </div>
       </div>
