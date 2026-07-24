@@ -5,7 +5,7 @@ import { DB } from '../services/db';
 import { Patient, DermHistory, TrichHistory, Session, LabResult, Treatment, Prescription } from '../types';
 import {
   User, Clipboard, Scissors, History, Beaker,
-  Plus, ChevronLeft, Printer,
+  ChevronLeft, Printer,
   Sun, AlertCircle, MapPin, FileText, ExternalLink,
   ChevronRight,
   Activity,
@@ -758,9 +758,6 @@ const PatientDetail: React.FC = () => {
                       <h3 className="text-2xl font-black text-slate-900">Historial Analítico Integral</h3>
                       <p className="text-xs text-slate-500 font-bold mt-1 uppercase tracking-widest">Dermatología y Tricología</p>
                     </div>
-                    <Link to="/analytics" className="text-xs font-black text-blue-600 bg-white px-6 py-3 rounded-2xl border-2 border-blue-100 flex items-center gap-2 hover:border-blue-600 hover:shadow-lg transition-all active:scale-95 group">
-                      <Beaker className="w-4 h-4 group-hover:scale-110 transition-transform" /> CARGAR ANALÍTICA IA
-                    </Link>
                   </div>
 
                   {labs.length > 0 ? (
@@ -858,11 +855,8 @@ const PatientDetail: React.FC = () => {
                       </div>
                       <h3 className="text-2xl font-black text-slate-800 uppercase tracking-tighter mb-2">Sin Historial Analítico</h3>
                       <p className="text-sm text-slate-400 font-bold max-w-md mx-auto">
-                        Carga y analiza resultados de laboratorio con IA en el módulo de Análisis para visualizar la interpretación clínica aquí.
+                        No hay resultados de laboratorio registrados para este paciente.
                       </p>
-                      <Link to="/analytics" className="inline-flex items-center gap-3 mt-8 bg-[#d3b3a8] text-white px-8 py-4 rounded-2xl font-black text-xs hover:bg-[#c4a499] transition-all shadow-xl shadow-[#d3b3a8]/20 active:scale-95">
-                        <Plus className="w-4 h-4" /> NUEVA ANALÍTICA CON IA
-                      </Link>
                     </div>
                   )}
                 </div>

@@ -6,7 +6,6 @@ import {
   Users,
   Stethoscope,
   FileText,
-  Activity,
   Settings,
   Menu,
   ChevronRight,
@@ -85,7 +84,6 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
     { to: '/patients', icon: Users, label: 'Pacientes', access: ['admin', 'doctor', 'assistant'] },
     { to: '/consultations', icon: Stethoscope, label: 'Consultas', access: ['admin', 'doctor', 'assistant'] },
     { to: '/reports', icon: FileText, label: 'Reportes', access: ['admin', 'doctor'] },
-    { to: '/analytics', icon: Activity, label: 'Análisis', access: ['admin', 'doctor'] },
     { to: '/settings', icon: Settings, label: 'Configuración', access: ['admin'] },
   ];
 

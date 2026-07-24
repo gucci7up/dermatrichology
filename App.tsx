@@ -8,7 +8,6 @@ import PatientDetail from './pages/PatientDetail';
 import NewPatient from './pages/NewPatient';
 import Settings from './pages/Settings';
 import PrintReport from './pages/PrintReport';
-import Analytics from './pages/Analytics';
 import Reports from './pages/Reports';
 import Consultations from './pages/Consultations';
 import NewConsultation from './pages/NewConsultation';
@@ -117,7 +116,6 @@ const App: React.FC = () => {
                   <Route path="/consultations" element={<Consultations />} />
                   <Route path="/consultations/new" element={<NewConsultation />} />
                   <Route path="/reports" element={<Reports />} />
-                  <Route path="/analytics" element={<Analytics />} />
                   <Route path="/settings" element={<Settings />} />
                 </Routes>
               </Layout>
