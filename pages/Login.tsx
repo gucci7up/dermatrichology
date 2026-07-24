@@ -1,11 +1,12 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { supabase } from '../services/supabase';
+import { useAuth } from '../context/AuthContext';
 import { Lock, Mail, Loader2, AlertCircle } from 'lucide-react';
 
 const Login: React.FC = () => {
     const navigate = useNavigate();
+    const { signIn } = useAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
@@ -17,16 +18,8 @@ const Login: React.FC = () => {
         setError(null);
 
         try {
-            const { data, error } = await supabase.auth.signInWithPassword({
-                email,
-                password,
-            });
-
-            if (error) throw error;
-
-            if (data.session) {
-                navigate('/');
-            }
+            await signIn(email, password);
+            navigate('/');
         } catch (err: any) {
             console.error('Login error:', err);
             setError(err.message || 'Error al iniciar sesión');
