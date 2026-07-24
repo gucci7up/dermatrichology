@@ -41,7 +41,21 @@ const NewPatient: React.FC = () => {
     }
   });
 
-  const [initialReasonTrich, setInitialReasonTrich] = React.useState('');
+  const [trichData, setTrichData] = React.useState({
+    motivo_consulta: '',
+    inicio_caida: '',
+    cantidad_diaria: '',
+    patron_caida: '',
+    factores_desencadenantes: '',
+    enfermedades_hormonales: '',
+    estres: '',
+    medicamentos: '',
+  });
+
+  const handleTrichChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setTrichData(prev => ({ ...prev, [name]: value }));
+  };
 
   // Handle prefill from Dashboard
   const location = useLocation();
@@ -66,7 +80,7 @@ const NewPatient: React.FC = () => {
       if (specialty === 'derm') {
         setDermData(prev => ({ ...prev, motivo_consulta: motivo || '' }));
       } else {
-        setInitialReasonTrich(motivo || '');
+        setTrichData(prev => ({ ...prev, motivo_consulta: motivo || '' }));
       }
     }
   }, [location]);
@@ -100,20 +114,20 @@ const NewPatient: React.FC = () => {
         const trichHist: TrichHistory = {
           id: crypto.randomUUID(),
           paciente_id: patientId,
-          motivo_consulta: initialReasonTrich || 'Consulta inicial de tricología',
+          motivo_consulta: trichData.motivo_consulta || 'Consulta inicial de tricología',
           antecedentes_familiares: '',
-          enfermedades_hormonales: '',
+          enfermedades_hormonales: trichData.enfermedades_hormonales,
           deficits_nutricionales: '',
-          estres: '',
+          estres: trichData.estres,
           cirugias: '',
           infecciones: '',
           covid: false,
-          medicamentos: '',
-          inicio_caida: '',
+          medicamentos: trichData.medicamentos,
+          inicio_caida: trichData.inicio_caida,
           duracion: '',
-          patron_caida: '',
-          cantidad_diaria: '',
-          factores_desencadenantes: '',
+          patron_caida: trichData.patron_caida,
+          cantidad_diaria: trichData.cantidad_diaria,
+          factores_desencadenantes: trichData.factores_desencadenantes,
           progresion: '',
           fecha: new Date().toISOString()
         };
@@ -341,19 +355,54 @@ const NewPatient: React.FC = () => {
         )}
 
         {specialty === 'trich' && (
-          <section className="bg-white rounded-3xl border border-slate-300 shadow-md p-8 animate-in fade-in slide-in-from-bottom-4">
-            <div className="flex items-center gap-2 mb-8 bg-slate-50 -mx-8 -mt-8 p-6 rounded-t-3xl border-b border-slate-200">
+          <section className="bg-white rounded-3xl border border-slate-300 shadow-md p-8 space-y-8 animate-in fade-in slide-in-from-bottom-4">
+            <div className="flex items-center gap-2 mb-2 bg-slate-50 -mx-8 -mt-8 p-6 rounded-t-3xl border-b border-slate-200">
               <Scissors className="w-6 h-6 text-[#d3b3a8]" />
               <h3 className="font-black text-xl text-slate-900">Historia Clínica Tricológica</h3>
             </div>
-            <div className="space-y-1">
-              <label className={labelClasses}>Motivo de Consulta Capilar</label>
-              <textarea
-                value={initialReasonTrich}
-                onChange={(e) => setInitialReasonTrich(e.target.value)}
-                className={`${inputClasses} min-h-[180px] py-4`}
-                placeholder="Describa detalladamente el problema de caída, densidad o afección del cuero cabelludo..."
-              />
+
+            <div className="space-y-6">
+              <div className="space-y-1">
+                <label className={labelClasses}>Motivo de Consulta (Caída, Picazón, Dolor...)</label>
+                <textarea name="motivo_consulta" value={trichData.motivo_consulta} onChange={handleTrichChange} className={`${inputClasses} min-h-[120px] py-4`} placeholder="Describa detalladamente el problema de caída, densidad o afección del cuero cabelludo..." />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="space-y-1">
+                  <label className={labelClasses}>Inicio de la Caída</label>
+                  <input type="text" name="inicio_caida" value={trichData.inicio_caida} onChange={handleTrichChange} className={inputClasses} placeholder="Ej: Hace 3 meses" />
+                </div>
+                <div className="space-y-1">
+                  <label className={labelClasses}>Cantidad Diaria Aprox.</label>
+                  <input type="text" name="cantidad_diaria" value={trichData.cantidad_diaria} onChange={handleTrichChange} className={inputClasses} placeholder="Ej: 50-100 cabellos" />
+                </div>
+                <div className="space-y-1">
+                  <label className={labelClasses}>Patrón de Caída</label>
+                  <input type="text" name="patron_caida" value={trichData.patron_caida} onChange={handleTrichChange} className={inputClasses} placeholder="Ej: Difuso, Frontal, Coronilla..." />
+                </div>
+                <div className="space-y-1">
+                  <label className={labelClasses}>Factores Desencadenantes</label>
+                  <input type="text" name="factores_desencadenantes" value={trichData.factores_desencadenantes} onChange={handleTrichChange} className={inputClasses} placeholder="Ej: Estrés, Posparto, Dieta..." />
+                </div>
+              </div>
+
+              <div className="pt-8 border-t border-slate-300">
+                <h4 className="text-md font-black text-slate-800 mb-6">Antecedentes Tricológicos</h4>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                  <div className="space-y-1">
+                    <label className={labelClasses}>Hormonales / Nutricionales</label>
+                    <textarea name="enfermedades_hormonales" value={trichData.enfermedades_hormonales} onChange={handleTrichChange} className={`${inputClasses} min-h-[100px] py-4`} placeholder="SOP, Tiroides, Anemia..." />
+                  </div>
+                  <div className="space-y-1">
+                    <label className={labelClasses}>Estrés / Cirugías / COVID</label>
+                    <textarea name="estres" value={trichData.estres} onChange={handleTrichChange} className={`${inputClasses} min-h-[100px] py-4`} />
+                  </div>
+                  <div className="space-y-1">
+                    <label className={labelClasses}>Medicamentos Actuales</label>
+                    <textarea name="medicamentos" value={trichData.medicamentos} onChange={handleTrichChange} className={`${inputClasses} min-h-[100px] py-4`} />
+                  </div>
+                </div>
+              </div>
             </div>
           </section>
         )}
