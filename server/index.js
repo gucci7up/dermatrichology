@@ -10,6 +10,10 @@ import settingsRoutes from './routes/settings.js';
 import profilesRoutes from './routes/profiles.js';
 import clinicalRoutes from './routes/clinical.js';
 
+process.on('unhandledRejection', (reason) => {
+  console.error('Unhandled rejection:', reason);
+});
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 
@@ -26,6 +30,11 @@ app.use('/api', requireAuth, clinicalRoutes);
 
 const distPath = path.join(__dirname, '..', 'dist');
 app.use(express.static(distPath));
+
+app.use((err, req, res, next) => {
+  console.error('Unhandled route error:', err);
+  res.status(500).json({ error: 'Internal server error' });
+});
 
 const PORT = process.env.PORT || 3001;
 app.listen(PORT, () => {

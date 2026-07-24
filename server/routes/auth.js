@@ -1,10 +1,11 @@
 import { Router } from 'express';
 import { query } from '../db.js';
 import { verifyPassword, signToken, requireAuth } from '../auth.js';
+import { asyncHandler } from '../lib/asyncHandler.js';
 
 const router = Router();
 
-router.post('/login', async (req, res) => {
+router.post('/login', asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
     return res.status(400).json({ error: 'email and password are required' });
@@ -24,9 +25,9 @@ router.post('/login', async (req, res) => {
   const token = signToken({ id: profile.id, role: profile.role, email: profile.email });
   const { password_hash, ...safeProfile } = profile;
   res.json({ token, profile: safeProfile });
-});
+}));
 
-router.get('/me', requireAuth, async (req, res) => {
+router.get('/me', requireAuth, asyncHandler(async (req, res) => {
   const { rows } = await query(
     'SELECT id, email, role, full_name, updated_at FROM profiles WHERE id = $1',
     [req.user.id]
@@ -36,6 +37,6 @@ router.get('/me', requireAuth, async (req, res) => {
     return res.status(404).json({ error: 'Profile not found' });
   }
   res.json({ profile });
-});
+}));
 
 export default router;

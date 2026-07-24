@@ -71,7 +71,6 @@ const NewPatient: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Use crypto.randomUUID() for Supabase UUID compatibility
     const patientId = crypto.randomUUID();
 
     const newPatient: Patient = {

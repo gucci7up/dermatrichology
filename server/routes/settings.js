@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { query } from '../db.js';
+import { asyncHandler } from '../lib/asyncHandler.js';
 
 const router = Router();
 
@@ -18,12 +19,12 @@ const SETTINGS_COLUMNS = [
   'doctor_name', 'doctor_profession', 'doctor_photo_url'
 ];
 
-router.get('/', async (req, res) => {
+router.get('/', asyncHandler(async (req, res) => {
   const { rows } = await query('SELECT * FROM settings LIMIT 1');
   res.json(rows[0] || DEFAULT_SETTINGS);
-});
+}));
 
-router.put('/', async (req, res) => {
+router.put('/', asyncHandler(async (req, res) => {
   const keys = SETTINGS_COLUMNS.filter((c) => req.body[c] !== undefined);
   if (keys.length === 0) return res.status(400).json({ error: 'No fields to update' });
 
@@ -45,6 +46,6 @@ router.put('/', async (req, res) => {
     );
   }
   res.status(204).end();
-});
+}));
 
 export default router;

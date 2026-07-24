@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { query } from '../db.js';
+import { asyncHandler } from '../lib/asyncHandler.js';
 
 const router = Router();
 
@@ -9,17 +10,17 @@ const APPOINTMENT_COLUMNS = [
   'motivo', 'estado', 'created_at'
 ];
 
-router.get('/', async (req, res) => {
+router.get('/', asyncHandler(async (req, res) => {
   const { rows } = await query('SELECT * FROM appointments ORDER BY created_at DESC');
   res.json(rows);
-});
+}));
 
-router.post('/', async (req, res) => {
+router.post('/', asyncHandler(async (req, res) => {
   const keys = APPOINTMENT_COLUMNS.filter((c) => req.body[c] !== undefined);
   const values = keys.map((k) => req.body[k]);
   const placeholders = keys.map((_, i) => `$${i + 1}`);
   await query(`INSERT INTO appointments (${keys.join(', ')}) VALUES (${placeholders.join(', ')})`, values);
   res.status(204).end();
-});
+}));
 
 export default router;
