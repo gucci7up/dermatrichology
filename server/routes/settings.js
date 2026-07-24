@@ -24,9 +24,11 @@ router.get('/', async (req, res) => {
 });
 
 router.put('/', async (req, res) => {
+  const keys = SETTINGS_COLUMNS.filter((c) => req.body[c] !== undefined);
+  if (keys.length === 0) return res.status(400).json({ error: 'No fields to update' });
+
   const { rows } = await query('SELECT id FROM settings LIMIT 1');
   const existing = rows[0];
-  const keys = SETTINGS_COLUMNS.filter((c) => req.body[c] !== undefined);
   const values = keys.map((k) => req.body[k]);
 
   if (existing) {
