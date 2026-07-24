@@ -106,6 +106,10 @@ const run = async () => {
   assert.deepEqual(trichList.body[0].examen_fisico, trichPayload.examen_fisico);
   console.log('JSONB round-trip passed (nested objects survived insert + read)');
 
+  const tooLong = await call('/patients', { method: 'POST', body: JSON.stringify({ id: crypto.randomUUID(), nombre_completo: 'a'.repeat(20001) }) }, token);
+  assert.equal(tooLong.status, 400, 'oversized field should be rejected');
+  console.log('input length validation works');
+
   const del = await call(`/patients/${patientId}`, { method: 'DELETE' }, token);
   assert.equal(del.status, 204);
   console.log('cleanup passed');

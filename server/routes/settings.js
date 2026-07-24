@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { query } from '../db.js';
 import { asyncHandler } from '../lib/asyncHandler.js';
+import { assertLengths } from '../lib/validate.js';
 
 const router = Router();
 
@@ -25,6 +26,7 @@ router.get('/', asyncHandler(async (req, res) => {
 }));
 
 router.put('/', asyncHandler(async (req, res) => {
+  assertLengths(req.body);
   const keys = SETTINGS_COLUMNS.filter((c) => req.body[c] !== undefined);
   if (keys.length === 0) return res.status(400).json({ error: 'No fields to update' });
 

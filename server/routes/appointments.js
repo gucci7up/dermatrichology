@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { query } from '../db.js';
 import { asyncHandler } from '../lib/asyncHandler.js';
+import { assertLengths } from '../lib/validate.js';
 
 const router = Router();
 
@@ -16,6 +17,7 @@ router.get('/', asyncHandler(async (req, res) => {
 }));
 
 router.post('/', asyncHandler(async (req, res) => {
+  assertLengths(req.body);
   const keys = APPOINTMENT_COLUMNS.filter((c) => req.body[c] !== undefined);
   const values = keys.map((k) => req.body[k]);
   const placeholders = keys.map((_, i) => `$${i + 1}`);

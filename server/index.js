@@ -33,7 +33,7 @@ app.use(express.static(distPath));
 
 app.use((err, req, res, next) => {
   console.error('Unhandled route error:', err);
-  res.status(500).json({ error: 'Internal server error' });
+  res.status(err.status || 500).json({ error: err.status ? err.message : 'Internal server error' });
 });
 
 const PORT = process.env.PORT || 3001;
