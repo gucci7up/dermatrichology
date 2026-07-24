@@ -2,10 +2,13 @@ import { Router } from 'express';
 import { query } from '../db.js';
 import { verifyPassword, signToken, requireAuth } from '../auth.js';
 import { asyncHandler } from '../lib/asyncHandler.js';
+import { rateLimit } from '../lib/rateLimit.js';
 
 const router = Router();
 
-router.post('/login', asyncHandler(async (req, res) => {
+const loginLimiter = rateLimit({ windowMs: 15 * 60 * 1000, max: 10 });
+
+router.post('/login', loginLimiter, asyncHandler(async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
     return res.status(400).json({ error: 'email and password are required' });

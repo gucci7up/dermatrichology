@@ -110,6 +110,14 @@ const run = async () => {
   assert.equal(del.status, 204);
   console.log('cleanup passed');
 
+  let got429 = false;
+  for (let i = 0; i < 12; i++) {
+    const r = await call('/auth/login', { method: 'POST', body: JSON.stringify({ email: 'ratelimit@test.local', password: 'x' }) });
+    if (r.status === 429) { got429 = true; break; }
+  }
+  assert.equal(got429, true, 'login should rate-limit after repeated attempts');
+  console.log('login rate-limit works');
+
   console.log('\nALL SMOKE TESTS PASSED');
 };
 
