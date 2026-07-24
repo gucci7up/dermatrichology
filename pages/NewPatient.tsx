@@ -276,6 +276,17 @@ const NewPatient: React.FC = () => {
                 </div>
               </div>
 
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="space-y-1">
+                  <label className={labelClasses}>Alergias</label>
+                  <input type="text" name="alergias" value={dermData.alergias} onChange={handleDermChange} className={`${inputClasses} bg-red-50/50 border-red-200 text-red-800 placeholder-red-300`} placeholder="Ej: Penicilina, Níquel..." />
+                </div>
+                <div className="space-y-1">
+                  <label className={labelClasses}>Medicamentos Actuales</label>
+                  <input type="text" name="medicamentos_actuales" value={dermData.medicamentos_actuales} onChange={handleDermChange} className={inputClasses} placeholder="Medicamentos que toma actualmente" />
+                </div>
+              </div>
+
               <div className="pt-8 border-t border-slate-300">
                 <h4 className="text-md font-black text-slate-800 mb-6 flex items-center gap-2">
                   <Sun className="w-5 h-5 text-orange-500" /> Hábitos y Fototipo
@@ -311,6 +322,16 @@ const NewPatient: React.FC = () => {
                           {val}
                         </button>
                       ))}
+                    </div>
+                    <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className={labelClasses}>Exposición Solar</label>
+                        <input type="text" name="habitos.exposicion_solar" value={dermData.habitos.exposicion_solar} onChange={handleDermChange} className={inputClasses} placeholder="Ej: Diaria, Ocasional..." />
+                      </div>
+                      <div>
+                        <label className={labelClasses}>Uso de Cosméticos</label>
+                        <input type="text" name="habitos.cosmeticos" value={dermData.habitos.cosmeticos} onChange={handleDermChange} className={inputClasses} placeholder="Ej: Cremas, Maquillaje..." />
+                      </div>
                     </div>
                   </div>
                 </div>
