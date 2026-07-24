@@ -13,7 +13,8 @@ import {
   ChevronDown,
   Eye,
   Save,
-  Camera
+  Camera,
+  X
 } from 'lucide-react';
 import { useToast } from '../context/ToastContext';
 
@@ -37,6 +38,7 @@ const PatientDetail: React.FC = () => {
   const [patient, setPatient] = React.useState<Patient | null>(null);
   const [activeTab, setActiveTab] = React.useState('info');
   const [expandedLabId, setExpandedLabId] = React.useState<string | null>(null);
+  const [enlargedPhoto, setEnlargedPhoto] = React.useState<string | null>(null);
 
   const [dermHist, setDermHist] = React.useState<DermHistory[]>([]);
   const [trichHist, setTrichHist] = React.useState<TrichHistory[]>([]);
@@ -739,7 +741,15 @@ const PatientDetail: React.FC = () => {
                                 <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-2">Evidencia Fotográfica</p>
                                 <div className="flex gap-2 overflow-x-auto pb-2 scrollbar-hide">
                                   {s.fotos_comparativas.map((foto, idx) => (
-                                    <div key={idx} className="relative w-24 h-24 flex-shrink-0 rounded-xl overflow-hidden border border-slate-200 shadow-sm group cursor-pointer hover:scale-105 transition-transform">
+                                    <div
+                                      key={idx}
+                                      onClick={() => setEnlargedPhoto(foto)}
+                                      role="button"
+                                      tabIndex={0}
+                                      aria-label={`Ampliar foto de evolución ${idx + 1}`}
+                                      onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') setEnlargedPhoto(foto); }}
+                                      className="relative w-24 h-24 flex-shrink-0 rounded-xl overflow-hidden border border-slate-200 shadow-sm group cursor-pointer hover:scale-105 transition-transform"
+                                    >
                                       <img src={foto} alt={`Evolución ${idx + 1}`} className="w-full h-full object-cover" />
                                     </div>
                                   ))}
@@ -916,6 +926,27 @@ const PatientDetail: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {enlargedPhoto && (
+        <div
+          className="fixed inset-0 z-[100] bg-slate-900/90 backdrop-blur-sm flex items-center justify-center p-6"
+          onClick={() => setEnlargedPhoto(null)}
+        >
+          <button
+            onClick={() => setEnlargedPhoto(null)}
+            aria-label="Cerrar imagen ampliada"
+            className="absolute top-6 right-6 p-3 bg-white/10 hover:bg-white/20 rounded-full text-white transition-all"
+          >
+            <X className="w-6 h-6" />
+          </button>
+          <img
+            src={enlargedPhoto}
+            alt="Foto de evolución ampliada"
+            className="max-w-full max-h-full rounded-2xl shadow-2xl object-contain"
+            onClick={(e) => e.stopPropagation()}
+          />
+        </div>
+      )}
     </div>
   );
 };
