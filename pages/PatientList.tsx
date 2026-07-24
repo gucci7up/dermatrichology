@@ -94,7 +94,7 @@ const PatientList: React.FC = () => {
             )}
 
             <div className="flex items-center gap-4 mb-6 pr-8">
-              <img src={patient.foto_perfil} className="w-16 h-16 rounded-2xl object-cover ring-4 ring-slate-50" alt="" />
+              <img src={patient.foto_perfil} className="w-16 h-16 rounded-2xl object-cover ring-4 ring-slate-50" alt={`Foto de ${patient.nombre_completo}`} />
               <div className="flex-1 min-w-0">
                 <h3 className="font-bold text-slate-900 truncate text-lg">{patient.nombre_completo}</h3>
                 <p className="text-sm text-slate-500 flex items-center gap-1.5">
