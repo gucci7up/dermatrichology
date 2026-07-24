@@ -246,11 +246,12 @@ const Reports: React.FC = () => {
               {patients.slice(0, 5).map(p => (
                 <div key={p.id} className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-200 group hover:border-blue-300 transition-all">
                   <div className="flex items-center gap-3">
-                    <img src={p.foto_perfil} className="w-8 h-8 rounded-full object-cover" />
+                    <img src={p.foto_perfil} alt={`Foto de ${p.nombre_completo}`} className="w-8 h-8 rounded-full object-cover" />
                     <span className="text-xs font-bold text-slate-800 truncate max-w-[120px]">{p.nombre_completo}</span>
                   </div>
                   <button
                     onClick={() => navigate(`/patients/${p.id}/print`)}
+                    aria-label={`Imprimir reporte de ${p.nombre_completo}`}
                     className="p-2 bg-white text-slate-400 hover:text-blue-600 hover:shadow-md rounded-xl border border-slate-200 transition-all"
                   >
                     <ArrowUpRight className="w-4 h-4" />

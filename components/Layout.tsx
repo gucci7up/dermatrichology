@@ -162,7 +162,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
       <main className="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto">
         <header className="bg-white border-b border-slate-300 h-16 flex items-center justify-between px-6 sticky top-0 z-10 shadow-md">
           <div className="flex items-center gap-4 lg:hidden min-w-0">
-            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 text-slate-800 hover:bg-slate-100 rounded-lg border border-slate-200 shadow-sm flex-shrink-0">
+            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} aria-label="Abrir menú" className="p-2 text-slate-800 hover:bg-slate-100 rounded-lg border border-slate-200 shadow-sm flex-shrink-0">
               <Menu className="w-6 h-6" />
             </button>
             <div className="truncate flex items-center gap-2">

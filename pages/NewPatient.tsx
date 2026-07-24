@@ -176,7 +176,7 @@ const NewPatient: React.FC = () => {
           <h1 className="text-3xl font-black text-slate-900">Registrar Nuevo Paciente</h1>
           <p className="text-slate-600 font-semibold">Inicia un expediente clínico detallado y estructurado.</p>
         </div>
-        <button onClick={() => navigate(-1)} className="p-3 bg-white hover:bg-slate-100 rounded-full transition-all border border-slate-300 shadow-md">
+        <button onClick={() => navigate(-1)} aria-label="Cerrar" className="p-3 bg-white hover:bg-slate-100 rounded-full transition-all border border-slate-300 shadow-md">
           <X className="w-6 h-6 text-slate-600" />
         </button>
       </div>
@@ -203,8 +203,8 @@ const NewPatient: React.FC = () => {
 
           <div className="flex flex-col items-center mb-8">
             <div className="relative group">
-              <img src={formData.foto_perfil} className="w-32 h-32 rounded-3xl object-cover ring-4 ring-white shadow-xl transition-transform group-hover:scale-105 duration-300 border border-slate-200" />
-              <button type="button" className="absolute -bottom-3 -right-3 p-3 bg-[#d3b3a8] text-white rounded-xl shadow-lg hover:bg-[#c4a499] transition-colors ring-4 ring-white">
+              <img src={formData.foto_perfil} alt={`Foto de ${formData.nombre_completo || 'nuevo paciente'}`} className="w-32 h-32 rounded-3xl object-cover ring-4 ring-white shadow-xl transition-transform group-hover:scale-105 duration-300 border border-slate-200" />
+              <button type="button" aria-label="Cambiar foto" className="absolute -bottom-3 -right-3 p-3 bg-[#d3b3a8] text-white rounded-xl shadow-lg hover:bg-[#c4a499] transition-colors ring-4 ring-white">
                 <Camera className="w-5 h-5" />
               </button>
             </div>

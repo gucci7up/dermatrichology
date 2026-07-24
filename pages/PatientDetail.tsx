@@ -240,7 +240,7 @@ const PatientDetail: React.FC = () => {
                 onClick={() => fileInputRef.current?.click()}
                 title="Cambiar foto de perfil"
               >
-                <img src={patient.foto_perfil} className="w-32 h-32 rounded-3xl object-cover ring-4 ring-slate-200 shadow-xl group-hover:opacity-80 transition-opacity" />
+                <img src={patient.foto_perfil} alt={`Foto de ${patient.nombre_completo}`} className="w-32 h-32 rounded-3xl object-cover ring-4 ring-slate-200 shadow-xl group-hover:opacity-80 transition-opacity" />
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/20 rounded-3xl">
                   <Camera className="w-8 h-8 text-white drop-shadow-lg" />
                 </div>

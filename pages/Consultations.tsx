@@ -101,7 +101,7 @@ const Consultations: React.FC = () => {
                 recentSessions.slice(0, 10).map((session, i) => (
                   <div key={session.id} className="p-6 hover:bg-slate-50 transition-all group">
                     <div className="flex items-start gap-4">
-                      <img src={session.patientPhoto} className="w-12 h-12 rounded-2xl object-cover ring-2 ring-white shadow-md" alt="" />
+                      <img src={session.patientPhoto} className="w-12 h-12 rounded-2xl object-cover ring-2 ring-white shadow-md" alt={`Foto de ${session.patientName}`} />
                       <div className="flex-1 min-w-0">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
                           <h4 className="font-black text-slate-900 group-hover:text-blue-600 transition-colors truncate">
@@ -172,7 +172,7 @@ const Consultations: React.FC = () => {
                         onClick={() => navigate(`/consultations/new?patientId=${p.id}`)}
                         className="w-full flex items-center gap-3 p-3 bg-white/5 hover:bg-white/10 rounded-xl border border-white/10 transition-all text-left group"
                       >
-                        <img src={p.foto_perfil} className="w-8 h-8 rounded-full object-cover" alt="" />
+                        <img src={p.foto_perfil} className="w-8 h-8 rounded-full object-cover" alt={`Foto de ${p.nombre_completo}`} />
                         <div className="flex-1 min-w-0">
                           <p className="text-xs font-black truncate">{p.nombre_completo}</p>
                           <p className="text-[9px] text-slate-500 font-bold">{p.documento_identidad}</p>

@@ -128,7 +128,7 @@ const Dashboard: React.FC = () => {
                     <tr key={patient.id} className="hover:bg-slate-50/80 transition-colors group">
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-3">
-                          <img src={patient.foto_perfil} className="w-10 h-10 rounded-full object-cover" alt="" />
+                          <img src={patient.foto_perfil} className="w-10 h-10 rounded-full object-cover" alt={`Foto de ${patient.nombre_completo}`} />
                           <div>
                             <p className="font-semibold text-slate-800">{patient.nombre_completo}</p>
                             <p className="text-xs text-slate-500 capitalize">{patient.sexo === 'M' ? 'Masculino' : 'Femenino'}, {patient.fecha_nacimiento}</p>

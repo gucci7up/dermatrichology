@@ -87,6 +87,7 @@ const PatientList: React.FC = () => {
                 onClick={(e) => handleDelete(patient.id, e)}
                 className="absolute top-4 right-4 p-2 text-slate-400 hover:text-red-500 hover:bg-red-50 rounded-full transition-colors z-10"
                 title="Eliminar Paciente"
+                aria-label={`Eliminar a ${patient.nombre_completo}`}
               >
                 <X className="w-5 h-5" />
               </button>

@@ -83,7 +83,7 @@ const NewConsultation: React.FC = () => {
         <div className="max-w-4xl mx-auto pb-20 animate-in fade-in slide-in-from-bottom-4">
             <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center gap-4">
-                    <button onClick={() => navigate(-1)} className="p-2 hover:bg-slate-100 rounded-full transition-all">
+                    <button onClick={() => navigate(-1)} aria-label="Volver" className="p-2 hover:bg-slate-100 rounded-full transition-all">
                         <ArrowLeft className="w-6 h-6 text-slate-500" />
                     </button>
                     <div>
@@ -91,7 +91,7 @@ const NewConsultation: React.FC = () => {
                         <div className="flex items-center gap-2 mt-1">
                             <span className="text-slate-500 font-semibold">Paciente:</span>
                             <div className="flex items-center gap-2 bg-white px-3 py-1 rounded-full border border-slate-200 shadow-sm">
-                                <img src={patient.foto_perfil} className="w-5 h-5 rounded-full object-cover" />
+                                <img src={patient.foto_perfil} alt={`Foto de ${patient.nombre_completo}`} className="w-5 h-5 rounded-full object-cover" />
                                 <span className="font-bold text-slate-900 text-sm">{patient.nombre_completo}</span>
                             </div>
                         </div>
@@ -224,6 +224,7 @@ const NewConsultation: React.FC = () => {
                                                         ...prev,
                                                         fotos_comparativas: prev.fotos_comparativas?.filter((_, i) => i !== idx)
                                                     }))}
+                                                    aria-label="Quitar foto"
                                                     className="absolute top-1 right-1 bg-red-500 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
                                                 >
                                                     <X className="w-3 h-3" />
