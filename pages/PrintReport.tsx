@@ -1,8 +1,8 @@
 
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { DB, AppSettings } from '../services/db';
-import { Patient, DermHistory, TrichHistory, Session, LabResult } from '../types';
+import { DB } from '../services/db';
+import { AppSettings, Patient, DermHistory, TrichHistory, Session, LabResult } from '../types';
 import { Printer, ChevronLeft, Calendar, User, Phone, MapPin, Activity } from 'lucide-react';
 
 const PrintReport: React.FC = () => {
@@ -87,17 +87,17 @@ const PrintReport: React.FC = () => {
       <div className="flex justify-between items-start border-b-4 border-slate-900 pb-6 mb-8">
         <div className="flex gap-4 items-center">
           <div className="flex items-center justify-center bg-white rounded-2xl overflow-hidden shadow-sm border border-slate-100"
-            style={{ width: settings.logoWidth + 10, height: settings.logoHeight + 10 }}>
-            {settings.logoUrl ? (
-              <img src={settings.logoUrl} style={{ width: settings.logoWidth, height: settings.logoHeight, objectFit: 'contain' }} alt="Logo Clinica" />
+            style={{ width: settings.logo_width + 10, height: settings.logo_height + 10 }}>
+            {settings.logo_url ? (
+              <img src={settings.logo_url} style={{ width: settings.logo_width, height: settings.logo_height, objectFit: 'contain' }} alt="Logo Clinica" />
             ) : (
               <div className="w-full h-full bg-slate-900 text-white flex items-center justify-center font-black text-2xl">
-                {settings.appName.charAt(0)}
+                {settings.app_name.charAt(0)}
               </div>
             )}
           </div>
           <div>
-            <h1 className="text-3xl font-black text-slate-900 leading-tight">{settings.appName}</h1>
+            <h1 className="text-3xl font-black text-slate-900 leading-tight">{settings.app_name}</h1>
             <p className="text-xs font-bold text-slate-500 uppercase tracking-widest">Servicio de Dermatología y Tricología</p>
           </div>
         </div>
@@ -216,8 +216,8 @@ const PrintReport: React.FC = () => {
         </div>
         <div className="flex flex-col items-center">
           <div className="w-48 border-b-2 border-slate-900 mb-2"></div>
-          <p className="text-xs font-black text-slate-900">{settings.doctorName}</p>
-          <p className="text-[10px] text-slate-500 font-bold">{settings.doctorProfession}</p>
+          <p className="text-xs font-black text-slate-900">{settings.doctor_name}</p>
+          <p className="text-[10px] text-slate-500 font-bold">{settings.doctor_profession}</p>
         </div>
       </div>
     </div>
