@@ -1,16 +1,14 @@
-
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { Session } from '@supabase/supabase-js';
-import { supabase } from '../services/supabase';
-import { DB } from '../services/db';
 import { UserProfile } from '../types';
+import { api, getToken, setToken, clearToken } from '../services/api';
 
 interface AuthContextType {
-    session: Session | null;
+    session: { token: string } | null;
     profile: UserProfile | null;
     loading: boolean;
     role: 'admin' | 'doctor' | 'assistant' | null;
     signOut: () => Promise<void>;
+    signIn: (email: string, password: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType>({
@@ -19,64 +17,47 @@ const AuthContext = createContext<AuthContextType>({
     loading: true,
     role: null,
     signOut: async () => { },
+    signIn: async () => { },
 });
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-    const [session, setSession] = useState<Session | null>(null);
+    const [session, setSession] = useState<{ token: string } | null>(null);
     const [profile, setProfile] = useState<UserProfile | null>(null);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        console.log("Auth: Setting up auth state listener...");
-
-        // 2. Listen for auth changes (handles initial session too)
-        const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
-            console.log("Auth: Event received:", event);
-            setSession(session);
-
-            if (session?.user) {
-                console.log("Auth: Session found, fetching profile...");
-                try {
-                    const userProfile = await DB.profiles.get(session.user.id);
-                    console.log("Auth: Profile fetched:", userProfile);
-                    setProfile(userProfile);
-                } catch (pError) {
-                    console.error("Auth: Error fetching profile:", pError);
-
-                    // FALLBACK: If DB fails, forcce ADMIN for specific email
-                    if (session.user.email === 'gucci7up@gmail.com') {
-                        console.warn("Auth: Forcing Admin Role for main user due to DB error.");
-                        setProfile({
-                            id: session.user.id,
-                            role: 'admin',
-                            full_name: 'Admin Fallback'
-                        } as any);
-                    } else {
-                        setProfile(null);
-                    }
-                }
-            } else {
-                setProfile(null);
+        const restoreSession = async () => {
+            const token = getToken();
+            if (!token) {
+                setLoading(false);
+                return;
             }
-            setLoading(false);
-        });
-
-        // Safety timeout
-        const maxWait = setTimeout(() => {
-            if (loading) {
-                console.warn("Auth: Timeout reached, forcing load completion.");
+            try {
+                const { profile } = await api<{ profile: UserProfile }>('/auth/me');
+                setSession({ token });
+                setProfile(profile);
+            } catch (e) {
+                console.error('Auth: session restore failed', e);
+                clearToken();
+            } finally {
                 setLoading(false);
             }
-        }, 3000);
-
-        return () => {
-            clearTimeout(maxWait);
-            subscription.unsubscribe();
         };
+        restoreSession();
     }, []);
 
+    const signIn = async (email: string, password: string) => {
+        const { token, profile } = await api<{ token: string; profile: UserProfile }>('/auth/login', {
+            method: 'POST',
+            body: JSON.stringify({ email, password }),
+        });
+        setToken(token);
+        setSession({ token });
+        setProfile(profile);
+    };
+
     const signOut = async () => {
-        await supabase.auth.signOut();
+        clearToken();
         setSession(null);
         setProfile(null);
     };
@@ -87,7 +68,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
             profile,
             loading,
             role: profile?.role || null,
-            signOut
+            signOut,
+            signIn,
         }}>
             {children}
         </AuthContext.Provider>
