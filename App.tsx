@@ -1,19 +1,19 @@
 
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { HashRouter, Routes, Route } from 'react-router-dom';
 import { Layout } from './components/Layout';
-import Dashboard from './pages/Dashboard';
-import PatientList from './pages/PatientList';
-import PatientDetail from './pages/PatientDetail';
-import NewPatient from './pages/NewPatient';
-import Settings from './pages/Settings';
-import PrintReport from './pages/PrintReport';
-import Reports from './pages/Reports';
-import Consultations from './pages/Consultations';
-import NewConsultation from './pages/NewConsultation';
-import Prescription from './pages/Prescription';
-import Landing from './pages/Landing';
-import Login from './pages/Login';
+const Dashboard = lazy(() => import('./pages/Dashboard'));
+const PatientList = lazy(() => import('./pages/PatientList'));
+const PatientDetail = lazy(() => import('./pages/PatientDetail'));
+const NewPatient = lazy(() => import('./pages/NewPatient'));
+const Settings = lazy(() => import('./pages/Settings'));
+const PrintReport = lazy(() => import('./pages/PrintReport'));
+const Reports = lazy(() => import('./pages/Reports'));
+const Consultations = lazy(() => import('./pages/Consultations'));
+const NewConsultation = lazy(() => import('./pages/NewConsultation'));
+const Prescription = lazy(() => import('./pages/Prescription'));
+const Landing = lazy(() => import('./pages/Landing'));
+const Login = lazy(() => import('./pages/Login'));
 import { AuthGuard } from './components/AuthGuard';
 import { DB } from './services/db';
 
@@ -98,30 +98,32 @@ const App: React.FC = () => {
   return (
     <AuthProvider>
       <HashRouter>
-        <Routes>
-          <Route path="/login" element={<Login />} />
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-slate-50"><div className="w-10 h-10 border-2 border-[#d3b3a8]/30 border-t-[#d3b3a8] rounded-full animate-spin" /></div>}>
+          <Routes>
+            <Route path="/login" element={<Login />} />
 
-          {/* Rutas Protegidas */}
-          <Route path="/*" element={
-            <AuthGuard>
-              <Layout>
-                <Routes>
-                  <Route path="/" element={<Dashboard />} />
-                  <Route path="/booking" element={<Landing />} />
-                  <Route path="/patients" element={<PatientList />} />
-                  <Route path="/patients/new" element={<NewPatient />} />
-                  <Route path="/patients/:id" element={<PatientDetail />} />
-                  <Route path="/patients/:id/print" element={<PrintReport />} />
-                  <Route path="/patients/:id/prescription" element={<Prescription />} />
-                  <Route path="/consultations" element={<Consultations />} />
-                  <Route path="/consultations/new" element={<NewConsultation />} />
-                  <Route path="/reports" element={<Reports />} />
-                  <Route path="/settings" element={<Settings />} />
-                </Routes>
-              </Layout>
-            </AuthGuard>
-          } />
-        </Routes>
+            {/* Rutas Protegidas */}
+            <Route path="/*" element={
+              <AuthGuard>
+                <Layout>
+                  <Routes>
+                    <Route path="/" element={<Dashboard />} />
+                    <Route path="/booking" element={<Landing />} />
+                    <Route path="/patients" element={<PatientList />} />
+                    <Route path="/patients/new" element={<NewPatient />} />
+                    <Route path="/patients/:id" element={<PatientDetail />} />
+                    <Route path="/patients/:id/print" element={<PrintReport />} />
+                    <Route path="/patients/:id/prescription" element={<Prescription />} />
+                    <Route path="/consultations" element={<Consultations />} />
+                    <Route path="/consultations/new" element={<NewConsultation />} />
+                    <Route path="/reports" element={<Reports />} />
+                    <Route path="/settings" element={<Settings />} />
+                  </Routes>
+                </Layout>
+              </AuthGuard>
+            } />
+          </Routes>
+        </Suspense>
       </HashRouter>
     </AuthProvider>
   );
