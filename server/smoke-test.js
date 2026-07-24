@@ -114,6 +114,14 @@ const run = async () => {
   assert.equal(del.status, 204);
   console.log('cleanup passed');
 
+  const apptId = crypto.randomUUID();
+  await call('/appointments', { method: 'POST', body: JSON.stringify({ id: apptId, paciente_nombre: 'Smoke Cita', especialidad: 'derm', fecha_preferida: '2026-08-01', hora_preferida: '10:00', motivo: 'test', estado: 'pendiente', created_at: new Date().toISOString() }) }, token);
+  const patchAppt = await call(`/appointments/${apptId}`, { method: 'PATCH', body: JSON.stringify({ estado: 'confirmada' }) }, token);
+  assert.equal(patchAppt.status, 204);
+  const appts = await call('/appointments', {}, token);
+  assert.equal(appts.body.find((a) => a.id === apptId).estado, 'confirmada', 'appointment status should update');
+  console.log('appointment status update works');
+
   let got429 = false;
   for (let i = 0; i < 12; i++) {
     const r = await call('/auth/login', { method: 'POST', body: JSON.stringify({ email: 'ratelimit@test.local', password: 'x' }) });
