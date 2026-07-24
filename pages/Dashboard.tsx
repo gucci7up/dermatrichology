@@ -1,8 +1,8 @@
 
 import React from 'react';
 import { Users, Calendar, TrendingUp, FlaskConical, Plus, ArrowUpRight, Search, Clock, ExternalLink } from 'lucide-react';
-import { DB, AppSettings } from '../services/db';
-import { Patient, AppointmentRequest } from '../types';
+import { DB } from '../services/db';
+import { Patient, AppointmentRequest, AppSettings } from '../types';
 import { Link, useNavigate } from 'react-router-dom';
 
 const StatCard = ({ label, value, icon: Icon, trend, color }: any) => (
@@ -26,16 +26,18 @@ const Dashboard: React.FC = () => {
   const [patients, setPatients] = React.useState<Patient[]>([]);
   const [appointments, setAppointments] = React.useState<AppointmentRequest[]>([]);
   const [settings, setSettings] = React.useState<AppSettings>({
-    appName: 'DermaTrich',
-    logoUrl: '',
-    logoWidth: 220,
-    logoHeight: 100,
-    doctorName: 'Cargando...',
-    doctorProfession: '...',
-    doctorPhoto: ''
+    app_name: 'DermaTrich',
+    logo_url: '',
+    logo_width: 220,
+    logo_height: 100,
+    doctor_name: 'Cargando...',
+    doctor_profession: '...',
+    doctor_photo_url: ''
   });
 
   const [totalPatients, setTotalPatients] = React.useState(0);
+  const [sessionCount, setSessionCount] = React.useState(0);
+  const [labPatientCount, setLabPatientCount] = React.useState(0);
 
   React.useEffect(() => {
     const loadData = async () => {
@@ -43,6 +45,19 @@ const Dashboard: React.FC = () => {
         const allPatients = await DB.patients.getAll();
         setTotalPatients(allPatients.length);
         setPatients(allPatients.slice(0, 5));
+
+        let sessions = 0;
+        let withLabs = 0;
+        await Promise.all(allPatients.map(async (p) => {
+          const [s, l] = await Promise.all([
+            DB.sessions.getByPatient(p.id),
+            DB.labs.getByPatient(p.id),
+          ]);
+          sessions += s.length;
+          if (l.length > 0) withLabs += 1;
+        }));
+        setSessionCount(sessions);
+        setLabPatientCount(withLabs);
 
         const allAppointments = await DB.appointments.getAll();
         setAppointments(allAppointments.filter(a => a.estado === 'pendiente').slice(0, 5));
@@ -67,7 +82,7 @@ const Dashboard: React.FC = () => {
     <div className="space-y-8">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900 truncate">Bienvenido, {settings.doctorName}</h1>
+          <h1 className="text-2xl font-bold text-slate-900 truncate">Bienvenido, {settings.doctor_name}</h1>
           <p className="text-slate-500">Aquí tienes un resumen de la actividad hoy.</p>
         </div>
         <div className="flex gap-3">
@@ -83,10 +98,10 @@ const Dashboard: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <StatCard label="Pacientes Totales" value={totalPatients} icon={Users} trend={12} color="bg-[#d3b3a8]" />
+        <StatCard label="Pacientes Totales" value={totalPatients} icon={Users} trend={0} color="bg-[#d3b3a8]" />
         <StatCard label="Citas Pendientes" value={appointments.length} icon={Clock} trend={0} color="bg-indigo-600" />
-        <StatCard label="Tratamientos Activos" value="42" icon={TrendingUp} trend={8} color="bg-emerald-500" />
-        <StatCard label="Labs Pendientes" value="3" icon={FlaskConical} trend={0} color="bg-orange-500" />
+        <StatCard label="Consultas Registradas" value={sessionCount} icon={TrendingUp} trend={0} color="bg-emerald-500" />
+        <StatCard label="Pacientes con Labs" value={labPatientCount} icon={FlaskConical} trend={0} color="bg-orange-500" />
       </div>
 
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-8">
@@ -121,7 +136,7 @@ const Dashboard: React.FC = () => {
                         </div>
                       </td>
                       <td className="px-6 py-4 text-sm text-slate-600 font-mono">{patient.documento_identidad}</td>
-                      <td className="px-6 py-4 text-sm text-slate-500">Reciente</td>
+                      <td className="px-6 py-4 text-sm text-slate-500">{patient.created_at ? new Date(patient.created_at).toLocaleDateString() : 'N/A'}</td>
                       <td className="px-6 py-4">
                         <Link to={`/patients/${patient.id}`} className="p-2 text-slate-400 hover:text-[#d3b3a8] transition-colors inline-block">
                           <Search className="w-5 h-5" />
