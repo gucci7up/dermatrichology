@@ -34,6 +34,7 @@ const NewPatient: React.FC = () => {
     habitos: {
       tabaco: false,
       alcohol: false,
+      drogas: false,
       cosmeticos: '',
       exposicion_solar: '',
       otros: ''
@@ -288,6 +289,10 @@ const NewPatient: React.FC = () => {
                     <label className="flex items-center gap-3 cursor-pointer group">
                       <input type="checkbox" checked={dermData.habitos.alcohol} className="w-5 h-5 rounded-lg border-slate-400 text-[#d3b3a8] focus:ring-[#d3b3a8] shadow-sm" onChange={(e) => setDermData(prev => ({ ...prev, habitos: { ...prev.habitos, alcohol: e.target.checked } }))} />
                       <span className="text-sm font-black text-slate-700 group-hover:text-slate-900 transition-colors">Alcoholismo</span>
+                    </label>
+                    <label className="flex items-center gap-3 cursor-pointer group">
+                      <input type="checkbox" checked={dermData.habitos.drogas} className="w-5 h-5 rounded-lg border-slate-400 text-[#d3b3a8] focus:ring-[#d3b3a8] shadow-sm" onChange={(e) => setDermData(prev => ({ ...prev, habitos: { ...prev.habitos, drogas: e.target.checked } }))} />
+                      <span className="text-sm font-black text-slate-700 group-hover:text-slate-900 transition-colors">Consumo de Drogas</span>
                     </label>
                   </div>
                   <div className="md:col-span-2 space-y-4 bg-slate-50 p-6 rounded-2xl border border-slate-300 shadow-inner">

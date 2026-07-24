@@ -73,7 +73,7 @@ const PatientDetail: React.FC = () => {
     antecedentes_familiares: '',
     alergias: '',
     medicamentos_actuales: '',
-    habitos: { tabaco: false, alcohol: false, cosmeticos: '', exposicion_solar: '', otros: '' },
+    habitos: { tabaco: false, alcohol: false, drogas: false, cosmeticos: '', exposicion_solar: '', otros: '' },
     tipo_piel_fitzpatrick: 1,
     historia_enfermedad: '',
     diagnosticos: '',
@@ -464,6 +464,15 @@ const PatientDetail: React.FC = () => {
                               className="w-5 h-5 rounded-md text-blue-600 focus:ring-blue-500"
                             />
                             <span className="font-bold text-slate-700">Consumo de Alcohol</span>
+                          </label>
+                          <label className="flex items-center gap-3 p-4 bg-slate-50 rounded-2xl cursor-pointer hover:bg-slate-100 transition-colors">
+                            <input
+                              type="checkbox"
+                              checked={dermForm.habitos?.drogas || false}
+                              onChange={e => setDermForm({ ...dermForm, habitos: { ...dermForm.habitos!, drogas: e.target.checked } })}
+                              className="w-5 h-5 rounded-md text-blue-600 focus:ring-blue-500"
+                            />
+                            <span className="font-bold text-slate-700">Consumo de Drogas</span>
                           </label>
                         </div>
                         <div className="space-y-4">

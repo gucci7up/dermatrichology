@@ -39,6 +39,7 @@ export interface DermHistory {
   habitos: {
     tabaco: boolean;
     alcohol: boolean;
+    drogas: boolean;
     cosmeticos: string;
     exposicion_solar: string;
     otros: string;
