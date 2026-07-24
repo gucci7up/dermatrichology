@@ -215,9 +215,10 @@ const PatientDetail: React.FC = () => {
           </button>
           <button
             onClick={() => navigate(`/patients/${id}/print`)}
+            aria-label="Exportar PDF"
             className="flex items-center justify-center gap-2 px-5 py-3 bg-white border-2 border-slate-400 rounded-2xl text-slate-700 font-black text-sm hover:bg-slate-50 shadow-md transition-all active:scale-95"
           >
-            <Printer className="w-4 h-4" /> IMPRIMIR
+            <Printer className="w-4 h-4" /> Exportar PDF
           </button>
         </div>
       </div>

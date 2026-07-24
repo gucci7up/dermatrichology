@@ -78,8 +78,8 @@ const PrintReport: React.FC = () => {
         <button onClick={() => navigate(-1)} className="flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 rounded-xl font-bold transition-all">
           <ChevronLeft className="w-4 h-4" /> Volver al Expediente
         </button>
-        <button onClick={() => window.print()} className="flex items-center gap-2 px-6 py-2 bg-blue-600 text-white rounded-xl font-bold shadow-lg">
-          <Printer className="w-4 h-4" /> Imprimir Ahora
+        <button onClick={() => window.print()} aria-label="Descargar o imprimir PDF" className="flex items-center gap-2 px-6 py-2 bg-blue-600 text-white rounded-xl font-bold shadow-lg">
+          <Printer className="w-4 h-4" /> Descargar / Imprimir PDF
         </button>
       </div>
 
