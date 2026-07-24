@@ -4,9 +4,11 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { DB } from '../services/db';
 import { Patient, DermHistory, TrichHistory } from '../types';
 import { Save, X, Camera, User, Phone, MapPin, Briefcase, Mail, CreditCard, Calendar, Stethoscope, Scissors, ClipboardList, AlertCircle, Sun } from 'lucide-react';
+import { useToast } from '../context/ToastContext';
 
 const NewPatient: React.FC = () => {
   const navigate = useNavigate();
+  const { notify } = useToast();
   const [specialty, setSpecialty] = React.useState<'derm' | 'trich'>('derm');
   const [formData, setFormData] = React.useState<Partial<Patient>>({
     nombre_completo: '',
@@ -120,7 +122,7 @@ const NewPatient: React.FC = () => {
       navigate(`/patients/${patientId}`);
     } catch (error) {
       console.error("Error saving patient:", error);
-      alert("Error al guardar el paciente. Por favor intente nuevamente.");
+      notify("Error al guardar el paciente. Por favor intente nuevamente.", 'error');
     }
   };
 

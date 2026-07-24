@@ -3,10 +3,12 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { DB } from '../services/db';
 import { Patient, AppSettings } from '../types';
 import { ChevronLeft, Printer, Save, Upload } from 'lucide-react';
+import { useToast } from '../context/ToastContext';
 
 const Prescription: React.FC = () => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
+    const { notify } = useToast();
     const [patient, setPatient] = React.useState<Patient | null>(null);
     const [settings, setSettings] = React.useState<AppSettings | null>(null);
     const [prescriptionText, setPrescriptionText] = React.useState('');
@@ -50,10 +52,10 @@ const Prescription: React.FC = () => {
                 contenido: prescriptionText,
                 fecha: new Date().toISOString()
             });
-            alert("Receta guardada en el historial del paciente.");
+            notify("Receta guardada en el historial del paciente.", 'success');
         } catch (error) {
             console.error("Error saving prescription:", error);
-            alert("Error al guardar la receta.");
+            notify("Error al guardar la receta.", 'error');
         }
     };
 

@@ -5,11 +5,13 @@ import { Patient } from '../types';
 import { Search, Filter, Plus, UserCircle, Phone, Mail, Users, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { useToast } from '../context/ToastContext';
 
 const PatientList: React.FC = () => {
   const [patients, setPatients] = React.useState<Patient[]>([]);
   const [searchTerm, setSearchTerm] = React.useState('');
   const { role } = useAuth();
+  const { notify } = useToast();
 
   React.useEffect(() => {
     const fetchPatients = async () => {
@@ -33,7 +35,7 @@ const PatientList: React.FC = () => {
         setPatients(prev => prev.filter(p => p.id !== patientId));
       } catch (error) {
         console.error("Error deleting patient", error);
-        alert("Ocurrió un error al intentar eliminar el paciente.");
+        notify("Ocurrió un error al intentar eliminar el paciente.", 'error');
       }
     }
   };

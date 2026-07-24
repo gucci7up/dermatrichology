@@ -15,6 +15,7 @@ import {
   Save,
   Camera
 } from 'lucide-react';
+import { useToast } from '../context/ToastContext';
 
 const TabButton = ({ active, onClick, icon: Icon, label }: any) => (
   <button
@@ -32,6 +33,7 @@ const TabButton = ({ active, onClick, icon: Icon, label }: any) => (
 const PatientDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
+  const { notify } = useToast();
   const [patient, setPatient] = React.useState<Patient | null>(null);
   const [activeTab, setActiveTab] = React.useState('info');
   const [expandedLabId, setExpandedLabId] = React.useState<string | null>(null);
@@ -56,7 +58,7 @@ const PatientDetail: React.FC = () => {
             setPatient({ ...patient, foto_perfil: base64 });
           } catch (error) {
             console.error("Error updating photo:", error);
-            alert("Error al actualizar la foto.");
+            notify("Error al actualizar la foto.", 'error');
           }
         }
       };
@@ -90,18 +92,18 @@ const PatientDetail: React.FC = () => {
     try {
       if (dermForm.id) {
         await DB.derm.update(dermForm.id, dermForm);
-        alert("Historia dermatológica actualizada correctamete.");
+        notify("Historia dermatológica actualizada correctamete.", 'success');
       } else {
         const newHistory = { ...dermForm, id: crypto.randomUUID(), paciente_id: id!, fecha: new Date().toISOString() } as DermHistory;
         await DB.derm.save(newHistory);
-        alert("Nueva historia dermatológica creada.");
+        notify("Nueva historia dermatológica creada.", 'success');
         // Reload
         const updated = await DB.derm.getByPatient(id!);
         setDermHist(updated);
       }
     } catch (e) {
       console.error("Error saving derm history", e);
-      alert("Error al guardar.");
+      notify("Error al guardar.", 'error');
     }
   };
 
@@ -139,17 +141,17 @@ const PatientDetail: React.FC = () => {
     try {
       if (trichForm.id) {
         await DB.trich.update(trichForm.id, trichForm);
-        alert("Historia tricológica actualizada.");
+        notify("Historia tricológica actualizada.", 'success');
       } else {
         const newHistory = { ...trichForm, id: crypto.randomUUID(), paciente_id: id!, fecha: new Date().toISOString() } as TrichHistory;
         await DB.trich.save(newHistory);
-        alert("Nueva historia tricológica creada.");
+        notify("Nueva historia tricológica creada.", 'success');
         const updated = await DB.trich.getByPatient(id!);
         setTrichHist(updated);
       }
     } catch (e) {
       console.error("Error saving trich history", e);
-      alert("Error al guardar.");
+      notify("Error al guardar.", 'error');
     }
   };
 

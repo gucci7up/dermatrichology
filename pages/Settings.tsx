@@ -3,8 +3,10 @@ import React from 'react';
 import { DB } from '../services/db';
 import { AppSettings } from '../types';
 import { Settings as SettingsIcon, Globe, Upload, Save, CheckCircle, Trash2, Image as ImageIcon, UserCircle, Briefcase, Maximize2 } from 'lucide-react';
+import { useToast } from '../context/ToastContext';
 
 const Settings: React.FC = () => {
+  const { notify } = useToast();
   const [settings, setSettings] = React.useState<AppSettings>({
     app_name: 'DermaTrich',
     logo_url: '',
@@ -39,7 +41,7 @@ const Settings: React.FC = () => {
       setTimeout(() => setShowSaved(false), 3000);
     } catch (error) {
       console.error("Error saving settings", error);
-      alert("Error al guardar la configuración.");
+      notify("Error al guardar la configuración.", 'error');
     }
   };
 

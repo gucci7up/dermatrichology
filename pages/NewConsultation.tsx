@@ -4,9 +4,11 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { DB } from '../services/db';
 import { Patient, Session } from '../types';
 import { Save, X, Camera, User, Calendar, Stethoscope, ArrowLeft, CheckCircle2 } from 'lucide-react';
+import { useToast } from '../context/ToastContext';
 
 const NewConsultation: React.FC = () => {
     const navigate = useNavigate();
+    const { notify } = useToast();
     const [searchParams] = useSearchParams();
     const patientId = searchParams.get('patientId');
     const appointmentId = searchParams.get('appointmentId'); // Optional, if coming from agenda
@@ -63,7 +65,7 @@ const NewConsultation: React.FC = () => {
             navigate(`/patients/${patientId}`);
         } catch (error) {
             console.error("Error saving session", error);
-            alert("Error al guardar la consulta.");
+            notify("Error al guardar la consulta.", 'error');
         } finally {
             setSaving(false);
         }

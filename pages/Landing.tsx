@@ -22,8 +22,10 @@ import {
   UserCheck,
   Gem
 } from 'lucide-react';
+import { useToast } from '../context/ToastContext';
 
 const Landing: React.FC = () => {
+  const { notify } = useToast();
   const [settings, setSettings] = React.useState<AppSettings>({
     app_name: 'DermaTrich',
     logo_url: '',
@@ -112,7 +114,7 @@ const Landing: React.FC = () => {
       setShowSuccess(true);
     } catch (error) {
       console.error("Error creating appointment:", error);
-      alert("Error al enviar la solicitud. Por favor intente nuevamente.");
+      notify("Error al enviar la solicitud. Por favor intente nuevamente.", 'error');
     } finally {
       setIsSubmitting(false);
     }
