@@ -21,22 +21,45 @@ inline en cada página (ver `pages/Consultations.tsx`, `components/Layout.tsx`,
 **Estilo:** clínica boutique / cálido — menos "hospital corporativo", más
 consultorio premium.
 
-**Paleta** (nuevos tokens en `tailwind.config.js`, bajo `theme.extend.colors`):
+**Paleta** (nuevos tokens en `tailwind.config.js`, bajo `theme.extend.colors`).
+
+Corrección post-exploración de código: el uso real de color en la app no es
+un solo tono de acento y un solo neutro — usa las escalas numeradas
+completas de Tailwind (`slate-50` a `slate-900`, `blue-50` a `blue-700`) en
+decenas de variantes (fondos, bordes, focus rings, sombras, badges). Para
+poder reemplazar esto con una sustitución de texto simple y determinística
+(un solo find/replace de `slate`→`sand` y `blue`→`terracotta`, sin mapear
+tono por tono), la paleta se define como dos escalas completas de 50 a 900
+que calzan 1:1 con la forma de las escalas de Tailwind que reemplazan:
 
 ```js
 colors: {
-  cream: {
-    DEFAULT: '#FBF6EF', // fondo base de página
-    card: '#FAF3E9',    // fondo alterno de tarjetas
-  },
   terracotta: {
-    DEFAULT: '#C15F3C', // acento primario: botones, badges activos, iconos
-    dark: '#8C4429',    // hover, texto de énfasis
+    50: '#FBF0EA', 100: '#F5DDD0', 200: '#EAC0AC', 300: '#DEA084',
+    400: '#D07F5C', 500: '#C4693F',
+    DEFAULT: '#C15F3C', 600: '#C15F3C', // acento primario: botones, badges, focus rings
+    700: '#8C4429', // hover, texto de énfasis (reemplaza blue-700)
+    800: '#723620', 900: '#5C2C1A',
   },
-  charcoal: '#3A322C',  // texto principal (reemplaza slate-900 en texto)
-  sand: '#E8DCC8',      // bordes/dividers (reemplaza slate-200/300)
+  sand: {
+    50: '#FBF6EF',  // fondo base de página (reemplaza slate-50)
+    100: '#F5EDE0', 200: '#EEE2CE',
+    300: '#E8DCC8', // bordes/dividers (reemplaza slate-200/slate-300)
+    400: '#D6C4A8', 500: '#B8A688', 600: '#93826A', 700: '#6B5A48',
+    800: '#4F4237',
+    900: '#3A322C', // texto principal (reemplaza slate-900)
+  },
 }
 ```
+
+`bg-sand-50` es el fondo crema de página; `text-sand-900` es el texto
+principal (antes `text-slate-900`); `bg-terracotta`/`bg-terracotta-600` es
+el CTA primario (antes `bg-blue-600`); `terracotta-700` es el hover/dark
+(antes `blue-700`). Los shades 100/200/400/500/800 quedan disponibles para
+los usos existentes de esas mismas posiciones en `slate-*`/`blue-*`
+(badges suaves, bordes claros, texto secundario, sombras) sin necesitar
+mapeo manual — cada `slate-N` pasa a `sand-N` y cada `blue-N` pasa a
+`terracotta-N`, mismo N.
 
 Los estados semánticos (éxito=verde, pendiente=ámbar, error=rojo, ya usados
 en badges de estado de cita) se mantienen — solo se desaturan levemente para
@@ -78,48 +101,38 @@ archivo a mano para introducir tokens nuevos es el camino más simple y
 consistente con el patrón ya existente en el proyecto (no se introduce un
 sistema de theming nuevo — sería sobre-ingeniería para una sola paleta).
 
-Por archivo, el cambio es mecánico: buscar y reemplazar las clases de color
-Tailwind actuales por los nuevos tokens equivalentes:
+Por archivo, el cambio es mecánico — tres sustituciones de texto exactas,
+aplicadas a cada ocurrencia en todo el árbol de `pages/` y `components/`
+(más `App.tsx`) sin excepciones ni mapeo caso por caso, gracias a que las
+escalas `sand`/`terracotta` calzan tono a tono con `slate`/`blue`:
 
-| Antes (slate) | Después |
-|---|---|
-| `bg-slate-900` (fondos oscuros, sidebar, cards destacadas) | `bg-charcoal` |
-| `bg-white` (fondo de página) | `bg-cream` |
-| `bg-white` (fondo de card sobre bg-cream) | `bg-white` o `bg-cream-card` (sin cambio si ya contrasta) |
-| `border-slate-200`/`border-slate-300` | `border-sand` |
-| `text-slate-900` (texto principal) | `text-charcoal` |
-| `text-blue-600`/`bg-blue-600` (acento/CTA, uso minoritario en gráficos de Dashboard) | `text-terracotta`/`bg-terracotta` |
-| `hover:bg-black`/`hover:text-blue-800` | `hover:bg-terracotta-dark` |
-| `font-black` en `h1`/`h2`/`h3`/nombres destacados | agregar `font-serif` (Fraunces ya es variable, el peso lo define el propio font-weight de Tailwind) |
-| Resto de texto/labels/botones | sin cambio de familia (Plus Jakarta Sans queda como `font-sans`, ya es el default de Tailwind) |
+| Antes | Después | Alcance |
+|---|---|---|
+| token `slate` (en cualquier clase: `bg-slate-900`, `text-slate-600`, `border-slate-200`, `divide-slate-200`, `ring-slate-300`, etc.) | token `sand` (misma clase, mismo N: `bg-sand-900`, `text-sand-600`, `border-sand-200`, ...) | todo `pages/*.tsx`, `components/*.tsx`, `App.tsx` |
+| token `blue` (en cualquier clase: `bg-blue-600`, `text-blue-700`, `ring-blue-500`, `shadow-blue-500`, `accent-blue-600`, etc.) | token `terracotta` (misma clase, mismo N) | ídem |
+| hex hardcodeado `#d3b3a8` (acento primario actual — logo, activo de sidebar, ~97 usos en `Layout.tsx`, `Login.tsx`, `Landing.tsx`, `Dashboard.tsx`, `PatientList.tsx`, `PatientDetail.tsx`, `NewPatient.tsx`, `NewConsultation.tsx`, `Settings.tsx`, `App.tsx`, `AuthGuard.tsx`, `ErrorBoundary.tsx`) y su hover `#c4a499` (~10 usos) | `#C15F3C` (terracotta-600) y `#8C4429` (terracotta-700) respectivamente | mismos archivos |
 
-**Corrección post-exploración de código (detectada al escribir el plan):**
-el acento real y dominante hoy NO es `blue-*` — es un hex fijo hardcodeado
-`#d3b3a8` (mauve/rosado, 97 usos) con hover `#c4a499` (10 usos), repetido
-inline en casi todos los archivos (`Layout.tsx`, `Login.tsx`, `Landing.tsx`,
-`Dashboard.tsx`, `PatientList.tsx`, `PatientDetail.tsx`, `NewPatient.tsx`,
-`NewConsultation.tsx`, `Settings.tsx`, `App.tsx`, `AuthGuard.tsx`,
-`ErrorBoundary.tsx`). Este es el reemplazo prioritario:
-
-| Antes (hex hardcodeado) | Después |
-|---|---|
-| `#d3b3a8` (cualquier uso: bg, text, border, ring, inline style) | `#C15F3C` (terracotta DEFAULT) |
-| `#c4a499` (hover) | `#8C4429` (terracotta dark) |
-
-`blue-*` queda como reemplazo secundario, limitado a los pocos usos en
-gráficos de `Dashboard.tsx` (recharts) — mismo mapeo a terracotta.
+`bg-white` como fondo de card sobre `bg-sand-50` no cambia (ya contrasta).
+`font-black` en `h1`/`h2`/`h3`/nombres de paciente destacados gana además
+`font-serif` (Fraunces ya es variable, el peso lo da el propio font-weight
+de Tailwind) — este paso es manual, no mecánico, porque requiere distinguir
+títulos de texto de cuerpo. El resto de texto/labels/botones no cambia de
+familia (Plus Jakarta Sans ya es el default vía `font-sans`).
 
 Bordes redondeados grandes (`rounded-[2rem]`, `rounded-2xl`, `rounded-3xl`)
 ya están en uso extensivo — se mantienen tal cual, encajan con el estilo
 boutique sin cambios.
 
-`components/Layout.tsx` (sidebar): fondo pasa de oscuro a `bg-cream` (o
-`bg-white` si el sidebar necesita diferenciarse del body), item de menú
-activo usa `bg-terracotta text-white` en vez del acento actual.
+`components/Layout.tsx` (sidebar): fondo pasa de oscuro (`slate-900`→
+`sand-900` por la sustitución mecánica) a `bg-sand-50` (fondo claro, cambio
+manual — la sustitución mecánica por sí sola dejaría el sidebar oscuro,
+solo con paleta cálida en vez de azulada), item de menú activo usa
+`bg-terracotta-600 text-white`.
 
 Badges de estado de cita (`Con Seguro`/`Sin Seguro`, `pendiente`/`confirmada`/
 `cancelada` en `AppointmentCard.tsx`) mantienen su lógica semántica de color
-(verde/ámbar/rojo/neutro) — solo el neutro/default pasa de slate a sand/charcoal.
+(verde/ámbar/rojo/neutro) — el neutro/default pasa de `slate-*` a `sand-*`
+vía la sustitución mecánica, sin cambio manual adicional.
 
 ## Fuera de alcance
 
