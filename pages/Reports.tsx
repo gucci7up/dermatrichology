@@ -100,13 +100,13 @@ const Reports: React.FC = () => {
     <div className="space-y-8 animate-in fade-in duration-500">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-black text-slate-900">Centro de Reportes</h1>
-          <p className="text-slate-600 font-semibold">Análisis de actividad, gestión de expedientes y exportación.</p>
+          <h1 className="text-3xl font-black text-sand-900">Centro de Reportes</h1>
+          <p className="text-sand-600 font-semibold">Análisis de actividad, gestión de expedientes y exportación.</p>
         </div>
         <div className="flex gap-3">
           <button
             onClick={exportPatientsCSV}
-            className="flex items-center gap-2 bg-white border-2 border-slate-300 hover:border-blue-600 hover:text-blue-600 text-slate-700 px-5 py-2.5 rounded-xl font-black text-xs transition-all shadow-md active:scale-95"
+            className="flex items-center gap-2 bg-white border-2 border-sand-300 hover:border-terracotta-600 hover:text-terracotta-600 text-sand-700 px-5 py-2.5 rounded-xl font-black text-xs transition-all shadow-md active:scale-95"
           >
             <FileSpreadsheet className="w-4 h-4" /> EXPORTAR PACIENTES (CSV)
           </button>
@@ -115,36 +115,36 @@ const Reports: React.FC = () => {
 
       {/* Tarjetas de Resumen */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-white p-6 rounded-3xl border border-slate-300 shadow-md">
+        <div className="bg-white p-6 rounded-3xl border border-sand-300 shadow-md">
           <div className="flex items-center gap-4">
-            <div className="p-3 bg-blue-50 text-blue-600 rounded-2xl">
+            <div className="p-3 bg-terracotta-50 text-terracotta-600 rounded-2xl">
               <Users className="w-6 h-6" />
             </div>
             <div>
-              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Base de Datos</p>
-              <h3 className="text-2xl font-black text-slate-900">{patients.length} Pacientes</h3>
+              <p className="text-[10px] font-black text-sand-400 uppercase tracking-widest">Base de Datos</p>
+              <h3 className="text-2xl font-black text-sand-900">{patients.length} Pacientes</h3>
             </div>
           </div>
         </div>
-        <div className="bg-white p-6 rounded-3xl border border-slate-300 shadow-md">
+        <div className="bg-white p-6 rounded-3xl border border-sand-300 shadow-md">
           <div className="flex items-center gap-4">
             <div className="p-3 bg-emerald-50 text-emerald-600 rounded-2xl">
               <CheckCircle2 className="w-6 h-6" />
             </div>
             <div>
-              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Consultas Totales</p>
-              <h3 className="text-2xl font-black text-slate-900">{allSessions.length} Registradas</h3>
+              <p className="text-[10px] font-black text-sand-400 uppercase tracking-widest">Consultas Totales</p>
+              <h3 className="text-2xl font-black text-sand-900">{allSessions.length} Registradas</h3>
             </div>
           </div>
         </div>
-        <div className="bg-white p-6 rounded-3xl border border-slate-300 shadow-md">
+        <div className="bg-white p-6 rounded-3xl border border-sand-300 shadow-md">
           <div className="flex items-center gap-4">
             <div className="p-3 bg-amber-50 text-amber-600 rounded-2xl">
               <TrendingUp className="w-6 h-6" />
             </div>
             <div>
-              <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest">Tasa de Retorno</p>
-              <h3 className="text-2xl font-black text-slate-900">74% Estimado</h3>
+              <p className="text-[10px] font-black text-sand-400 uppercase tracking-widest">Tasa de Retorno</p>
+              <h3 className="text-2xl font-black text-sand-900">74% Estimado</h3>
             </div>
           </div>
         </div>
@@ -153,17 +153,17 @@ const Reports: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 pb-20">
         {/* Lado Izquierdo: Línea de Tiempo / Gráficos */}
         <div className="lg:col-span-2 space-y-8">
-          <div className="bg-white rounded-[2.5rem] border border-slate-300 shadow-lg overflow-hidden">
-            <div className="flex border-b border-slate-200">
+          <div className="bg-white rounded-[2.5rem] border border-sand-300 shadow-lg overflow-hidden">
+            <div className="flex border-b border-sand-200">
               <button
                 onClick={() => setActiveTab('activity')}
-                className={`flex-1 py-5 font-black text-xs uppercase tracking-widest transition-all ${activeTab === 'activity' ? 'bg-slate-900 text-white' : 'text-slate-500 hover:bg-slate-50'}`}
+                className={`flex-1 py-5 font-black text-xs uppercase tracking-widest transition-all ${activeTab === 'activity' ? 'bg-sand-900 text-white' : 'text-sand-500 hover:bg-sand-50'}`}
               >
                 Actividad Clínica Reciente
               </button>
               <button
                 onClick={() => setActiveTab('stats')}
-                className={`flex-1 py-5 font-black text-xs uppercase tracking-widest transition-all ${activeTab === 'stats' ? 'bg-slate-900 text-white' : 'text-slate-500 hover:bg-slate-50'}`}
+                className={`flex-1 py-5 font-black text-xs uppercase tracking-widest transition-all ${activeTab === 'stats' ? 'bg-sand-900 text-white' : 'text-sand-500 hover:bg-sand-50'}`}
               >
                 Métricas de Volumen
               </button>
@@ -176,28 +176,28 @@ const Reports: React.FC = () => {
                     allSessions.slice(0, 8).map((session, i) => (
                       <div key={i} className="flex gap-4 group">
                         <div className="flex flex-col items-center">
-                          <div className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center border-2 border-slate-200 group-hover:border-blue-500 group-hover:bg-blue-50 transition-all">
-                            <Clock className="w-5 h-5 text-slate-400 group-hover:text-blue-600" />
+                          <div className="w-10 h-10 rounded-full bg-sand-100 flex items-center justify-center border-2 border-sand-200 group-hover:border-terracotta-500 group-hover:bg-terracotta-50 transition-all">
+                            <Clock className="w-5 h-5 text-sand-400 group-hover:text-terracotta-600" />
                           </div>
                           {i < allSessions.slice(0, 8).length - 1 && (
-                            <div className="w-0.5 flex-1 bg-slate-100 my-2"></div>
+                            <div className="w-0.5 flex-1 bg-sand-100 my-2"></div>
                           )}
                         </div>
                         <div className="flex-1 pb-6">
                           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-1">
-                            <h4 className="font-black text-slate-900 hover:text-blue-600 cursor-pointer" onClick={() => navigate(`/patients/${session.patientId}`)}>
+                            <h4 className="font-black text-sand-900 hover:text-terracotta-600 cursor-pointer" onClick={() => navigate(`/patients/${session.patientId}`)}>
                               {session.patientName}
                             </h4>
-                            <span className="text-[10px] font-black text-slate-400 uppercase bg-slate-50 px-3 py-1 rounded-full border border-slate-200">
+                            <span className="text-[10px] font-black text-sand-400 uppercase bg-sand-50 px-3 py-1 rounded-full border border-sand-200">
                               {new Date(session.fecha).toLocaleDateString()}
                             </span>
                           </div>
-                          <p className="text-sm text-slate-600 font-medium line-clamp-2">{session.evolucion_clinica}</p>
+                          <p className="text-sm text-sand-600 font-medium line-clamp-2">{session.evolucion_clinica}</p>
                           <div className="mt-3 flex items-center gap-4">
                             <span className="text-[10px] font-black text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded uppercase">Variación: {session.cambios_densidad}%</span>
                             <button
                               onClick={() => navigate(`/patients/${session.patientId}/print`)}
-                              className="text-[10px] font-black text-slate-400 hover:text-blue-600 flex items-center gap-1 transition-all"
+                              className="text-[10px] font-black text-sand-400 hover:text-terracotta-600 flex items-center gap-1 transition-all"
                             >
                               <Printer className="w-3 h-3" /> Imprimir Reporte
                             </button>
@@ -206,9 +206,9 @@ const Reports: React.FC = () => {
                       </div>
                     ))
                   ) : (
-                    <div className="py-20 text-center border-2 border-dashed border-slate-200 rounded-3xl">
-                      <History className="w-12 h-12 text-slate-200 mx-auto mb-4" />
-                      <p className="text-slate-400 font-black uppercase tracking-widest text-sm">No hay actividad registrada aún.</p>
+                    <div className="py-20 text-center border-2 border-dashed border-sand-200 rounded-3xl">
+                      <History className="w-12 h-12 text-sand-200 mx-auto mb-4" />
+                      <p className="text-sand-400 font-black uppercase tracking-widest text-sm">No hay actividad registrada aún.</p>
                     </div>
                   )}
                 </div>
@@ -238,21 +238,21 @@ const Reports: React.FC = () => {
 
         {/* Lado Derecho: Acceso Directo e Impresiones */}
         <div className="space-y-8">
-          <section className="bg-white rounded-[2rem] border border-slate-300 shadow-md p-6">
-            <h3 className="font-black text-sm text-slate-900 uppercase tracking-widest mb-6 flex items-center gap-2">
-              <Printer className="w-4 h-4 text-blue-600" /> Expedientes Listos
+          <section className="bg-white rounded-[2rem] border border-sand-300 shadow-md p-6">
+            <h3 className="font-black text-sm text-sand-900 uppercase tracking-widest mb-6 flex items-center gap-2">
+              <Printer className="w-4 h-4 text-terracotta-600" /> Expedientes Listos
             </h3>
             <div className="space-y-4">
               {patients.slice(0, 5).map(p => (
-                <div key={p.id} className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-200 group hover:border-blue-300 transition-all">
+                <div key={p.id} className="flex items-center justify-between p-4 bg-sand-50 rounded-2xl border border-sand-200 group hover:border-terracotta-300 transition-all">
                   <div className="flex items-center gap-3">
                     <img src={p.foto_perfil} alt={`Foto de ${p.nombre_completo}`} className="w-8 h-8 rounded-full object-cover" />
-                    <span className="text-xs font-bold text-slate-800 truncate max-w-[120px]">{p.nombre_completo}</span>
+                    <span className="text-xs font-bold text-sand-800 truncate max-w-[120px]">{p.nombre_completo}</span>
                   </div>
                   <button
                     onClick={() => navigate(`/patients/${p.id}/print`)}
                     aria-label={`Imprimir reporte de ${p.nombre_completo}`}
-                    className="p-2 bg-white text-slate-400 hover:text-blue-600 hover:shadow-md rounded-xl border border-slate-200 transition-all"
+                    className="p-2 bg-white text-sand-400 hover:text-terracotta-600 hover:shadow-md rounded-xl border border-sand-200 transition-all"
                   >
                     <ArrowUpRight className="w-4 h-4" />
                   </button>
@@ -261,19 +261,19 @@ const Reports: React.FC = () => {
             </div>
             <button
               onClick={() => navigate('/patients')}
-              className="w-full mt-6 py-3 text-[10px] font-black text-slate-500 uppercase tracking-widest hover:bg-slate-50 rounded-xl transition-all"
+              className="w-full mt-6 py-3 text-[10px] font-black text-sand-500 uppercase tracking-widest hover:bg-sand-50 rounded-xl transition-all"
             >
               Ver Directorio Completo
             </button>
           </section>
 
-          <section className="bg-slate-900 rounded-[2rem] p-8 text-white relative overflow-hidden group">
+          <section className="bg-sand-900 rounded-[2rem] p-8 text-white relative overflow-hidden group">
             <div className="absolute -right-4 -bottom-4 opacity-10 group-hover:scale-110 transition-transform duration-700">
               <FileText className="w-32 h-32" />
             </div>
             <div className="relative z-10">
               <h3 className="font-black text-lg mb-2">Auditoría de Datos</h3>
-              <p className="text-xs text-slate-400 font-medium leading-relaxed mb-6">Todos los reportes cumplen con la integridad referencial de pacientes y sesiones almacenadas localmente.</p>
+              <p className="text-xs text-sand-400 font-medium leading-relaxed mb-6">Todos los reportes cumplen con la integridad referencial de pacientes y sesiones almacenadas localmente.</p>
               <div className="flex items-center gap-2 text-emerald-400 text-[10px] font-black uppercase tracking-widest">
                 <CheckCircle2 className="w-4 h-4" /> Datos Sincronizados
               </div>

@@ -68,18 +68,18 @@ const Prescription: React.FC = () => {
     });
 
     return (
-        <div className="min-h-screen bg-slate-100 p-8 print:p-0 print:bg-white flex flex-col items-center">
+        <div className="min-h-screen bg-sand-100 p-8 print:p-0 print:bg-white flex flex-col items-center">
             {/* Toolbar - Hidden when printing */}
             <div className="w-full max-w-[210mm] flex items-center justify-between mb-8 print:hidden">
                 <button
                     onClick={() => navigate(-1)}
-                    className="flex items-center gap-2 text-slate-500 hover:text-slate-800 font-bold"
+                    className="flex items-center gap-2 text-sand-500 hover:text-sand-800 font-bold"
                 >
                     <ChevronLeft className="w-5 h-5" /> Volver
                 </button>
 
                 <div className="flex gap-4">
-                    <label className="flex items-center gap-2 px-4 py-2 bg-white border border-slate-300 rounded-lg text-slate-700 font-bold cursor-pointer hover:bg-slate-50 text-sm shadow-sm">
+                    <label className="flex items-center gap-2 px-4 py-2 bg-white border border-sand-300 rounded-lg text-sand-700 font-bold cursor-pointer hover:bg-sand-50 text-sm shadow-sm">
                         <Upload className="w-4 h-4" />
                         Subir Plantilla (Imagen)
                         <input type="file" accept="image/*" className="hidden" onChange={handleTemplateUpload} />
@@ -94,7 +94,7 @@ const Prescription: React.FC = () => {
 
                     <button
                         onClick={handlePrint}
-                        className="flex items-center gap-2 px-6 py-2 bg-blue-600 text-white rounded-lg font-bold hover:bg-blue-700 shadow-lg shadow-blue-500/30"
+                        className="flex items-center gap-2 px-6 py-2 bg-terracotta-600 text-white rounded-lg font-bold hover:bg-terracotta-700 shadow-lg shadow-terracotta-500/30"
                     >
                         <Printer className="w-4 h-4" /> Imprimir
                     </button>
@@ -115,8 +115,8 @@ const Prescription: React.FC = () => {
                         alt="Background Template"
                     />
                 ) : (
-                    <div className="absolute inset-0 z-0 flex items-center justify-center border-8 border-double border-slate-100 m-8">
-                        <p className="text-slate-300 font-black text-4xl uppercase -rotate-12">Plantilla Horizontal (Cárgala)</p>
+                    <div className="absolute inset-0 z-0 flex items-center justify-center border-8 border-double border-sand-100 m-8">
+                        <p className="text-sand-300 font-black text-4xl uppercase -rotate-12">Plantilla Horizontal (Cárgala)</p>
                     </div>
                 )}
 
@@ -126,7 +126,7 @@ const Prescription: React.FC = () => {
                     {/* Main Writing Area - Adjusted to clear logo and fill page width */}
                     <div className="absolute top-[60mm] left-[25mm] right-[25mm] bottom-[50mm]">
                         <textarea
-                            className="w-full h-full bg-transparent resize-none border-none focus:ring-0 font-['Caveat'] text-2xl leading-loose text-slate-800 placeholder-slate-300/50 outline-none p-4"
+                            className="w-full h-full bg-transparent resize-none border-none focus:ring-0 font-['Caveat'] text-2xl leading-loose text-sand-800 placeholder-sand-300/50 outline-none p-4"
                             placeholder="Escribe la receta aquí..."
                             value={prescriptionText}
                             onChange={(e) => setPrescriptionText(e.target.value)}
@@ -137,12 +137,12 @@ const Prescription: React.FC = () => {
                     {/* Footer Fields - Adjusted for Landscape Bottom */}
 
                     {/* Paciente Name - Bottom Left */}
-                    <div className="absolute bottom-[28mm] left-[45mm] font-['Caveat'] text-xl text-slate-900 font-bold whitespace-nowrap">
+                    <div className="absolute bottom-[28mm] left-[45mm] font-['Caveat'] text-xl text-sand-900 font-bold whitespace-nowrap">
                         {patient.nombre_completo}
                     </div>
 
                     {/* Date - Bottom Left (Below Patient, shifted left to avoid signature) */}
-                    <div className="absolute bottom-[14mm] left-[25mm] font-['Caveat'] text-xl text-slate-900 font-bold whitespace-nowrap">
+                    <div className="absolute bottom-[14mm] left-[25mm] font-['Caveat'] text-xl text-sand-900 font-bold whitespace-nowrap">
                         {currentDate}
                     </div>
 

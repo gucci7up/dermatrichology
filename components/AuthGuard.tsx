@@ -9,10 +9,10 @@ export const AuthGuard: React.FC<{ children: React.ReactNode }> = ({ children })
 
     if (loading) {
         return (
-            <div className="min-h-screen flex items-center justify-center bg-slate-50">
+            <div className="min-h-screen flex items-center justify-center bg-sand-50">
                 <div className="flex flex-col items-center gap-4">
-                    <Loader2 className="w-10 h-10 text-[#d3b3a8] animate-spin" />
-                    <p className="text-sm font-black text-slate-400 uppercase tracking-widest">Verificando acceso...</p>
+                    <Loader2 className="w-10 h-10 text-[#C15F3C] animate-spin" />
+                    <p className="text-sm font-black text-sand-400 uppercase tracking-widest">Verificando acceso...</p>
                 </div>
             </div>
         );

@@ -55,16 +55,16 @@ const Consultations: React.FC = () => {
     p.documento_identidad.includes(searchTerm)
   ).slice(0, 5);
 
-  const cardClasses = "bg-white rounded-[2rem] border border-slate-300 shadow-md overflow-hidden";
+  const cardClasses = "bg-white rounded-[2rem] border border-sand-300 shadow-md overflow-hidden";
 
   return (
     <div className="space-y-8 animate-in fade-in duration-500 pb-20">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-black text-slate-900">Consultas y Evolución</h1>
-          <p className="text-slate-600 font-semibold">Gestión operativa de sesiones clínicas y seguimiento.</p>
+          <h1 className="text-3xl font-black text-sand-900">Consultas y Evolución</h1>
+          <p className="text-sand-600 font-semibold">Gestión operativa de sesiones clínicas y seguimiento.</p>
         </div>
-        <Link to="/patients/new" className="flex items-center gap-2 bg-slate-900 hover:bg-black text-white px-6 py-3 rounded-2xl font-black text-xs transition-all shadow-xl active:scale-95">
+        <Link to="/patients/new" className="flex items-center gap-2 bg-sand-900 hover:bg-black text-white px-6 py-3 rounded-2xl font-black text-xs transition-all shadow-xl active:scale-95">
           <UserPlus className="w-4 h-4" /> REGISTRAR PARA CONSULTA
         </Link>
       </div>
@@ -73,31 +73,31 @@ const Consultations: React.FC = () => {
         {/* Columna Principal: Timeline de Actividad */}
         <div className="lg:col-span-2 space-y-6">
           <section className={cardClasses}>
-            <div className="p-6 border-b border-slate-200 flex items-center justify-between bg-slate-50/50">
+            <div className="p-6 border-b border-sand-200 flex items-center justify-between bg-sand-50/50">
               <div className="flex items-center gap-3">
-                <div className="p-2 bg-blue-600 rounded-xl shadow-lg">
+                <div className="p-2 bg-terracotta-600 rounded-xl shadow-lg">
                   <History className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="font-black text-lg text-slate-900">Actividad Clínica Reciente</h3>
+                <h3 className="font-black text-lg text-sand-900">Actividad Clínica Reciente</h3>
               </div>
             </div>
 
-            <div className="divide-y divide-slate-200">
+            <div className="divide-y divide-sand-200">
               {recentSessions.length > 0 ? (
                 recentSessions.slice(0, 10).map((session, i) => (
-                  <div key={session.id} className="p-6 hover:bg-slate-50 transition-all group">
+                  <div key={session.id} className="p-6 hover:bg-sand-50 transition-all group">
                     <div className="flex items-start gap-4">
                       <img src={session.patientPhoto} className="w-12 h-12 rounded-2xl object-cover ring-2 ring-white shadow-md" alt={`Foto de ${session.patientName}`} />
                       <div className="flex-1 min-w-0">
                         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
-                          <h4 className="font-black text-slate-900 group-hover:text-blue-600 transition-colors truncate">
+                          <h4 className="font-black text-sand-900 group-hover:text-terracotta-600 transition-colors truncate">
                             {session.patientName}
                           </h4>
-                          <span className="text-[10px] font-black text-slate-400 bg-white border border-slate-200 px-3 py-1 rounded-full whitespace-nowrap">
+                          <span className="text-[10px] font-black text-sand-400 bg-white border border-sand-200 px-3 py-1 rounded-full whitespace-nowrap">
                             {new Date(session.fecha).toLocaleDateString('es-ES', { day: '2-digit', month: 'short', hour: '2-digit', minute: '2-digit' })}
                           </span>
                         </div>
-                        <p className="text-sm text-slate-600 font-medium line-clamp-2 italic mb-3">
+                        <p className="text-sm text-sand-600 font-medium line-clamp-2 italic mb-3">
                           "{session.evolucion_clinica}"
                         </p>
                         <div className="flex items-center gap-4">
@@ -106,7 +106,7 @@ const Consultations: React.FC = () => {
                           </div>
                           <button
                             onClick={() => navigate(`/patients/${session.patientId}`)}
-                            className="text-[10px] font-black text-blue-600 hover:text-blue-800 flex items-center gap-1"
+                            className="text-[10px] font-black text-terracotta-600 hover:text-terracotta-800 flex items-center gap-1"
                           >
                             Abrir Expediente <ArrowRight className="w-3 h-3" />
                           </button>
@@ -117,8 +117,8 @@ const Consultations: React.FC = () => {
                 ))
               ) : (
                 <div className="p-20 text-center">
-                  <Clock className="w-12 h-12 text-slate-200 mx-auto mb-4" />
-                  <p className="font-black text-slate-400 uppercase tracking-widest text-sm">No hay consultas registradas hoy.</p>
+                  <Clock className="w-12 h-12 text-sand-200 mx-auto mb-4" />
+                  <p className="font-black text-sand-400 uppercase tracking-widest text-sm">No hay consultas registradas hoy.</p>
                 </div>
               )}
             </div>
@@ -127,7 +127,7 @@ const Consultations: React.FC = () => {
 
         {/* Columna Lateral: Nueva Consulta y Búsqueda */}
         <div className="space-y-6">
-          <section className="bg-slate-900 rounded-[2.5rem] p-8 text-white shadow-2xl relative overflow-hidden group">
+          <section className="bg-sand-900 rounded-[2.5rem] p-8 text-white shadow-2xl relative overflow-hidden group">
             <div className="absolute -right-6 -top-6 opacity-10 group-hover:scale-110 transition-transform duration-700">
               <Stethoscope className="w-40 h-40" />
             </div>
@@ -135,17 +135,17 @@ const Consultations: React.FC = () => {
             <div className="relative z-10 space-y-6">
               <div>
                 <h3 className="text-xl font-black mb-2">Iniciar Consulta</h3>
-                <p className="text-slate-400 text-xs font-bold leading-relaxed">Busca un paciente existente para registrar una nueva sesión o evolución.</p>
+                <p className="text-sand-400 text-xs font-bold leading-relaxed">Busca un paciente existente para registrar una nueva sesión o evolución.</p>
               </div>
 
               <div className="relative">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-sand-500" />
                 <input
                   type="text"
                   placeholder="Nombre o DNI..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-11 pr-4 py-3.5 bg-slate-800 border border-slate-700 rounded-2xl text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all placeholder-slate-500 font-bold"
+                  className="w-full pl-11 pr-4 py-3.5 bg-sand-800 border border-sand-700 rounded-2xl text-sm focus:ring-2 focus:ring-terracotta-500 outline-none transition-all placeholder-sand-500 font-bold"
                 />
               </div>
 
@@ -161,13 +161,13 @@ const Consultations: React.FC = () => {
                         <img src={p.foto_perfil} className="w-8 h-8 rounded-full object-cover" alt={`Foto de ${p.nombre_completo}`} />
                         <div className="flex-1 min-w-0">
                           <p className="text-xs font-black truncate">{p.nombre_completo}</p>
-                          <p className="text-[9px] text-slate-500 font-bold">{p.documento_identidad}</p>
+                          <p className="text-[9px] text-sand-500 font-bold">{p.documento_identidad}</p>
                         </div>
-                        <ChevronRight className="w-4 h-4 text-slate-600 group-hover:text-blue-500 transition-colors" />
+                        <ChevronRight className="w-4 h-4 text-sand-600 group-hover:text-terracotta-500 transition-colors" />
                       </button>
                     ))
                   ) : (
-                    <p className="text-center py-4 text-xs font-black text-slate-500 uppercase">Sin resultados</p>
+                    <p className="text-center py-4 text-xs font-black text-sand-500 uppercase">Sin resultados</p>
                   )}
                 </div>
               )}

@@ -49,28 +49,28 @@ export const AppointmentCard: React.FC<{
   };
 
   return (
-    <div className="flex flex-col gap-3 p-4 bg-white rounded-3xl border border-slate-200 shadow-sm hover:border-blue-400 transition-all group">
+    <div className="flex flex-col gap-3 p-4 bg-white rounded-3xl border border-sand-200 shadow-sm hover:border-terracotta-400 transition-all group">
       <div className="flex gap-4">
-        <div className="font-black text-blue-600 text-sm py-1 border-r border-slate-200 pr-4 flex items-center justify-center min-w-[60px]">
+        <div className="font-black text-terracotta-600 text-sm py-1 border-r border-sand-200 pr-4 flex items-center justify-center min-w-[60px]">
           {appointment.hora_preferida}
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
-            <p className="text-sm font-black text-slate-900 group-hover:text-blue-700 transition-colors">{appointment.paciente_nombre}</p>
+            <p className="text-sm font-black text-sand-900 group-hover:text-terracotta-700 transition-colors">{appointment.paciente_nombre}</p>
             <span className={`text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full ${estadoBadgeClasses[appointment.estado]}`}>
               {appointment.estado}
             </span>
             {appointment.con_seguro ? (
-              <span className="flex items-center gap-1 text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full bg-blue-100 text-blue-700">
+              <span className="flex items-center gap-1 text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full bg-terracotta-100 text-terracotta-700">
                 <ShieldCheck className="w-3 h-3" /> Con Seguro
               </span>
             ) : (
-              <span className="flex items-center gap-1 text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full bg-slate-100 text-slate-500">
+              <span className="flex items-center gap-1 text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full bg-sand-100 text-sand-500">
                 <ShieldOff className="w-3 h-3" /> Sin Seguro
               </span>
             )}
           </div>
-          <p className="text-[10px] font-black text-slate-400 uppercase tracking-tighter">
+          <p className="text-[10px] font-black text-sand-400 uppercase tracking-tighter">
             CI: {appointment.paciente_cedula || 'N/A'} · {appointment.especialidad === 'derm' ? 'DERMATOLOGÍA' : 'TRICOLOGÍA'} · {(() => {
               const [y, m, d] = appointment.fecha_preferida.slice(0, 10).split('-').map(Number);
               return new Date(y, m - 1, d).toLocaleDateString();
@@ -86,19 +86,19 @@ export const AppointmentCard: React.FC<{
             required
             value={fecha}
             onChange={(e) => setFecha(e.target.value)}
-            className="px-3 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs font-bold"
+            className="px-3 py-1.5 bg-sand-50 border border-sand-300 rounded-lg text-xs font-bold"
           />
           <input
             type="time"
             required
             value={hora}
             onChange={(e) => setHora(e.target.value)}
-            className="px-3 py-1.5 bg-slate-50 border border-slate-300 rounded-lg text-xs font-bold"
+            className="px-3 py-1.5 bg-sand-50 border border-sand-300 rounded-lg text-xs font-bold"
           />
-          <button type="submit" disabled={saving} className="px-3 py-1.5 bg-blue-600 text-white rounded-lg font-black text-[10px] uppercase tracking-widest hover:bg-blue-700 disabled:opacity-50 transition-all">
+          <button type="submit" disabled={saving} className="px-3 py-1.5 bg-terracotta-600 text-white rounded-lg font-black text-[10px] uppercase tracking-widest hover:bg-terracotta-700 disabled:opacity-50 transition-all">
             {saving ? 'Guardando...' : 'Guardar'}
           </button>
-          <button type="button" onClick={() => setRescheduling(false)} className="px-3 py-1.5 bg-slate-200 text-slate-700 rounded-lg font-black text-[10px] uppercase tracking-widest hover:bg-slate-300 transition-all">
+          <button type="button" onClick={() => setRescheduling(false)} className="px-3 py-1.5 bg-sand-200 text-sand-700 rounded-lg font-black text-[10px] uppercase tracking-widest hover:bg-sand-300 transition-all">
             Cancelar
           </button>
         </form>
@@ -121,7 +121,7 @@ export const AppointmentCard: React.FC<{
           </button>
           <button
             onClick={() => setRescheduling(true)}
-            className="px-3 py-1.5 bg-slate-900 text-white rounded-lg font-black text-[10px] uppercase tracking-widest hover:bg-black transition-all flex items-center gap-1"
+            className="px-3 py-1.5 bg-sand-900 text-white rounded-lg font-black text-[10px] uppercase tracking-widest hover:bg-black transition-all flex items-center gap-1"
           >
             <Pencil className="w-3 h-3" /> Reprogramar
           </button>

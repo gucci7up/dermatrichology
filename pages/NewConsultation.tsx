@@ -71,11 +71,11 @@ const NewConsultation: React.FC = () => {
         }
     };
 
-    if (loading) return <div className="p-10 text-center font-bold text-slate-500">Cargando paciente...</div>;
+    if (loading) return <div className="p-10 text-center font-bold text-sand-500">Cargando paciente...</div>;
     if (!patient) return (
         <div className="p-10 text-center">
-            <p className="font-bold text-slate-500">Paciente no seleccionado.</p>
-            <button onClick={() => navigate('/consultations')} className="mt-4 text-blue-600 font-bold underline">Volver a Consultas</button>
+            <p className="font-bold text-sand-500">Paciente no seleccionado.</p>
+            <button onClick={() => navigate('/consultations')} className="mt-4 text-terracotta-600 font-bold underline">Volver a Consultas</button>
         </div>
     );
 
@@ -83,16 +83,16 @@ const NewConsultation: React.FC = () => {
         <div className="max-w-4xl mx-auto pb-20 animate-in fade-in slide-in-from-bottom-4">
             <div className="flex items-center justify-between mb-8">
                 <div className="flex items-center gap-4">
-                    <button onClick={() => navigate(-1)} aria-label="Volver" className="p-2 hover:bg-slate-100 rounded-full transition-all">
-                        <ArrowLeft className="w-6 h-6 text-slate-500" />
+                    <button onClick={() => navigate(-1)} aria-label="Volver" className="p-2 hover:bg-sand-100 rounded-full transition-all">
+                        <ArrowLeft className="w-6 h-6 text-sand-500" />
                     </button>
                     <div>
-                        <h1 className="text-3xl font-black text-slate-900">Nueva Consulta</h1>
+                        <h1 className="text-3xl font-black text-sand-900">Nueva Consulta</h1>
                         <div className="flex items-center gap-2 mt-1">
-                            <span className="text-slate-500 font-semibold">Paciente:</span>
-                            <div className="flex items-center gap-2 bg-white px-3 py-1 rounded-full border border-slate-200 shadow-sm">
+                            <span className="text-sand-500 font-semibold">Paciente:</span>
+                            <div className="flex items-center gap-2 bg-white px-3 py-1 rounded-full border border-sand-200 shadow-sm">
                                 <img src={patient.foto_perfil} alt={`Foto de ${patient.nombre_completo}`} className="w-5 h-5 rounded-full object-cover" />
-                                <span className="font-bold text-slate-900 text-sm">{patient.nombre_completo}</span>
+                                <span className="font-bold text-sand-900 text-sm">{patient.nombre_completo}</span>
                             </div>
                         </div>
                     </div>
@@ -103,33 +103,33 @@ const NewConsultation: React.FC = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Columna Izquierda: Datos Clínicos */}
                     <div className="lg:col-span-2 space-y-8">
-                        <section className="bg-white rounded-[2.5rem] border border-slate-200 shadow-md p-8">
-                            <div className="flex items-center gap-3 mb-6 border-b border-slate-100 pb-4">
-                                <div className="p-2 bg-blue-50 text-blue-600 rounded-xl">
+                        <section className="bg-white rounded-[2.5rem] border border-sand-200 shadow-md p-8">
+                            <div className="flex items-center gap-3 mb-6 border-b border-sand-100 pb-4">
+                                <div className="p-2 bg-terracotta-50 text-terracotta-600 rounded-xl">
                                     <Stethoscope className="w-5 h-5" />
                                 </div>
-                                <h3 className="font-black text-lg text-slate-900">Evolución Clínica</h3>
+                                <h3 className="font-black text-lg text-sand-900">Evolución Clínica</h3>
                             </div>
 
                             <div className="space-y-6">
                                 <div>
-                                    <label className="text-[11px] font-black text-slate-500 uppercase tracking-widest ml-1 mb-2 block">Descripción de la Evolución</label>
+                                    <label className="text-[11px] font-black text-sand-500 uppercase tracking-widest ml-1 mb-2 block">Descripción de la Evolución</label>
                                     <textarea
                                         required
                                         value={sessionData.evolucion_clinica}
                                         onChange={e => setSessionData({ ...sessionData, evolucion_clinica: e.target.value })}
-                                        className="w-full h-40 p-5 bg-slate-50 border border-slate-200 rounded-2xl text-slate-900 font-medium focus:ring-2 focus:ring-blue-500 outline-none resize-none placeholder-slate-400"
+                                        className="w-full h-40 p-5 bg-sand-50 border border-sand-200 rounded-2xl text-sand-900 font-medium focus:ring-2 focus:ring-terracotta-500 outline-none resize-none placeholder-sand-400"
                                         placeholder="Detalle los cambios observados, síntomas referidos y hallazgos en la exploración física..."
                                     />
                                 </div>
 
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                     <div>
-                                        <label className="text-[11px] font-black text-slate-500 uppercase tracking-widest ml-1 mb-2 block">Respuesta al Tratamiento</label>
+                                        <label className="text-[11px] font-black text-sand-500 uppercase tracking-widest ml-1 mb-2 block">Respuesta al Tratamiento</label>
                                         <select
                                             value={sessionData.respuesta_tratamiento}
                                             onChange={e => setSessionData({ ...sessionData, respuesta_tratamiento: e.target.value })}
-                                            className="w-full p-4 bg-white border border-slate-200 rounded-xl font-bold text-slate-700 focus:ring-2 focus:ring-blue-500 outline-none"
+                                            className="w-full p-4 bg-white border border-sand-200 rounded-xl font-bold text-sand-700 focus:ring-2 focus:ring-terracotta-500 outline-none"
                                         >
                                             <option value="Excelente">Excelente</option>
                                             <option value="Buena">Buena</option>
@@ -139,8 +139,8 @@ const NewConsultation: React.FC = () => {
                                         </select>
                                     </div>
                                     <div>
-                                        <label className="text-[11px] font-black text-slate-500 uppercase tracking-widest ml-1 mb-2 block">Variación de Densidad (%)</label>
-                                        <div className="flex items-center gap-4 bg-slate-50 p-3 rounded-xl border border-slate-200">
+                                        <label className="text-[11px] font-black text-sand-500 uppercase tracking-widest ml-1 mb-2 block">Variación de Densidad (%)</label>
+                                        <div className="flex items-center gap-4 bg-sand-50 p-3 rounded-xl border border-sand-200">
                                             <input
                                                 type="range"
                                                 min="-50"
@@ -148,10 +148,10 @@ const NewConsultation: React.FC = () => {
                                                 step="1"
                                                 value={sessionData.cambios_densidad}
                                                 onChange={e => setSessionData({ ...sessionData, cambios_densidad: parseInt(e.target.value) })}
-                                                className="flex-1 h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600"
+                                                className="flex-1 h-2 bg-sand-200 rounded-lg appearance-none cursor-pointer accent-terracotta-600"
                                             />
                                             <span className={`font-black w-16 text-right ${(sessionData.cambios_densidad || 0) > 0 ? 'text-emerald-600' :
-                                                (sessionData.cambios_densidad || 0) < 0 ? 'text-red-500' : 'text-slate-500'
+                                                (sessionData.cambios_densidad || 0) < 0 ? 'text-red-500' : 'text-sand-500'
                                                 }`}>
                                                 {(sessionData.cambios_densidad || 0) > 0 ? '+' : ''}{sessionData.cambios_densidad}%
                                             </span>
@@ -161,19 +161,19 @@ const NewConsultation: React.FC = () => {
                             </div>
                         </section>
 
-                        <section className="bg-white rounded-[2.5rem] border border-slate-200 shadow-md p-8">
-                            <div className="flex items-center gap-3 mb-6 border-b border-slate-100 pb-4">
+                        <section className="bg-white rounded-[2.5rem] border border-sand-200 shadow-md p-8">
+                            <div className="flex items-center gap-3 mb-6 border-b border-sand-100 pb-4">
                                 <div className="p-2 bg-emerald-50 text-emerald-600 rounded-xl">
                                     <CheckCircle2 className="w-5 h-5" />
                                 </div>
-                                <h3 className="font-black text-lg text-slate-900">Plan Terapéutico</h3>
+                                <h3 className="font-black text-lg text-sand-900">Plan Terapéutico</h3>
                             </div>
                             <div>
-                                <label className="text-[11px] font-black text-slate-500 uppercase tracking-widest ml-1 mb-2 block">Ajustes / Indicaciones</label>
+                                <label className="text-[11px] font-black text-sand-500 uppercase tracking-widest ml-1 mb-2 block">Ajustes / Indicaciones</label>
                                 <textarea
                                     value={sessionData.ajustes_terapeuticos}
                                     onChange={e => setSessionData({ ...sessionData, ajustes_terapeuticos: e.target.value })}
-                                    className="w-full h-32 p-5 bg-slate-50 border border-slate-200 rounded-2xl text-slate-900 font-medium focus:ring-2 focus:ring-emerald-500 outline-none resize-none placeholder-slate-400"
+                                    className="w-full h-32 p-5 bg-sand-50 border border-sand-200 rounded-2xl text-sand-900 font-medium focus:ring-2 focus:ring-emerald-500 outline-none resize-none placeholder-sand-400"
                                     placeholder="Mantener dosis actual, agregar suplementos, programar próxima sesión..."
                                 />
                             </div>
@@ -182,13 +182,13 @@ const NewConsultation: React.FC = () => {
 
                     {/* Columna Derecha: Fotos y Acciones */}
                     <div className="space-y-6">
-                        <section className="bg-slate-900 text-white rounded-[2.5rem] p-8 shadow-xl">
+                        <section className="bg-sand-900 text-white rounded-[2.5rem] p-8 shadow-xl">
                             <div className="flex items-center gap-3 mb-6">
-                                <Camera className="w-6 h-6 text-[#d3b3a8]" />
+                                <Camera className="w-6 h-6 text-[#C15F3C]" />
                                 <h3 className="font-black text-lg">Registro Fotográfico</h3>
                             </div>
                             <div className="space-y-4">
-                                <label className="aspect-square bg-slate-800 rounded-2xl border-2 border-dashed border-slate-600 flex flex-col items-center justify-center text-slate-400 hover:bg-slate-700 hover:border-slate-500 hover:text-white transition-all cursor-pointer">
+                                <label className="aspect-square bg-sand-800 rounded-2xl border-2 border-dashed border-sand-600 flex flex-col items-center justify-center text-sand-400 hover:bg-sand-700 hover:border-sand-500 hover:text-white transition-all cursor-pointer">
                                     <Camera className="w-8 h-8 mb-2" />
                                     <span className="text-xs font-bold uppercase tracking-widest">Añadir Foto</span>
                                     <input
@@ -216,7 +216,7 @@ const NewConsultation: React.FC = () => {
                                 {sessionData.fotos_comparativas && sessionData.fotos_comparativas.length > 0 && (
                                     <div className="grid grid-cols-2 gap-2 mt-4">
                                         {sessionData.fotos_comparativas.map((photo, idx) => (
-                                            <div key={idx} className="relative aspect-square rounded-lg overflow-hidden border border-slate-600 group">
+                                            <div key={idx} className="relative aspect-square rounded-lg overflow-hidden border border-sand-600 group">
                                                 <img src={photo} className="w-full h-full object-cover" alt={`Evidencia ${idx}`} />
                                                 <button
                                                     type="button"
@@ -234,7 +234,7 @@ const NewConsultation: React.FC = () => {
                                     </div>
                                 )}
 
-                                <p className="text-xs text-slate-500 text-center font-medium">
+                                <p className="text-xs text-sand-500 text-center font-medium">
                                     {sessionData.fotos_comparativas?.length || 0} fotos seleccionadas
                                 </p>
                             </div>
@@ -243,7 +243,7 @@ const NewConsultation: React.FC = () => {
                         <button
                             type="submit"
                             disabled={saving}
-                            className="w-full py-5 bg-[#d3b3a8] hover:bg-[#c4a499] text-white rounded-2xl font-black text-sm shadow-xl shadow-[#d3b3a8]/20 flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
+                            className="w-full py-5 bg-[#C15F3C] hover:bg-[#8C4429] text-white rounded-2xl font-black text-sm shadow-xl shadow-[#C15F3C]/20 flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
                         >
                             {saving ? 'GUARDANDO...' : (
                                 <>

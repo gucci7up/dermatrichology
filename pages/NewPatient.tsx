@@ -165,43 +165,43 @@ const NewPatient: React.FC = () => {
       <div
         onClick={() => setSpecialty(type)}
         className={`cursor-pointer flex-1 p-6 rounded-2xl border-2 transition-all duration-300 flex flex-col items-center text-center gap-3 ${isActive
-          ? 'border-[#d3b3a8] bg-[#d3b3a8]/5 ring-4 ring-[#d3b3a8]/10 shadow-lg'
-          : 'border-slate-300 bg-white hover:border-[#d3b3a8]/40 hover:bg-slate-50'
+          ? 'border-[#C15F3C] bg-[#C15F3C]/5 ring-4 ring-[#C15F3C]/10 shadow-lg'
+          : 'border-sand-300 bg-white hover:border-[#C15F3C]/40 hover:bg-sand-50'
           }`}
       >
-        <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all ${isActive ? 'bg-[#d3b3a8] text-white shadow-lg' : 'bg-slate-200 text-slate-500'
+        <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all ${isActive ? 'bg-[#C15F3C] text-white shadow-lg' : 'bg-sand-200 text-sand-500'
           }`}>
           <Icon className="w-7 h-7" />
         </div>
         <div>
-          <h4 className={`font-bold text-lg ${isActive ? 'text-slate-900' : 'text-slate-800'}`}>{title}</h4>
-          <p className="text-xs text-slate-500 mt-1 font-medium">{desc}</p>
+          <h4 className={`font-bold text-lg ${isActive ? 'text-sand-900' : 'text-sand-800'}`}>{title}</h4>
+          <p className="text-xs text-sand-500 mt-1 font-medium">{desc}</p>
         </div>
       </div>
     );
   };
 
-  const inputClasses = "w-full px-5 py-3 bg-white border border-slate-400 rounded-xl focus:ring-2 focus:ring-[#d3b3a8] focus:border-[#d3b3a8] outline-none transition-all placeholder-slate-400 text-slate-900 shadow-sm";
-  const labelClasses = "text-[11px] font-black text-slate-600 uppercase tracking-widest ml-1 mb-1.5 block";
+  const inputClasses = "w-full px-5 py-3 bg-white border border-sand-400 rounded-xl focus:ring-2 focus:ring-[#C15F3C] focus:border-[#C15F3C] outline-none transition-all placeholder-sand-400 text-sand-900 shadow-sm";
+  const labelClasses = "text-[11px] font-black text-sand-600 uppercase tracking-widest ml-1 mb-1.5 block";
 
   return (
     <div className="max-w-4xl mx-auto pb-20">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-black text-slate-900">Registrar Nuevo Paciente</h1>
-          <p className="text-slate-600 font-semibold">Inicia un expediente clínico detallado y estructurado.</p>
+          <h1 className="text-3xl font-black text-sand-900">Registrar Nuevo Paciente</h1>
+          <p className="text-sand-600 font-semibold">Inicia un expediente clínico detallado y estructurado.</p>
         </div>
-        <button onClick={() => navigate(-1)} aria-label="Cerrar" className="p-3 bg-white hover:bg-slate-100 rounded-full transition-all border border-slate-300 shadow-md">
-          <X className="w-6 h-6 text-slate-600" />
+        <button onClick={() => navigate(-1)} aria-label="Cerrar" className="p-3 bg-white hover:bg-sand-100 rounded-full transition-all border border-sand-300 shadow-md">
+          <X className="w-6 h-6 text-sand-600" />
         </button>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-8">
         {/* Paso 1: Especialidad */}
-        <section className="bg-white rounded-3xl border border-slate-300 shadow-md p-8">
-          <div className="flex items-center gap-2 mb-8 bg-slate-50 -mx-8 -mt-8 p-6 rounded-t-3xl border-b border-slate-200">
-            <ClipboardList className="w-6 h-6 text-[#d3b3a8]" />
-            <h3 className="font-black text-xl text-slate-900">Tipo de Consulta</h3>
+        <section className="bg-white rounded-3xl border border-sand-300 shadow-md p-8">
+          <div className="flex items-center gap-2 mb-8 bg-sand-50 -mx-8 -mt-8 p-6 rounded-t-3xl border-b border-sand-200">
+            <ClipboardList className="w-6 h-6 text-[#C15F3C]" />
+            <h3 className="font-black text-xl text-sand-900">Tipo de Consulta</h3>
           </div>
           <div className="flex flex-col sm:flex-row gap-6">
             <SpecialtyCard type="derm" icon={Stethoscope} title="Dermatología" desc="Enfermedades de la piel, uñas y estética." />
@@ -210,16 +210,16 @@ const NewPatient: React.FC = () => {
         </section>
 
         {/* Paso 2: Datos del Paciente */}
-        <section className="bg-white rounded-3xl border border-slate-300 shadow-md p-8 space-y-8">
-          <div className="flex items-center gap-2 mb-2 bg-slate-50 -mx-8 -mt-8 p-6 rounded-t-3xl border-b border-slate-200">
-            <User className="w-6 h-6 text-[#d3b3a8]" />
-            <h3 className="font-black text-xl text-slate-900">Información Personal</h3>
+        <section className="bg-white rounded-3xl border border-sand-300 shadow-md p-8 space-y-8">
+          <div className="flex items-center gap-2 mb-2 bg-sand-50 -mx-8 -mt-8 p-6 rounded-t-3xl border-b border-sand-200">
+            <User className="w-6 h-6 text-[#C15F3C]" />
+            <h3 className="font-black text-xl text-sand-900">Información Personal</h3>
           </div>
 
           <div className="flex flex-col items-center mb-8">
             <div className="relative group">
-              <img src={formData.foto_perfil} alt={`Foto de ${formData.nombre_completo || 'nuevo paciente'}`} className="w-32 h-32 rounded-3xl object-cover ring-4 ring-white shadow-xl transition-transform group-hover:scale-105 duration-300 border border-slate-200" />
-              <button type="button" aria-label="Cambiar foto" className="absolute -bottom-3 -right-3 p-3 bg-[#d3b3a8] text-white rounded-xl shadow-lg hover:bg-[#c4a499] transition-colors ring-4 ring-white">
+              <img src={formData.foto_perfil} alt={`Foto de ${formData.nombre_completo || 'nuevo paciente'}`} className="w-32 h-32 rounded-3xl object-cover ring-4 ring-white shadow-xl transition-transform group-hover:scale-105 duration-300 border border-sand-200" />
+              <button type="button" aria-label="Cambiar foto" className="absolute -bottom-3 -right-3 p-3 bg-[#C15F3C] text-white rounded-xl shadow-lg hover:bg-[#8C4429] transition-colors ring-4 ring-white">
                 <Camera className="w-5 h-5" />
               </button>
             </div>
@@ -267,10 +267,10 @@ const NewPatient: React.FC = () => {
 
         {/* Paso 3: Historia Clínica */}
         {specialty === 'derm' && (
-          <section className="bg-white rounded-3xl border border-slate-300 shadow-md p-8 space-y-8 animate-in fade-in slide-in-from-bottom-4">
-            <div className="flex items-center gap-2 mb-2 bg-slate-50 -mx-8 -mt-8 p-6 rounded-t-3xl border-b border-slate-200">
-              <AlertCircle className="w-6 h-6 text-[#d3b3a8]" />
-              <h3 className="font-black text-xl text-slate-900">Historia Clínica Dermatológica</h3>
+          <section className="bg-white rounded-3xl border border-sand-300 shadow-md p-8 space-y-8 animate-in fade-in slide-in-from-bottom-4">
+            <div className="flex items-center gap-2 mb-2 bg-sand-50 -mx-8 -mt-8 p-6 rounded-t-3xl border-b border-sand-200">
+              <AlertCircle className="w-6 h-6 text-[#C15F3C]" />
+              <h3 className="font-black text-xl text-sand-900">Historia Clínica Dermatológica</h3>
             </div>
 
             <div className="space-y-6">
@@ -301,26 +301,26 @@ const NewPatient: React.FC = () => {
                 </div>
               </div>
 
-              <div className="pt-8 border-t border-slate-300">
-                <h4 className="text-md font-black text-slate-800 mb-6 flex items-center gap-2">
+              <div className="pt-8 border-t border-sand-300">
+                <h4 className="text-md font-black text-sand-800 mb-6 flex items-center gap-2">
                   <Sun className="w-5 h-5 text-orange-500" /> Hábitos y Fototipo
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                  <div className="bg-slate-50 p-6 rounded-2xl border border-slate-300 space-y-4 shadow-inner">
+                  <div className="bg-sand-50 p-6 rounded-2xl border border-sand-300 space-y-4 shadow-inner">
                     <label className="flex items-center gap-3 cursor-pointer group">
-                      <input type="checkbox" checked={dermData.habitos.tabaco} className="w-5 h-5 rounded-lg border-slate-400 text-[#d3b3a8] focus:ring-[#d3b3a8] shadow-sm" onChange={(e) => setDermData(prev => ({ ...prev, habitos: { ...prev.habitos, tabaco: e.target.checked } }))} />
-                      <span className="text-sm font-black text-slate-700 group-hover:text-slate-900 transition-colors">Tabaquismo</span>
+                      <input type="checkbox" checked={dermData.habitos.tabaco} className="w-5 h-5 rounded-lg border-sand-400 text-[#C15F3C] focus:ring-[#C15F3C] shadow-sm" onChange={(e) => setDermData(prev => ({ ...prev, habitos: { ...prev.habitos, tabaco: e.target.checked } }))} />
+                      <span className="text-sm font-black text-sand-700 group-hover:text-sand-900 transition-colors">Tabaquismo</span>
                     </label>
                     <label className="flex items-center gap-3 cursor-pointer group">
-                      <input type="checkbox" checked={dermData.habitos.alcohol} className="w-5 h-5 rounded-lg border-slate-400 text-[#d3b3a8] focus:ring-[#d3b3a8] shadow-sm" onChange={(e) => setDermData(prev => ({ ...prev, habitos: { ...prev.habitos, alcohol: e.target.checked } }))} />
-                      <span className="text-sm font-black text-slate-700 group-hover:text-slate-900 transition-colors">Alcoholismo</span>
+                      <input type="checkbox" checked={dermData.habitos.alcohol} className="w-5 h-5 rounded-lg border-sand-400 text-[#C15F3C] focus:ring-[#C15F3C] shadow-sm" onChange={(e) => setDermData(prev => ({ ...prev, habitos: { ...prev.habitos, alcohol: e.target.checked } }))} />
+                      <span className="text-sm font-black text-sand-700 group-hover:text-sand-900 transition-colors">Alcoholismo</span>
                     </label>
                     <label className="flex items-center gap-3 cursor-pointer group">
-                      <input type="checkbox" checked={dermData.habitos.drogas} className="w-5 h-5 rounded-lg border-slate-400 text-[#d3b3a8] focus:ring-[#d3b3a8] shadow-sm" onChange={(e) => setDermData(prev => ({ ...prev, habitos: { ...prev.habitos, drogas: e.target.checked } }))} />
-                      <span className="text-sm font-black text-slate-700 group-hover:text-slate-900 transition-colors">Consumo de Drogas</span>
+                      <input type="checkbox" checked={dermData.habitos.drogas} className="w-5 h-5 rounded-lg border-sand-400 text-[#C15F3C] focus:ring-[#C15F3C] shadow-sm" onChange={(e) => setDermData(prev => ({ ...prev, habitos: { ...prev.habitos, drogas: e.target.checked } }))} />
+                      <span className="text-sm font-black text-sand-700 group-hover:text-sand-900 transition-colors">Consumo de Drogas</span>
                     </label>
                   </div>
-                  <div className="md:col-span-2 space-y-4 bg-slate-50 p-6 rounded-2xl border border-slate-300 shadow-inner">
+                  <div className="md:col-span-2 space-y-4 bg-sand-50 p-6 rounded-2xl border border-sand-300 shadow-inner">
                     <label className={labelClasses}>Escala Fitzpatrick (Seleccione)</label>
                     <div className="flex gap-2">
                       {[1, 2, 3, 4, 5, 6].map(val => (
@@ -329,8 +329,8 @@ const NewPatient: React.FC = () => {
                           type="button"
                           onClick={() => setDermData(prev => ({ ...prev, tipo_piel_fitzpatrick: val }))}
                           className={`flex-1 py-3 rounded-xl font-black text-sm transition-all border-2 ${dermData.tipo_piel_fitzpatrick === val
-                            ? 'bg-[#d3b3a8] text-white border-[#d3b3a8] shadow-lg scale-105'
-                            : 'bg-white text-slate-500 border-slate-400 hover:border-[#d3b3a8] hover:text-[#d3b3a8] shadow-sm'
+                            ? 'bg-[#C15F3C] text-white border-[#C15F3C] shadow-lg scale-105'
+                            : 'bg-white text-sand-500 border-sand-400 hover:border-[#C15F3C] hover:text-[#C15F3C] shadow-sm'
                             }`}
                         >
                           {val}
@@ -355,10 +355,10 @@ const NewPatient: React.FC = () => {
         )}
 
         {specialty === 'trich' && (
-          <section className="bg-white rounded-3xl border border-slate-300 shadow-md p-8 space-y-8 animate-in fade-in slide-in-from-bottom-4">
-            <div className="flex items-center gap-2 mb-2 bg-slate-50 -mx-8 -mt-8 p-6 rounded-t-3xl border-b border-slate-200">
-              <Scissors className="w-6 h-6 text-[#d3b3a8]" />
-              <h3 className="font-black text-xl text-slate-900">Historia Clínica Tricológica</h3>
+          <section className="bg-white rounded-3xl border border-sand-300 shadow-md p-8 space-y-8 animate-in fade-in slide-in-from-bottom-4">
+            <div className="flex items-center gap-2 mb-2 bg-sand-50 -mx-8 -mt-8 p-6 rounded-t-3xl border-b border-sand-200">
+              <Scissors className="w-6 h-6 text-[#C15F3C]" />
+              <h3 className="font-black text-xl text-sand-900">Historia Clínica Tricológica</h3>
             </div>
 
             <div className="space-y-6">
@@ -386,8 +386,8 @@ const NewPatient: React.FC = () => {
                 </div>
               </div>
 
-              <div className="pt-8 border-t border-slate-300">
-                <h4 className="text-md font-black text-slate-800 mb-6">Antecedentes Tricológicos</h4>
+              <div className="pt-8 border-t border-sand-300">
+                <h4 className="text-md font-black text-sand-800 mb-6">Antecedentes Tricológicos</h4>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                   <div className="space-y-1">
                     <label className={labelClasses}>Hormonales / Nutricionales</label>
@@ -408,10 +408,10 @@ const NewPatient: React.FC = () => {
         )}
 
         <div className="flex flex-col sm:flex-row gap-4 pt-6">
-          <button type="submit" className="flex-[2] bg-[#d3b3a8] hover:bg-[#c4a499] text-white py-5 rounded-2xl font-black shadow-xl shadow-[#d3b3a8]/20 flex items-center justify-center gap-3 transition-all active:scale-[0.98] ring-4 ring-white">
+          <button type="submit" className="flex-[2] bg-[#C15F3C] hover:bg-[#8C4429] text-white py-5 rounded-2xl font-black shadow-xl shadow-[#C15F3C]/20 flex items-center justify-center gap-3 transition-all active:scale-[0.98] ring-4 ring-white">
             <Save className="w-6 h-6" /> GUARDAR PACIENTE Y GENERAR FICHA
           </button>
-          <button type="button" onClick={() => navigate(-1)} className="flex-1 border-2 border-slate-400 py-5 rounded-2xl font-black text-slate-600 bg-white hover:bg-slate-100 transition-all shadow-md">
+          <button type="button" onClick={() => navigate(-1)} className="flex-1 border-2 border-sand-400 py-5 rounded-2xl font-black text-sand-600 bg-white hover:bg-sand-100 transition-all shadow-md">
             CANCELAR
           </button>
         </div>

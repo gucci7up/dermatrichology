@@ -22,14 +22,14 @@ const SidebarItem: React.FC<{ to: string; icon: any; label: string; active: bool
   <Link
     to={to}
     className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group ${active
-      ? 'bg-[#d3b3a8] text-white shadow-lg shadow-[#d3b3a8]/30'
-      : 'text-slate-700 hover:bg-slate-100 border border-transparent hover:border-slate-200'
-      } ${external ? 'border-dashed border-slate-300' : ''}`}
+      ? 'bg-[#C15F3C] text-white shadow-lg shadow-[#C15F3C]/30'
+      : 'text-sand-700 hover:bg-sand-100 border border-transparent hover:border-sand-200'
+      } ${external ? 'border-dashed border-sand-300' : ''}`}
   >
-    <Icon className={`w-5 h-5 ${active ? 'text-white' : 'text-slate-500 group-hover:text-[#d3b3a8]'}`} />
+    <Icon className={`w-5 h-5 ${active ? 'text-white' : 'text-sand-500 group-hover:text-[#C15F3C]'}`} />
     <span className="font-bold">{label}</span>
     {active && !external && <ChevronRight className="ml-auto w-4 h-4" />}
-    {external && <Globe className="ml-auto w-3.5 h-3.5 text-slate-300" />}
+    {external && <Globe className="ml-auto w-3.5 h-3.5 text-sand-300" />}
   </Link>
 );
 
@@ -95,11 +95,11 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 
 
   return (
-    <div className="min-h-screen flex bg-slate-100">
+    <div className="min-h-screen flex bg-sand-100">
       {/* Sidebar Desktop */}
-      <aside className="hidden lg:flex flex-col w-72 bg-white border-r border-slate-300 p-6 pt-4 sticky top-0 h-screen shadow-xl z-20">
+      <aside className="hidden lg:flex flex-col w-72 bg-white border-r border-sand-300 p-6 pt-4 sticky top-0 h-screen shadow-xl z-20">
         {/* LOGO CONTAINER */}
-        <div className="mb-2 pb-2 border-b border-slate-200 flex flex-col items-center justify-center w-full min-h-[80px]">
+        <div className="mb-2 pb-2 border-b border-sand-200 flex flex-col items-center justify-center w-full min-h-[80px]">
           {settings.logo_url ? (
             <div className="w-full flex justify-center items-center overflow-hidden">
               <img
@@ -116,12 +116,12 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
             </div>
           ) : (
             <div className="flex items-center gap-3 px-2 w-full">
-              <div className="w-10 h-10 bg-[#d3b3a8] rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg ring-4 ring-[#d3b3a8]/10 flex-shrink-0">
+              <div className="w-10 h-10 bg-[#C15F3C] rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg ring-4 ring-[#C15F3C]/10 flex-shrink-0">
                 {(settings.app_name || 'D').charAt(0).toUpperCase()}
               </div>
               <div className="min-w-0">
-                <h1 className="font-black text-slate-900 leading-tight truncate">{settings.app_name}</h1>
-                <p className="text-[10px] text-[#d3b3a8] font-black uppercase tracking-widest">Medical Center</p>
+                <h1 className="font-black text-sand-900 leading-tight truncate">{settings.app_name}</h1>
+                <p className="text-[10px] text-[#C15F3C] font-black uppercase tracking-widest">Medical Center</p>
               </div>
             </div>
           )}
@@ -139,7 +139,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
           ))}
 
           {showLandingLink && (
-            <div className="pt-4 mt-4 border-t border-slate-200">
+            <div className="pt-4 mt-4 border-t border-sand-200">
               <SidebarItem
                 to="/booking"
                 icon={Globe}
@@ -151,10 +151,10 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
           )}
         </nav>
 
-        <div className="pt-4 border-t border-slate-300 mt-4">
+        <div className="pt-4 border-t border-sand-300 mt-4">
           <button
             onClick={handleLogout}
-            className="flex items-center gap-3 px-4 py-3 w-full text-slate-600 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all font-bold border border-transparent hover:border-red-200">
+            className="flex items-center gap-3 px-4 py-3 w-full text-sand-600 hover:text-red-600 hover:bg-red-50 rounded-xl transition-all font-bold border border-transparent hover:border-red-200">
             <LogOut className="w-5 h-5" />
             <span>Cerrar Sesión</span>
           </button>
@@ -163,9 +163,9 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 
       {/* Main Content */}
       <main className="flex-1 flex flex-col min-w-0 h-screen overflow-y-auto">
-        <header className="bg-white border-b border-slate-300 h-16 flex items-center justify-between px-6 sticky top-0 z-10 shadow-md">
+        <header className="bg-white border-b border-sand-300 h-16 flex items-center justify-between px-6 sticky top-0 z-10 shadow-md">
           <div className="flex items-center gap-4 lg:hidden min-w-0">
-            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} aria-label="Abrir menú" className="p-2 text-slate-800 hover:bg-slate-100 rounded-lg border border-slate-200 shadow-sm flex-shrink-0">
+            <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} aria-label="Abrir menú" className="p-2 text-sand-800 hover:bg-sand-100 rounded-lg border border-sand-200 shadow-sm flex-shrink-0">
               <Menu className="w-6 h-6" />
             </button>
             <div className="truncate flex items-center gap-2">
@@ -176,7 +176,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                   alt="Logo Mobile"
                 />
               ) : (
-                <span className="font-black text-[#d3b3a8] truncate">{settings.app_name}</span>
+                <span className="font-black text-[#C15F3C] truncate">{settings.app_name}</span>
               )}
             </div>
           </div>
@@ -186,28 +186,28 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
               <input
                 type="text"
                 placeholder="Buscar paciente por nombre o ID..."
-                className="w-full pl-10 pr-4 py-2 bg-slate-50 border border-slate-400 rounded-full text-sm focus:ring-2 focus:ring-[#d3b3a8] focus:bg-white focus:border-[#d3b3a8] transition-all outline-none font-medium shadow-inner"
+                className="w-full pl-10 pr-4 py-2 bg-sand-50 border border-sand-400 rounded-full text-sm focus:ring-2 focus:ring-[#C15F3C] focus:bg-white focus:border-[#C15F3C] transition-all outline-none font-medium shadow-inner"
               />
-              <SearchIcon className="w-4 h-4 absolute left-3.5 top-2.5 text-slate-500 group-focus-within:text-[#d3b3a8]" />
+              <SearchIcon className="w-4 h-4 absolute left-3.5 top-2.5 text-sand-500 group-focus-within:text-[#C15F3C]" />
             </div>
           </div>
 
           <div className="flex items-center gap-4">
             <div className="text-right hidden sm:block">
-              <p className="text-sm font-black text-slate-900">{settings.doctor_name}</p>
-              <p className="text-[10px] text-[#d3b3a8] font-bold uppercase tracking-wider">{settings.doctor_profession}</p>
+              <p className="text-sm font-black text-sand-900">{settings.doctor_name}</p>
+              <p className="text-[10px] text-[#C15F3C] font-bold uppercase tracking-wider">{settings.doctor_profession}</p>
             </div>
-            <div className="w-10 h-10 rounded-full bg-slate-100 border border-slate-400 shadow-md overflow-hidden ring-2 ring-white flex items-center justify-center">
+            <div className="w-10 h-10 rounded-full bg-sand-100 border border-sand-400 shadow-md overflow-hidden ring-2 ring-white flex items-center justify-center">
               {settings.doctor_photo_url ? (
                 <img src={settings.doctor_photo_url} alt="Doctor" className="w-full h-full object-cover" />
               ) : (
-                <Users className="w-6 h-6 text-slate-400" />
+                <Users className="w-6 h-6 text-sand-400" />
               )}
             </div>
           </div>
         </header>
 
-        <div className="p-6 md:p-8 bg-slate-100 min-h-full">
+        <div className="p-6 md:p-8 bg-sand-100 min-h-full">
           {children}
         </div>
       </main>
@@ -215,9 +215,9 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
       {/* Mobile Overlay */}
       {isMobileMenuOpen && (
         <div className="fixed inset-0 z-40 lg:hidden">
-          <div className="fixed inset-0 bg-slate-900/60 backdrop-blur-md" onClick={() => setIsMobileMenuOpen(false)}></div>
-          <div className="fixed inset-y-0 left-0 w-72 bg-white p-6 shadow-2xl border-r border-slate-300">
-            <div className="flex flex-col items-center gap-3 mb-4 border-b border-slate-100 pb-2 justify-center min-h-[70px]">
+          <div className="fixed inset-0 bg-sand-900/60 backdrop-blur-md" onClick={() => setIsMobileMenuOpen(false)}></div>
+          <div className="fixed inset-y-0 left-0 w-72 bg-white p-6 shadow-2xl border-r border-sand-300">
+            <div className="flex flex-col items-center gap-3 mb-4 border-b border-sand-100 pb-2 justify-center min-h-[70px]">
               {settings.logo_url ? (
                 <img
                   src={settings.logo_url}
@@ -226,10 +226,10 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                 />
               ) : (
                 <>
-                  <div className="w-10 h-10 bg-[#d3b3a8] rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg">
+                  <div className="w-10 h-10 bg-[#C15F3C] rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg">
                     {(settings.app_name || 'D').charAt(0)}
                   </div>
-                  <h1 className="font-black text-slate-900 truncate">{settings.app_name}</h1>
+                  <h1 className="font-black text-sand-900 truncate">{settings.app_name}</h1>
                 </>
               )}
             </div>
@@ -239,8 +239,8 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                   key={`${item.to}-${idx}`}
                   to={item.to}
                   className={`flex items-center gap-3 p-4 font-black rounded-xl border transition-all ${location.pathname === item.to
-                    ? 'bg-[#d3b3a8] text-white'
-                    : 'text-slate-700 hover:bg-[#d3b3a8]/10 hover:text-[#d3b3a8] border-transparent hover:border-[#d3b3a8]/20'
+                    ? 'bg-[#C15F3C] text-white'
+                    : 'text-sand-700 hover:bg-[#C15F3C]/10 hover:text-[#C15F3C] border-transparent hover:border-[#C15F3C]/20'
                     }`}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
@@ -248,13 +248,13 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                 </Link>
               ))}
               {showLandingLink && (
-                <div className="pt-4 mt-4 border-t border-slate-100">
+                <div className="pt-4 mt-4 border-t border-sand-100">
                   <Link
                     to="/booking"
-                    className="flex items-center gap-3 p-4 font-black rounded-xl border border-dashed border-slate-300 text-slate-700 hover:bg-slate-50 transition-all"
+                    className="flex items-center gap-3 p-4 font-black rounded-xl border border-dashed border-sand-300 text-sand-700 hover:bg-sand-50 transition-all"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    <Globe className="w-5 h-5 text-slate-500" /> Ver Landing Pública
+                    <Globe className="w-5 h-5 text-sand-500" /> Ver Landing Pública
                   </Link>
                 </div>
               )}

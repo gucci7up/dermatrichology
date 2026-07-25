@@ -29,15 +29,15 @@ const Login: React.FC = () => {
     };
 
     return (
-        <div className="min-h-screen bg-slate-100 flex items-center justify-center p-4">
-            <div className="max-w-md w-full bg-white rounded-3xl border border-slate-200 shadow-xl overflow-hidden">
+        <div className="min-h-screen bg-sand-100 flex items-center justify-center p-4">
+            <div className="max-w-md w-full bg-white rounded-3xl border border-sand-200 shadow-xl overflow-hidden">
                 <div className="p-8 md:p-10">
                     <div className="text-center mb-8">
-                        <div className="w-16 h-16 bg-[#d3b3a8] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-[#d3b3a8]/30">
+                        <div className="w-16 h-16 bg-[#C15F3C] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-[#C15F3C]/30">
                             <Lock className="w-8 h-8 text-white" />
                         </div>
-                        <h1 className="text-2xl font-black text-slate-900 mb-2">Bienvenido</h1>
-                        <p className="text-slate-500 font-medium">Ingresa tus credenciales para acceder al sistema.</p>
+                        <h1 className="text-2xl font-black text-sand-900 mb-2">Bienvenido</h1>
+                        <p className="text-sand-500 font-medium">Ingresa tus credenciales para acceder al sistema.</p>
                     </div>
 
                     {error && (
@@ -49,9 +49,9 @@ const Login: React.FC = () => {
 
                     <form onSubmit={handleLogin} className="space-y-6">
                         <div className="space-y-2">
-                            <label className="text-xs font-black text-slate-500 uppercase tracking-widest ml-1">Correo Electrónico</label>
+                            <label className="text-xs font-black text-sand-500 uppercase tracking-widest ml-1">Correo Electrónico</label>
                             <div className="relative">
-                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                                <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-sand-400" />
                                 <input
                                     type="email"
                                     value={email}
@@ -59,23 +59,23 @@ const Login: React.FC = () => {
                                     autoComplete="email"
                                     spellCheck={false}
                                     required
-                                    className="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 font-bold focus:ring-2 focus:ring-[#d3b3a8] focus:border-[#d3b3a8] outline-none transition-all"
+                                    className="w-full pl-12 pr-4 py-4 bg-sand-50 border border-sand-200 rounded-xl text-sand-900 font-bold focus:ring-2 focus:ring-[#C15F3C] focus:border-[#C15F3C] outline-none transition-all"
                                     placeholder="admin@dermatrich.com"
                                 />
                             </div>
                         </div>
 
                         <div className="space-y-2">
-                            <label className="text-xs font-black text-slate-500 uppercase tracking-widest ml-1">Contraseña</label>
+                            <label className="text-xs font-black text-sand-500 uppercase tracking-widest ml-1">Contraseña</label>
                             <div className="relative">
-                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-400" />
+                                <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-sand-400" />
                                 <input
                                     type="password"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                     autoComplete="current-password"
                                     required
-                                    className="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-200 rounded-xl text-slate-900 font-bold focus:ring-2 focus:ring-[#d3b3a8] focus:border-[#d3b3a8] outline-none transition-all"
+                                    className="w-full pl-12 pr-4 py-4 bg-sand-50 border border-sand-200 rounded-xl text-sand-900 font-bold focus:ring-2 focus:ring-[#C15F3C] focus:border-[#C15F3C] outline-none transition-all"
                                     placeholder="••••••••"
                                 />
                             </div>
@@ -84,7 +84,7 @@ const Login: React.FC = () => {
                         <button
                             type="submit"
                             disabled={loading}
-                            className="w-full bg-slate-900 hover:bg-black text-white py-4 rounded-xl font-black text-sm shadow-xl hover:shadow-2xl transition-all active:scale-[0.98] flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                            className="w-full bg-sand-900 hover:bg-black text-white py-4 rounded-xl font-black text-sm shadow-xl hover:shadow-2xl transition-all active:scale-[0.98] flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                         >
                             {loading ? (
                                 <>
@@ -97,8 +97,8 @@ const Login: React.FC = () => {
                         </button>
                     </form>
                 </div>
-                <div className="bg-slate-50 p-6 text-center border-t border-slate-200">
-                    <p className="text-xs text-slate-400 font-semibold">
+                <div className="bg-sand-50 p-6 text-center border-t border-sand-200">
+                    <p className="text-xs text-sand-400 font-semibold">
                         Dermatrichology App &copy; {new Date().getFullYear()}
                     </p>
                 </div>

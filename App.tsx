@@ -100,7 +100,7 @@ const App: React.FC = () => {
   return (
     <AuthProvider>
       <HashRouter>
-        <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-slate-50"><div className="w-10 h-10 border-2 border-[#d3b3a8]/30 border-t-[#d3b3a8] rounded-full animate-spin" /></div>}>
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-sand-50"><div className="w-10 h-10 border-2 border-[#C15F3C]/30 border-t-[#C15F3C] rounded-full animate-spin" /></div>}>
           <Routes>
             <Route path="/login" element={<Login />} />
 
