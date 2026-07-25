@@ -37,7 +37,7 @@ const Agenda: React.FC = () => {
   };
 
   const dayAppointments = appointments
-    .filter((a) => a.fecha_preferida === selectedDate && a.estado !== 'cancelada')
+    .filter((a) => a.fecha_preferida.slice(0, 10) === selectedDate && a.estado !== 'cancelada')
     .sort((a, b) => a.hora_preferida.localeCompare(b.hora_preferida));
 
   const cardClasses = 'bg-white rounded-[2rem] border border-slate-300 shadow-md overflow-hidden';
