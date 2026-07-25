@@ -36,7 +36,7 @@ const Login: React.FC = () => {
                         <div className="w-16 h-16 bg-[#C15F3C] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-[#C15F3C]/30">
                             <Lock className="w-8 h-8 text-white" />
                         </div>
-                        <h1 className="text-2xl font-black text-sand-900 mb-2">Bienvenido</h1>
+                        <h1 className="font-serif text-2xl font-black text-sand-900 mb-2">Bienvenido</h1>
                         <p className="text-sand-500 font-medium">Ingresa tus credenciales para acceder al sistema.</p>
                     </div>
 

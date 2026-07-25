@@ -100,7 +100,7 @@ const Reports: React.FC = () => {
     <div className="space-y-8 animate-in fade-in duration-500">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-black text-sand-900">Centro de Reportes</h1>
+          <h1 className="font-serif text-3xl font-black text-sand-900">Centro de Reportes</h1>
           <p className="text-sand-600 font-semibold">Análisis de actividad, gestión de expedientes y exportación.</p>
         </div>
         <div className="flex gap-3">
@@ -122,7 +122,7 @@ const Reports: React.FC = () => {
             </div>
             <div>
               <p className="text-[10px] font-black text-sand-400 uppercase tracking-widest">Base de Datos</p>
-              <h3 className="text-2xl font-black text-sand-900">{patients.length} Pacientes</h3>
+              <h3 className="font-serif text-2xl font-black text-sand-900">{patients.length} Pacientes</h3>
             </div>
           </div>
         </div>
@@ -133,7 +133,7 @@ const Reports: React.FC = () => {
             </div>
             <div>
               <p className="text-[10px] font-black text-sand-400 uppercase tracking-widest">Consultas Totales</p>
-              <h3 className="text-2xl font-black text-sand-900">{allSessions.length} Registradas</h3>
+              <h3 className="font-serif text-2xl font-black text-sand-900">{allSessions.length} Registradas</h3>
             </div>
           </div>
         </div>
@@ -144,7 +144,7 @@ const Reports: React.FC = () => {
             </div>
             <div>
               <p className="text-[10px] font-black text-sand-400 uppercase tracking-widest">Tasa de Retorno</p>
-              <h3 className="text-2xl font-black text-sand-900">74% Estimado</h3>
+              <h3 className="font-serif text-2xl font-black text-sand-900">74% Estimado</h3>
             </div>
           </div>
         </div>
@@ -239,7 +239,7 @@ const Reports: React.FC = () => {
         {/* Lado Derecho: Acceso Directo e Impresiones */}
         <div className="space-y-8">
           <section className="bg-white rounded-[2rem] border border-sand-300 shadow-md p-6">
-            <h3 className="font-black text-sm text-sand-900 uppercase tracking-widest mb-6 flex items-center gap-2">
+            <h3 className="font-serif font-black text-sm text-sand-900 uppercase tracking-widest mb-6 flex items-center gap-2">
               <Printer className="w-4 h-4 text-terracotta-600" /> Expedientes Listos
             </h3>
             <div className="space-y-4">
@@ -272,7 +272,7 @@ const Reports: React.FC = () => {
               <FileText className="w-32 h-32" />
             </div>
             <div className="relative z-10">
-              <h3 className="font-black text-lg mb-2">Auditoría de Datos</h3>
+              <h3 className="font-serif font-black text-lg mb-2">Auditoría de Datos</h3>
               <p className="text-xs text-sand-400 font-medium leading-relaxed mb-6">Todos los reportes cumplen con la integridad referencial de pacientes y sesiones almacenadas localmente.</p>
               <div className="flex items-center gap-2 text-emerald-400 text-[10px] font-black uppercase tracking-widest">
                 <CheckCircle2 className="w-4 h-4" /> Datos Sincronizados

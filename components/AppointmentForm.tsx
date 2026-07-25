@@ -49,7 +49,7 @@ export const AppointmentForm: React.FC<{ onSaved: () => void }> = ({ onSaved }) 
 
       <div className="relative z-10 space-y-5">
         <div>
-          <h3 className="text-xl font-black mb-2">Nueva Cita</h3>
+          <h3 className="font-serif text-xl font-black mb-2">Nueva Cita</h3>
           <p className="text-sand-400 text-xs font-bold leading-relaxed">Completa los datos para agendar una cita.</p>
         </div>
 

@@ -9,7 +9,7 @@ const StatCard = ({ label, value, icon: Icon, trend, color }: any) => (
   <div className="bg-white p-6 rounded-2xl border border-sand-200 shadow-md flex items-start justify-between">
     <div>
       <p className="text-sm font-medium text-sand-500 mb-1">{label}</p>
-      <h3 className="text-3xl font-bold text-sand-800">{value}</h3>
+      <h3 className="font-serif text-3xl font-bold text-sand-800">{value}</h3>
       <div className={`mt-2 flex items-center gap-1 text-xs font-semibold ${trend > 0 ? 'text-[#C15F3C]' : 'text-sand-400'}`}>
         {trend > 0 && <TrendingUp className="w-3 h-3" />}
         <span>{trend > 0 ? `+${trend}% vs mes anterior` : 'Sin cambios'}</span>
@@ -82,7 +82,7 @@ const Dashboard: React.FC = () => {
     <div className="space-y-8">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-sand-900 truncate">Bienvenido, {settings.doctor_name}</h1>
+          <h1 className="font-serif text-2xl font-bold text-sand-900 truncate">Bienvenido, {settings.doctor_name}</h1>
           <p className="text-sand-500">Aquí tienes un resumen de la actividad hoy.</p>
         </div>
         <div className="flex gap-3">
@@ -108,7 +108,7 @@ const Dashboard: React.FC = () => {
         <div className="xl:col-span-2 space-y-6">
           <div className="bg-white rounded-2xl border border-sand-200 shadow-md overflow-hidden">
             <div className="p-6 border-b border-sand-200 flex items-center justify-between">
-              <h2 className="font-bold text-sand-800 text-lg">Pacientes Recientes</h2>
+              <h2 className="font-serif font-bold text-sand-800 text-lg">Pacientes Recientes</h2>
               <Link to="/patients" className="text-sm font-semibold text-[#C15F3C] hover:text-[#8C4429] flex items-center gap-1">
                 Ver todos <ArrowUpRight className="w-4 h-4" />
               </Link>
@@ -156,7 +156,7 @@ const Dashboard: React.FC = () => {
 
         <div className="space-y-6">
           <div className="bg-white rounded-2xl border border-sand-200 shadow-md p-6">
-            <h2 className="font-bold text-sand-800 text-lg mb-4 flex items-center gap-2">
+            <h2 className="font-serif font-bold text-sand-800 text-lg mb-4 flex items-center gap-2">
               <Clock className="w-5 h-5 text-indigo-600" /> Solicitudes Web
             </h2>
             <div className="space-y-4">

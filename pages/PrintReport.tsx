@@ -60,7 +60,7 @@ const PrintReport: React.FC = () => {
 
   const SectionHeader = ({ title }: { title: string }) => (
     <div className="mt-8 mb-4 border-b-2 border-sand-900 pb-1">
-      <h3 className="text-lg font-black text-sand-900 uppercase tracking-tighter">{title}</h3>
+      <h3 className="font-serif text-lg font-black text-sand-900 uppercase tracking-tighter">{title}</h3>
     </div>
   );
 
@@ -97,7 +97,7 @@ const PrintReport: React.FC = () => {
             )}
           </div>
           <div>
-            <h1 className="text-3xl font-black text-sand-900 leading-tight">{settings.app_name}</h1>
+            <h1 className="font-serif text-3xl font-black text-sand-900 leading-tight">{settings.app_name}</h1>
             <p className="text-xs font-bold text-sand-500 uppercase tracking-widest">Servicio de Dermatología y Tricología</p>
           </div>
         </div>

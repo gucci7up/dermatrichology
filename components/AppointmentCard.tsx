@@ -56,7 +56,7 @@ export const AppointmentCard: React.FC<{
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
-            <p className="text-sm font-black text-sand-900 group-hover:text-terracotta-700 transition-colors">{appointment.paciente_nombre}</p>
+            <p className="font-serif text-sm font-black text-sand-900 group-hover:text-terracotta-700 transition-colors">{appointment.paciente_nombre}</p>
             <span className={`text-[9px] font-black uppercase tracking-widest px-2 py-0.5 rounded-full ${estadoBadgeClasses[appointment.estado]}`}>
               {appointment.estado}
             </span>

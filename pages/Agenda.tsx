@@ -46,7 +46,7 @@ const Agenda: React.FC = () => {
     <div className="space-y-8 animate-in fade-in duration-500 pb-20 max-w-4xl mx-auto">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-black text-sand-900">Agenda</h1>
+          <h1 className="font-serif text-3xl font-black text-sand-900">Agenda</h1>
           <p className="text-sand-600 font-semibold">Citas del día, por especialidad y estado.</p>
         </div>
         <button

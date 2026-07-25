@@ -37,7 +37,7 @@ export class ErrorBoundary extends Component<Props, State> {
                             <AlertTriangle className="w-10 h-10 text-red-500" />
                         </div>
 
-                        <h1 className="text-2xl font-black text-sand-900 mb-3">Algo salió mal</h1>
+                        <h1 className="font-serif text-2xl font-black text-sand-900 mb-3">Algo salió mal</h1>
                         <p className="text-sand-500 font-medium mb-8">
                             La aplicación ha encontrado un error crítico y no puede continuar.
                         </p>

@@ -61,7 +61,7 @@ const Consultations: React.FC = () => {
     <div className="space-y-8 animate-in fade-in duration-500 pb-20">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-black text-sand-900">Consultas y Evolución</h1>
+          <h1 className="font-serif text-3xl font-black text-sand-900">Consultas y Evolución</h1>
           <p className="text-sand-600 font-semibold">Gestión operativa de sesiones clínicas y seguimiento.</p>
         </div>
         <Link to="/patients/new" className="flex items-center gap-2 bg-sand-900 hover:bg-black text-white px-6 py-3 rounded-2xl font-black text-xs transition-all shadow-xl active:scale-95">
@@ -78,7 +78,7 @@ const Consultations: React.FC = () => {
                 <div className="p-2 bg-terracotta-600 rounded-xl shadow-lg">
                   <History className="w-5 h-5 text-white" />
                 </div>
-                <h3 className="font-black text-lg text-sand-900">Actividad Clínica Reciente</h3>
+                <h3 className="font-serif font-black text-lg text-sand-900">Actividad Clínica Reciente</h3>
               </div>
             </div>
 
@@ -134,7 +134,7 @@ const Consultations: React.FC = () => {
 
             <div className="relative z-10 space-y-6">
               <div>
-                <h3 className="text-xl font-black mb-2">Iniciar Consulta</h3>
+                <h3 className="font-serif text-xl font-black mb-2">Iniciar Consulta</h3>
                 <p className="text-sand-400 text-xs font-bold leading-relaxed">Busca un paciente existente para registrar una nueva sesión o evolución.</p>
               </div>
 

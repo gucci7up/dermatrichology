@@ -42,7 +42,7 @@ const Schedule: React.FC = () => {
   return (
     <div className="space-y-8 animate-in fade-in duration-500 pb-20 max-w-6xl mx-auto">
       <div>
-        <h1 className="text-3xl font-black text-sand-900">Agendar Citas</h1>
+        <h1 className="font-serif text-3xl font-black text-sand-900">Agendar Citas</h1>
         <p className="text-sand-600 font-semibold">Registra, cancela o reprograma citas de pacientes.</p>
       </div>
 
@@ -55,7 +55,7 @@ const Schedule: React.FC = () => {
           <section className={`${cardClasses} p-6`}>
             <div className="flex items-center gap-3 mb-6">
               <CalendarClock className="w-6 h-6 text-terracotta-600" />
-              <h3 className="font-black text-sand-900 text-base uppercase tracking-widest">Próximas Citas</h3>
+              <h3 className="font-serif font-black text-sand-900 text-base uppercase tracking-widest">Próximas Citas</h3>
             </div>
             <div className="space-y-4">
               {appointments.length > 0 ? (
@@ -73,7 +73,7 @@ const Schedule: React.FC = () => {
           <section className={`${cardClasses} p-6`}>
             <div className="flex items-center gap-3 mb-4">
               <Users className="w-6 h-6 text-sand-500" />
-              <h3 className="font-black text-sand-900 text-base uppercase tracking-widest">Pacientes Registrados</h3>
+              <h3 className="font-serif font-black text-sand-900 text-base uppercase tracking-widest">Pacientes Registrados</h3>
             </div>
             <input
               type="text"

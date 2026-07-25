@@ -87,7 +87,7 @@ const NewConsultation: React.FC = () => {
                         <ArrowLeft className="w-6 h-6 text-sand-500" />
                     </button>
                     <div>
-                        <h1 className="text-3xl font-black text-sand-900">Nueva Consulta</h1>
+                        <h1 className="font-serif text-3xl font-black text-sand-900">Nueva Consulta</h1>
                         <div className="flex items-center gap-2 mt-1">
                             <span className="text-sand-500 font-semibold">Paciente:</span>
                             <div className="flex items-center gap-2 bg-white px-3 py-1 rounded-full border border-sand-200 shadow-sm">
@@ -108,7 +108,7 @@ const NewConsultation: React.FC = () => {
                                 <div className="p-2 bg-terracotta-50 text-terracotta-600 rounded-xl">
                                     <Stethoscope className="w-5 h-5" />
                                 </div>
-                                <h3 className="font-black text-lg text-sand-900">Evolución Clínica</h3>
+                                <h3 className="font-serif font-black text-lg text-sand-900">Evolución Clínica</h3>
                             </div>
 
                             <div className="space-y-6">
@@ -166,7 +166,7 @@ const NewConsultation: React.FC = () => {
                                 <div className="p-2 bg-emerald-50 text-emerald-600 rounded-xl">
                                     <CheckCircle2 className="w-5 h-5" />
                                 </div>
-                                <h3 className="font-black text-lg text-sand-900">Plan Terapéutico</h3>
+                                <h3 className="font-serif font-black text-lg text-sand-900">Plan Terapéutico</h3>
                             </div>
                             <div>
                                 <label className="text-[11px] font-black text-sand-500 uppercase tracking-widest ml-1 mb-2 block">Ajustes / Indicaciones</label>
@@ -185,7 +185,7 @@ const NewConsultation: React.FC = () => {
                         <section className="bg-sand-900 text-white rounded-[2.5rem] p-8 shadow-xl">
                             <div className="flex items-center gap-3 mb-6">
                                 <Camera className="w-6 h-6 text-[#C15F3C]" />
-                                <h3 className="font-black text-lg">Registro Fotográfico</h3>
+                                <h3 className="font-serif font-black text-lg">Registro Fotográfico</h3>
                             </div>
                             <div className="space-y-4">
                                 <label className="aspect-square bg-sand-800 rounded-2xl border-2 border-dashed border-sand-600 flex flex-col items-center justify-center text-sand-400 hover:bg-sand-700 hover:border-sand-500 hover:text-white transition-all cursor-pointer">

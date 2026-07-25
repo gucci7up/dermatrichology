@@ -199,7 +199,7 @@ const PatientDetail: React.FC = () => {
           <ChevronLeft className="w-6 h-6" />
         </Link>
         <div className="flex-1">
-          <h1 className="text-3xl font-black text-sand-900 leading-tight">{patient.nombre_completo}</h1>
+          <h1 className="font-serif text-3xl font-black text-sand-900 leading-tight">{patient.nombre_completo}</h1>
           <p className="text-terracotta-600 font-bold text-xs uppercase tracking-widest">Expediente ID: {patient.documento_identidad}</p>
         </div>
         <div className="flex gap-2">
@@ -248,7 +248,7 @@ const PatientDetail: React.FC = () => {
                   <Camera className="w-8 h-8 text-white drop-shadow-lg" />
                 </div>
               </div>
-              <h2 className="font-black text-xl text-sand-900 leading-tight">{patient.nombre_completo}</h2>
+              <h2 className="font-serif font-black text-xl text-sand-900 leading-tight">{patient.nombre_completo}</h2>
               <p className="text-terracotta-600 text-[10px] font-black uppercase mt-1 tracking-widest">{patient.ocupacion}</p>
             </div>
 
@@ -304,7 +304,7 @@ const PatientDetail: React.FC = () => {
               {activeTab === 'derm' && (
                 <div className="space-y-8 animate-in fade-in">
                   <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-2xl font-black text-sand-900">Ficha Dermatológica</h3>
+                    <h3 className="font-serif text-2xl font-black text-sand-900">Ficha Dermatológica</h3>
                     <div className="flex gap-2">
                       <button
                         onClick={handleDermSave}
@@ -547,7 +547,7 @@ const PatientDetail: React.FC = () => {
               {activeTab === 'trich' && (
                 <div className="space-y-8 animate-in fade-in">
                   <div className="flex items-center justify-between mb-6">
-                    <h3 className="text-2xl font-black text-sand-900">Consulta de Tricología</h3>
+                    <h3 className="font-serif text-2xl font-black text-sand-900">Consulta de Tricología</h3>
                     <div className="flex gap-2">
                       <button
                         onClick={handleTrichSave}
@@ -720,7 +720,7 @@ const PatientDetail: React.FC = () => {
 
               {activeTab === 'sessions' && (
                 <div className="space-y-8 animate-in fade-in">
-                  <h3 className="text-2xl font-black text-sand-900">Seguimiento Evolutivo</h3>
+                  <h3 className="font-serif text-2xl font-black text-sand-900">Seguimiento Evolutivo</h3>
                   {sessions.length > 0 ? (
                     <div className="space-y-8">
                       {sessions.map(s => (
@@ -777,7 +777,7 @@ const PatientDetail: React.FC = () => {
                 <div className="space-y-8 animate-in fade-in">
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="text-2xl font-black text-sand-900">Historial Analítico Integral</h3>
+                      <h3 className="font-serif text-2xl font-black text-sand-900">Historial Analítico Integral</h3>
                       <p className="text-xs text-sand-500 font-bold mt-1 uppercase tracking-widest">Dermatología y Tricología</p>
                     </div>
                   </div>
@@ -875,7 +875,7 @@ const PatientDetail: React.FC = () => {
                       <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-xl border border-sand-100 group-hover:scale-110 transition-transform duration-500">
                         <Beaker className="w-10 h-10 text-sand-300 group-hover:text-terracotta-400 transition-colors" />
                       </div>
-                      <h3 className="text-2xl font-black text-sand-800 uppercase tracking-tighter mb-2">Sin Historial Analítico</h3>
+                      <h3 className="font-serif text-2xl font-black text-sand-800 uppercase tracking-tighter mb-2">Sin Historial Analítico</h3>
                       <p className="text-sm text-sand-400 font-bold max-w-md mx-auto">
                         No hay resultados de laboratorio registrados para este paciente.
                       </p>
@@ -887,7 +887,7 @@ const PatientDetail: React.FC = () => {
               {activeTab === 'recetas' && (
                 <div className="space-y-8 animate-in fade-in">
                   <div className="flex items-center justify-between">
-                    <h3 className="text-2xl font-black text-sand-900">Historial de Recetas</h3>
+                    <h3 className="font-serif text-2xl font-black text-sand-900">Historial de Recetas</h3>
                   </div>
                   {prescriptions.length > 0 ? (
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

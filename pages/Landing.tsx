@@ -131,7 +131,7 @@ const Landing: React.FC = () => {
           <div className="w-20 h-20 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-6">
             <CheckCircle className="w-10 h-10" />
           </div>
-          <h2 className="text-3xl font-black text-sand-900 mb-2">¡Solicitud Enviada!</h2>
+          <h2 className="font-serif text-3xl font-black text-sand-900 mb-2">¡Solicitud Enviada!</h2>
           <p className="text-sand-600 font-medium mb-8">Gracias por confiar en nosotros. Nos pondremos en contacto contigo en breve para confirmar tu horario.</p>
           <button
             onClick={() => window.location.reload()}
@@ -186,7 +186,7 @@ const Landing: React.FC = () => {
           <div className="inline-flex items-center gap-2 bg-[#C15F3C]/10 text-[#C15F3C] px-4 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest mb-6">
             <Star className="w-3 h-3" /> Excelencia Médica en cada consulta
           </div>
-          <h1 className="text-5xl md:text-7xl font-black text-sand-900 leading-[1.1] tracking-tighter mb-8">
+          <h1 className="font-serif text-5xl md:text-7xl font-black text-sand-900 leading-[1.1] tracking-tighter mb-8">
             Tu piel y cabello en <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#C15F3C] to-sand-400">manos expertas.</span>
           </h1>
@@ -200,7 +200,7 @@ const Landing: React.FC = () => {
       <section id="servicios" className="py-24 bg-white px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-sand-900 mb-4 tracking-tighter">Nuestros Servicios</h2>
+            <h2 className="font-serif text-4xl md:text-5xl font-black text-sand-900 mb-4 tracking-tighter">Nuestros Servicios</h2>
             <div className="w-24 h-2 bg-[#C15F3C] mx-auto rounded-full mb-6"></div>
             <p className="text-sand-500 font-bold max-w-xl mx-auto uppercase text-[11px] tracking-[0.2em]">Cuidado integral de piel, pelo y uñas con tecnología de vanguardia</p>
           </div>
@@ -222,7 +222,7 @@ const Landing: React.FC = () => {
       <section id="agendar" className="py-24 px-6 relative overflow-hidden bg-sand-50">
         <div className="max-w-2xl mx-auto bg-white rounded-[3.5rem] shadow-2xl p-8 md:p-14 border border-sand-200 relative z-10">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-black mb-3 text-sand-900">Agenda tu Consulta</h2>
+            <h2 className="font-serif text-4xl font-black mb-3 text-sand-900">Agenda tu Consulta</h2>
             <p className="text-sand-500 font-bold uppercase text-[10px] tracking-[0.2em]">Completa los datos para reservar tu espacio</p>
           </div>
 

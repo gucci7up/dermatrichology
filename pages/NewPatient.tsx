@@ -188,7 +188,7 @@ const NewPatient: React.FC = () => {
     <div className="max-w-4xl mx-auto pb-20">
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-3xl font-black text-sand-900">Registrar Nuevo Paciente</h1>
+          <h1 className="font-serif text-3xl font-black text-sand-900">Registrar Nuevo Paciente</h1>
           <p className="text-sand-600 font-semibold">Inicia un expediente clínico detallado y estructurado.</p>
         </div>
         <button onClick={() => navigate(-1)} aria-label="Cerrar" className="p-3 bg-white hover:bg-sand-100 rounded-full transition-all border border-sand-300 shadow-md">
@@ -201,7 +201,7 @@ const NewPatient: React.FC = () => {
         <section className="bg-white rounded-3xl border border-sand-300 shadow-md p-8">
           <div className="flex items-center gap-2 mb-8 bg-sand-50 -mx-8 -mt-8 p-6 rounded-t-3xl border-b border-sand-200">
             <ClipboardList className="w-6 h-6 text-[#C15F3C]" />
-            <h3 className="font-black text-xl text-sand-900">Tipo de Consulta</h3>
+            <h3 className="font-serif font-black text-xl text-sand-900">Tipo de Consulta</h3>
           </div>
           <div className="flex flex-col sm:flex-row gap-6">
             <SpecialtyCard type="derm" icon={Stethoscope} title="Dermatología" desc="Enfermedades de la piel, uñas y estética." />
@@ -213,7 +213,7 @@ const NewPatient: React.FC = () => {
         <section className="bg-white rounded-3xl border border-sand-300 shadow-md p-8 space-y-8">
           <div className="flex items-center gap-2 mb-2 bg-sand-50 -mx-8 -mt-8 p-6 rounded-t-3xl border-b border-sand-200">
             <User className="w-6 h-6 text-[#C15F3C]" />
-            <h3 className="font-black text-xl text-sand-900">Información Personal</h3>
+            <h3 className="font-serif font-black text-xl text-sand-900">Información Personal</h3>
           </div>
 
           <div className="flex flex-col items-center mb-8">
@@ -270,7 +270,7 @@ const NewPatient: React.FC = () => {
           <section className="bg-white rounded-3xl border border-sand-300 shadow-md p-8 space-y-8 animate-in fade-in slide-in-from-bottom-4">
             <div className="flex items-center gap-2 mb-2 bg-sand-50 -mx-8 -mt-8 p-6 rounded-t-3xl border-b border-sand-200">
               <AlertCircle className="w-6 h-6 text-[#C15F3C]" />
-              <h3 className="font-black text-xl text-sand-900">Historia Clínica Dermatológica</h3>
+              <h3 className="font-serif font-black text-xl text-sand-900">Historia Clínica Dermatológica</h3>
             </div>
 
             <div className="space-y-6">
@@ -358,7 +358,7 @@ const NewPatient: React.FC = () => {
           <section className="bg-white rounded-3xl border border-sand-300 shadow-md p-8 space-y-8 animate-in fade-in slide-in-from-bottom-4">
             <div className="flex items-center gap-2 mb-2 bg-sand-50 -mx-8 -mt-8 p-6 rounded-t-3xl border-b border-sand-200">
               <Scissors className="w-6 h-6 text-[#C15F3C]" />
-              <h3 className="font-black text-xl text-sand-900">Historia Clínica Tricológica</h3>
+              <h3 className="font-serif font-black text-xl text-sand-900">Historia Clínica Tricológica</h3>
             </div>
 
             <div className="space-y-6">

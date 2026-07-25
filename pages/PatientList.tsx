@@ -51,7 +51,7 @@ const PatientList: React.FC = () => {
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-sand-900">Directorio de Pacientes</h1>
+          <h1 className="font-serif text-2xl font-bold text-sand-900">Directorio de Pacientes</h1>
           <p className="text-sand-500">Gestión completa de historiales y expedientes.</p>
         </div>
         <Link to="/patients/new" className="flex items-center justify-center gap-2 bg-[#C15F3C] hover:bg-[#8C4429] text-white px-5 py-2.5 rounded-xl font-medium transition-all shadow-lg shadow-[#C15F3C]/20">
@@ -96,7 +96,7 @@ const PatientList: React.FC = () => {
             <div className="flex items-center gap-4 mb-6 pr-8">
               <img src={patient.foto_perfil} className="w-16 h-16 rounded-2xl object-cover ring-4 ring-sand-50" alt={`Foto de ${patient.nombre_completo}`} />
               <div className="flex-1 min-w-0">
-                <h3 className="font-bold text-sand-900 truncate text-lg">{patient.nombre_completo}</h3>
+                <h3 className="font-serif font-bold text-sand-900 truncate text-lg">{patient.nombre_completo}</h3>
                 <p className="text-sm text-sand-500 flex items-center gap-1.5">
                   <UserCircle className="w-3.5 h-3.5" />
                   ID: {patient.documento_identidad}
@@ -134,7 +134,7 @@ const PatientList: React.FC = () => {
           <div className="w-20 h-20 bg-sand-50 rounded-full flex items-center justify-center mx-auto mb-4">
             <Users className="w-10 h-10 text-sand-300" />
           </div>
-          <h3 className="text-xl font-bold text-sand-800">No se encontraron pacientes</h3>
+          <h3 className="font-serif text-xl font-bold text-sand-800">No se encontraron pacientes</h3>
           <p className="text-sand-500 mt-1">Prueba con otros términos de búsqueda o registra uno nuevo.</p>
         </div>
       )}

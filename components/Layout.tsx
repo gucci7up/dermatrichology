@@ -120,7 +120,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                 {(settings.app_name || 'D').charAt(0).toUpperCase()}
               </div>
               <div className="min-w-0">
-                <h1 className="font-black text-sand-900 leading-tight truncate">{settings.app_name}</h1>
+                <h1 className="font-serif font-black text-sand-900 leading-tight truncate">{settings.app_name}</h1>
                 <p className="text-[10px] text-[#C15F3C] font-black uppercase tracking-widest">Medical Center</p>
               </div>
             </div>
@@ -229,7 +229,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                   <div className="w-10 h-10 bg-[#C15F3C] rounded-xl flex items-center justify-center text-white font-black text-xl shadow-lg">
                     {(settings.app_name || 'D').charAt(0)}
                   </div>
-                  <h1 className="font-black text-sand-900 truncate">{settings.app_name}</h1>
+                  <h1 className="font-serif font-black text-sand-900 truncate">{settings.app_name}</h1>
                 </>
               )}
             </div>

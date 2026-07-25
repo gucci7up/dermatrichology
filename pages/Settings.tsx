@@ -78,7 +78,7 @@ const Settings: React.FC = () => {
   return (
     <div className="max-w-4xl mx-auto space-y-10 animate-in fade-in slide-in-from-bottom-4 pb-20">
       <div>
-        <h1 className="text-3xl font-black text-sand-900">Configuración del Sistema</h1>
+        <h1 className="font-serif text-3xl font-black text-sand-900">Configuración del Sistema</h1>
         <p className="text-sand-600 font-semibold">Configura la identidad de tu clínica y perfil profesional.</p>
       </div>
 
@@ -87,7 +87,7 @@ const Settings: React.FC = () => {
         <section className="bg-white rounded-3xl border border-sand-300 shadow-md p-8">
           <div className="flex items-center gap-2 mb-8 bg-sand-50 -mx-8 -mt-8 p-6 rounded-t-3xl border-b border-sand-200">
             <Globe className="w-6 h-6 text-[#C15F3C]" />
-            <h3 className="font-black text-xl text-sand-900">Identidad Institucional</h3>
+            <h3 className="font-serif font-black text-xl text-sand-900">Identidad Institucional</h3>
           </div>
 
           <div className="space-y-8">
@@ -164,7 +164,7 @@ const Settings: React.FC = () => {
         <section className="bg-white rounded-3xl border border-sand-300 shadow-md p-8">
           <div className="flex items-center gap-2 mb-8 bg-sand-50 -mx-8 -mt-8 p-6 rounded-t-3xl border-b border-sand-200">
             <UserCircle className="w-6 h-6 text-[#C15F3C]" />
-            <h3 className="font-black text-xl text-sand-900">Perfil del Profesional</h3>
+            <h3 className="font-serif font-black text-xl text-sand-900">Perfil del Profesional</h3>
           </div>
 
           <div className="space-y-8">
