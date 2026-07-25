@@ -80,20 +80,28 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="space-y-8">
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <h1 className="font-serif text-2xl font-bold text-sand-900 truncate">Bienvenido, {settings.doctor_name}</h1>
-          <p className="text-sand-500">Aquí tienes un resumen de la actividad hoy.</p>
-        </div>
-        <div className="flex gap-3">
-          <Link to="/booking" className="flex items-center gap-2 bg-white border border-sand-300 hover:bg-sand-50 text-sand-700 px-5 py-2.5 rounded-xl font-medium transition-all shadow-sm">
-            <ExternalLink className="w-4 h-4" />
-            Ver Landing Pública
-          </Link>
-          <Link to="/patients/new" className="flex items-center gap-2 bg-[#C15F3C] hover:bg-[#8C4429] text-white px-5 py-2.5 rounded-xl font-medium transition-all shadow-lg shadow-[#C15F3C]/20">
-            <Plus className="w-4 h-4" />
-            Nuevo Paciente
-          </Link>
+      <div className="relative overflow-hidden bg-gradient-to-br from-terracotta-700 to-terracotta-900 rounded-3xl px-6 py-8 md:px-10 md:py-10 text-white shadow-lg">
+        <svg viewBox="0 0 400 200" preserveAspectRatio="none" className="absolute inset-0 w-full h-full opacity-[0.14]" aria-hidden="true">
+          <path d="M0,80 Q100,20 200,80 T400,80" stroke="white" strokeWidth="2" fill="none" />
+          <path d="M0,130 Q100,70 200,130 T400,130" stroke="white" strokeWidth="1.5" fill="none" />
+          <circle cx="340" cy="40" r="24" stroke="white" strokeWidth="1.5" fill="none" />
+          <circle cx="40" cy="160" r="14" stroke="white" strokeWidth="1.5" fill="none" />
+        </svg>
+        <div className="relative flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h1 className="font-serif text-2xl font-bold truncate">Bienvenido, {settings.doctor_name}</h1>
+            <p className="text-white/80">Aquí tienes un resumen de la actividad hoy.</p>
+          </div>
+          <div className="flex gap-3">
+            <Link to="/booking" className="flex items-center gap-2 bg-white/10 border border-white/30 hover:bg-white/20 text-white px-5 py-2.5 rounded-xl font-medium transition-all backdrop-blur-sm">
+              <ExternalLink className="w-4 h-4" />
+              Ver Landing Pública
+            </Link>
+            <Link to="/patients/new" className="flex items-center gap-2 bg-white hover:bg-sand-50 text-terracotta-800 px-5 py-2.5 rounded-xl font-bold transition-all shadow-lg">
+              <Plus className="w-4 h-4" />
+              Nuevo Paciente
+            </Link>
+          </div>
         </div>
       </div>
 
