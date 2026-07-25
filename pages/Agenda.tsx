@@ -5,7 +5,12 @@ import { AppointmentForm } from '../components/AppointmentForm';
 import { AppointmentCard } from '../components/AppointmentCard';
 import { AppointmentRequest } from '../types';
 
-const toDateInputValue = (d: Date) => d.toISOString().split('T')[0];
+const toDateInputValue = (d: Date) => {
+  const year = d.getFullYear();
+  const month = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
 
 const Agenda: React.FC = () => {
   const [appointments, setAppointments] = React.useState<AppointmentRequest[]>([]);
