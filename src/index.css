@@ -1,5 +1,8 @@
+@import '@fontsource-variable/fraunces';
+@import '@fontsource/plus-jakarta-sans';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body { font-family: 'Inter', sans-serif; }
+body { font-family: 'Plus Jakarta Sans', sans-serif; }
