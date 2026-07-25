@@ -14,8 +14,8 @@
 - Backend is plain JS ESM — no TypeScript in `server/`.
 - Match existing Tailwind styling conventions from `pages/Consultations.tsx` (the file this plan extracts from) — same color/spacing/typography language, this is Phase 1 (functional), not the later visual redesign.
 - `useToast()` must be called at the top of any component body that uses it (React hooks rule).
-- A real `.env` exists at the repo root (`DATABASE_URL`, `JWT_SECRET`) — never modify or commit it. Admin credentials for verification: `gucci7up@gmail.com` / `Gucci1826` — never print the password in a report or chat message.
-- No new frontend test framework. Backend logic changes extend `server/smoke-test.js` with `node:assert/strict` (run via `SMOKE_ADMIN_EMAIL=gucci7up@gmail.com SMOKE_ADMIN_PASSWORD=Gucci1826 node server/smoke-test.js` against the real Dokploy Postgres).
+- A real `.env` exists at the repo root (`DATABASE_URL`, `JWT_SECRET`) — never modify or commit it. Admin credentials for verification: `gucci7up@gmail.com` — obtain the password out-of-band (do not commit it); never print it in a report or chat message.
+- No new frontend test framework. Backend logic changes extend `server/smoke-test.js` with `node:assert/strict` (run via `SMOKE_ADMIN_EMAIL=gucci7up@gmail.com SMOKE_ADMIN_PASSWORD=<obtain out-of-band> node server/smoke-test.js` against the real Dokploy Postgres).
 - `assistant` role must end up restricted to exactly `/schedule` — no other route reachable, including `/`.
 
 ---
@@ -119,7 +119,7 @@ In `server/smoke-test.js`, find the existing appointment-status-update block (th
 
 ```bash
 npm run server   # background
-SMOKE_ADMIN_EMAIL=gucci7up@gmail.com SMOKE_ADMIN_PASSWORD="Gucci1826" node server/smoke-test.js
+SMOKE_ADMIN_EMAIL=gucci7up@gmail.com SMOKE_ADMIN_PASSWORD="<obtain out-of-band>" node server/smoke-test.js
 ```
 Expected: `appointment cedula/seguro fields work` prints, plus all prior smoke lines, plus `ALL SMOKE TESTS PASSED`. Stop the server.
 

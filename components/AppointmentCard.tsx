@@ -71,7 +71,7 @@ export const AppointmentCard: React.FC<{
             )}
           </div>
           <p className="text-[10px] font-black text-slate-400 uppercase tracking-tighter">
-            CI: {appointment.paciente_cedula || 'N/A'} · {appointment.especialidad === 'derm' ? 'DERMATOLOGÍA' : 'TRICOLOGÍA'} · {new Date(appointment.fecha_preferida).toLocaleDateString()}
+            CI: {appointment.paciente_cedula || 'N/A'} · {appointment.especialidad === 'derm' ? 'DERMATOLOGÍA' : 'TRICOLOGÍA'} · {new Date(appointment.fecha_preferida + 'T00:00:00').toLocaleDateString()}
           </p>
         </div>
       </div>

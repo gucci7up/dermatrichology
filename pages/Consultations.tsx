@@ -14,11 +14,9 @@ import {
 import { DB } from '../services/db';
 import { Patient, Session } from '../types';
 import { useNavigate, Link } from 'react-router-dom';
-import { useToast } from '../context/ToastContext';
 
 const Consultations: React.FC = () => {
   const navigate = useNavigate();
-  const { notify } = useToast();
   const [searchTerm, setSearchTerm] = React.useState('');
   const [recentSessions, setRecentSessions] = React.useState<any[]>([]);
   const [patients, setPatients] = React.useState<Patient[]>([]);
