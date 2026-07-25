@@ -14,6 +14,8 @@ const NewConsultation = lazy(() => import('./pages/NewConsultation'));
 const Prescription = lazy(() => import('./pages/Prescription'));
 const Landing = lazy(() => import('./pages/Landing'));
 const Login = lazy(() => import('./pages/Login'));
+const Schedule = lazy(() => import('./pages/Schedule'));
+const Agenda = lazy(() => import('./pages/Agenda'));
 import { AuthGuard } from './components/AuthGuard';
 import { DB } from './services/db';
 
@@ -118,6 +120,8 @@ const App: React.FC = () => {
                     <Route path="/consultations/new" element={<NewConsultation />} />
                     <Route path="/reports" element={<Reports />} />
                     <Route path="/settings" element={<Settings />} />
+                    <Route path="/schedule" element={<Schedule />} />
+                    <Route path="/agenda" element={<Agenda />} />
                   </Routes>
                 </Layout>
               </AuthGuard>

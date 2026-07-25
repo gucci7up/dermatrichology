@@ -7,6 +7,7 @@ import {
   Stethoscope,
   FileText,
   Settings,
+  CalendarClock,
   Menu,
   ChevronRight,
   LogOut,
@@ -80,11 +81,13 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
 
   // Define All Menu Items
   const allMenuItems = [
-    { to: '/', icon: LayoutDashboard, label: 'Dashboard', access: ['admin', 'doctor', 'assistant'] },
-    { to: '/patients', icon: Users, label: 'Pacientes', access: ['admin', 'doctor', 'assistant'] },
-    { to: '/consultations', icon: Stethoscope, label: 'Consultas', access: ['admin', 'doctor', 'assistant'] },
+    { to: '/', icon: LayoutDashboard, label: 'Dashboard', access: ['admin', 'doctor'] },
+    { to: '/patients', icon: Users, label: 'Pacientes', access: ['admin', 'doctor'] },
+    { to: '/consultations', icon: Stethoscope, label: 'Consultas', access: ['admin', 'doctor'] },
+    { to: '/agenda', icon: CalendarClock, label: 'Agenda', access: ['admin', 'doctor'] },
     { to: '/reports', icon: FileText, label: 'Reportes', access: ['admin', 'doctor'] },
     { to: '/settings', icon: Settings, label: 'Configuración', access: ['admin'] },
+    { to: '/schedule', icon: CalendarClock, label: 'Agendar Citas', access: ['assistant'] },
   ];
 
   const menuItems = allMenuItems.filter(item => !role || item.access.includes(role));

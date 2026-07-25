@@ -37,15 +37,10 @@ export const AuthGuard: React.FC<{ children: React.ReactNode }> = ({ children })
         return <Navigate to="/" replace />;
     }
 
-    // Assistant restrictions
-    // "Asistente - solo puede ver pacientes y consultas y el dashboard"
+    // Assistant (secretaria) restrictions: only the appointment-scheduling screen.
     if (role === 'assistant') {
-        const allowedRoutes = ['/', '/patients', '/consultations'];
-        const isAllowed = allowedRoutes.some(route =>
-            location.pathname === route || location.pathname.startsWith(route + '/')
-        );
-        if (!isAllowed) {
-            return <Navigate to="/" replace />;
+        if (location.pathname !== '/schedule') {
+            return <Navigate to="/schedule" replace />;
         }
     }
 
