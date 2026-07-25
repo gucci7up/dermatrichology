@@ -74,6 +74,9 @@ export const DB = {
     },
     updateStatus: async (id: string, estado: 'pendiente' | 'confirmada' | 'cancelada') => {
       await api(`/appointments/${id}`, { method: 'PATCH', body: JSON.stringify({ estado }) });
+    },
+    update: async (id: string, partial: Partial<AppointmentRequest>) => {
+      await api(`/appointments/${id}`, { method: 'PATCH', body: JSON.stringify(partial) });
     }
   },
 
