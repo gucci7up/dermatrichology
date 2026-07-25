@@ -95,7 +95,7 @@ export const AppointmentCard: React.FC<{
             onChange={(e) => setHora(e.target.value)}
             className="px-3 py-1.5 bg-sand-50 border border-sand-300 rounded-lg text-xs font-bold"
           />
-          <button type="submit" disabled={saving} className="px-3 py-1.5 bg-terracotta-600 text-white rounded-lg font-black text-[10px] uppercase tracking-widest hover:bg-terracotta-700 disabled:opacity-50 transition-all">
+          <button type="submit" disabled={saving} className="px-3 py-1.5 bg-terracotta-700 text-white rounded-lg font-black text-[10px] uppercase tracking-widest hover:bg-terracotta-700 disabled:opacity-50 transition-all">
             {saving ? 'Guardando...' : 'Guardar'}
           </button>
           <button type="button" onClick={() => setRescheduling(false)} className="px-3 py-1.5 bg-sand-200 text-sand-700 rounded-lg font-black text-[10px] uppercase tracking-widest hover:bg-sand-300 transition-all">

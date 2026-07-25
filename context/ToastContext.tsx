@@ -13,7 +13,7 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setToasts((t) => [...t, { id, message, type }]);
     setTimeout(() => setToasts((t) => t.filter((x) => x.id !== id)), 4000);
   }, []);
-  const color = { success: 'bg-emerald-600', error: 'bg-red-600', info: 'bg-slate-900' };
+  const color = { success: 'bg-emerald-600', error: 'bg-red-600', info: 'bg-sand-900' };
   return (
     <ToastContext.Provider value={{ notify }}>
       {children}

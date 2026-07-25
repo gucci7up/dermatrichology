@@ -308,7 +308,7 @@ const PatientDetail: React.FC = () => {
                     <div className="flex gap-2">
                       <button
                         onClick={handleDermSave}
-                        className="bg-terracotta-600 hover:bg-terracotta-700 text-white px-6 py-2 rounded-xl font-bold text-sm shadow-lg shadow-terracotta-500/30 transition-all active:scale-95 flex items-center gap-2"
+                        className="bg-terracotta-700 hover:bg-terracotta-700 text-white px-6 py-2 rounded-xl font-bold text-sm shadow-lg shadow-terracotta-500/30 transition-all active:scale-95 flex items-center gap-2"
                       >
                         <Save className="w-4 h-4" /> GUARDAR FICHA
                       </button>
@@ -551,7 +551,7 @@ const PatientDetail: React.FC = () => {
                     <div className="flex gap-2">
                       <button
                         onClick={handleTrichSave}
-                        className="bg-terracotta-600 hover:bg-terracotta-700 text-white px-6 py-2 rounded-xl font-bold text-sm shadow-lg shadow-terracotta-500/30 transition-all active:scale-95 flex items-center gap-2"
+                        className="bg-terracotta-700 hover:bg-terracotta-700 text-white px-6 py-2 rounded-xl font-bold text-sm shadow-lg shadow-terracotta-500/30 transition-all active:scale-95 flex items-center gap-2"
                       >
                         <Save className="w-4 h-4" /> GUARDAR FICHA
                       </button>
@@ -646,7 +646,7 @@ const PatientDetail: React.FC = () => {
                                   setTrichForm({ ...trichForm, examen_fisico: { ...trichForm.examen_fisico!, cuero_cabelludo: updated } });
                                 }}
                                 className={`px-3 py-1 rounded-full text-xs font-bold transition-all ${trichForm.examen_fisico?.cuero_cabelludo?.includes(sign)
-                                  ? 'bg-terracotta-600 text-white shadow-md'
+                                  ? 'bg-terracotta-700 text-white shadow-md'
                                   : 'bg-white border border-sand-300 text-sand-500 hover:border-terracotta-400'
                                   }`}
                               >
@@ -681,7 +681,7 @@ const PatientDetail: React.FC = () => {
                         </div>
                         <div>
                           <label className="text-xs font-bold uppercase tracking-widest text-sand-500">% Miniaturización</label>
-                          <input type="number" className="w-full mt-2 p-3 bg-sand-800 border_slate-700 rounded-xl text-white font-bold" value={trichForm.tricoscopia?.miniaturizacion_pct || 0} onChange={e => setTrichForm({ ...trichForm, tricoscopia: { ...trichForm.tricoscopia!, miniaturizacion_pct: parseInt(e.target.value) } })} />
+                          <input type="number" className="w-full mt-2 p-3 bg-sand-800 border-2 border-sand-700 rounded-xl text-white font-bold" value={trichForm.tricoscopia?.miniaturizacion_pct || 0} onChange={e => setTrichForm({ ...trichForm, tricoscopia: { ...trichForm.tricoscopia!, miniaturizacion_pct: parseInt(e.target.value) } })} />
                         </div>
                         <div className="flex flex-col gap-2 pt-6">
                           <label className="flex items-center gap-2 cursor-pointer">
@@ -818,7 +818,7 @@ const PatientDetail: React.FC = () => {
                                   <button
                                     onClick={() => setExpandedLabId(expandedLabId === lab.id ? null : lab.id)}
                                     className={`px-6 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all inline-flex items-center justify-center gap-2 ${expandedLabId === lab.id
-                                      ? 'bg-terracotta-600 text-white shadow-lg shadow-terracotta-500/30 hover:bg-terracotta-700'
+                                      ? 'bg-terracotta-700 text-white shadow-lg shadow-terracotta-500/30 hover:bg-terracotta-700'
                                       : 'bg-white border-2 border-sand-200 text-sand-600 hover:border-terracotta-600 hover:text-terracotta-600'
                                       }`}
                                   >

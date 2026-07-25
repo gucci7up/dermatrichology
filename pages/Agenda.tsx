@@ -51,7 +51,7 @@ const Agenda: React.FC = () => {
         </div>
         <button
           onClick={() => setShowForm((v) => !v)}
-          className="flex items-center gap-2 bg-terracotta-600 hover:bg-terracotta-700 text-white px-6 py-3 rounded-2xl font-black text-xs uppercase tracking-widest transition-all shadow-lg active:scale-95"
+          className="flex items-center gap-2 bg-terracotta-700 hover:bg-terracotta-700 text-white px-6 py-3 rounded-2xl font-black text-xs uppercase tracking-widest transition-all shadow-lg active:scale-95"
         >
           {showForm ? <X className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
           {showForm ? 'Cerrar' : 'Nueva Cita'}

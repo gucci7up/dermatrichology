@@ -122,7 +122,7 @@ export const AppointmentForm: React.FC<{ onSaved: () => void }> = ({ onSaved }) 
           <button
             type="submit"
             disabled={saving}
-            className="w-full flex items-center justify-center gap-2 bg-terracotta-600 hover:bg-terracotta-500 disabled:opacity-50 disabled:cursor-not-allowed text-white px-6 py-3.5 rounded-2xl font-black text-xs uppercase tracking-widest transition-all shadow-xl active:scale-95"
+            className="w-full flex items-center justify-center gap-2 bg-terracotta-700 hover:bg-terracotta-500 disabled:opacity-50 disabled:cursor-not-allowed text-white px-6 py-3.5 rounded-2xl font-black text-xs uppercase tracking-widest transition-all shadow-xl active:scale-95"
           >
             <Plus className="w-4 h-4" /> {saving ? 'Guardando...' : 'Crear Cita'}
           </button>

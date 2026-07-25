@@ -94,7 +94,7 @@ const Prescription: React.FC = () => {
 
                     <button
                         onClick={handlePrint}
-                        className="flex items-center gap-2 px-6 py-2 bg-terracotta-600 text-white rounded-lg font-bold hover:bg-terracotta-700 shadow-lg shadow-terracotta-500/30"
+                        className="flex items-center gap-2 px-6 py-2 bg-terracotta-700 text-white rounded-lg font-bold hover:bg-terracotta-700 shadow-lg shadow-terracotta-500/30"
                     >
                         <Printer className="w-4 h-4" /> Imprimir
                     </button>
