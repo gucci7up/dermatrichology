@@ -140,3 +140,76 @@ vía la sustitución mecánica, sin cambio manual adicional.
 - Dark mode — no fue pedido.
 - Sistema de theming/design-tokens abstracto (CSS variables, context de tema,
   etc.) — una sola paleta fija no lo justifica.
+
+## Ampliación (Fase 2b): rediseño de layout y componentes
+
+Tras ver la app con la paleta/tipografía nueva (Fase 2a, mergeada), la
+doctora pidió más — no solo recoloreado, sino una reestructuración visual
+real: layout, espaciado/sombras, componentes (botones/cards/inputs), y
+elementos decorativos. Esto amplía el "Fuera de alcance" original: ahora SÍ
+se tocan layout y componentes compartidos, con la paleta/tipografía de Fase
+2a como base ya fija (no cambian).
+
+**Alcance de esta ampliación:** `pages/Login.tsx` y `pages/Dashboard.tsx`
+primero, para validar el nuevo lenguaje visual antes de replicarlo al resto
+de la app (Pacientes, Consultas, Agenda, Schedule, Reportes, Settings,
+Landing) en una fase posterior separada.
+
+Direcciones elegidas por la doctora (proceso de brainstorming con mockups
+visuales, tres decisiones):
+
+**1. Layout — "Bento cálido":** grid asimétrico con bloque "hero" de ancho
+completo en la parte superior (fondo degradado `terracotta-700`→`terracotta-900`,
+texto blanco, esquinas muy redondeadas `rounded-[28px]`/`rounded-3xl`) seguido
+de un grid de stat-cards debajo (ej. 3 columnas: Pacientes / Esta semana /
+Alertas, o proporciones asimétricas 1.4fr/1fr si el contenido lo pide). Cards
+elevadas con sombra suave (`shadow-sm`/`shadow-md`, no `shadow-xl` — sutil,
+no pesada).
+
+**2. Componentes — "Definido / con borde":**
+- **Cards:** `bg-white border border-sand-300 rounded-2xl shadow-sm p-6`
+  (o `p-8` en cards principales) — reemplaza el `rounded-[2rem]
+  border-slate-300 shadow-md` genérico usado hoy en casi todas las
+  secciones. Esquina media (`rounded-2xl` = 16px), no la esquina extrema
+  actual.
+- **Botones primarios:** `bg-terracotta-700 hover:bg-terracotta-800
+  text-white font-bold rounded-xl px-6 py-3` — rectangular con esquina
+  media, NO píldora (`rounded-full` descartado en el mockup).
+- **Botones secundarios/outline:** `bg-transparent text-terracotta-800
+  border-[1.5px] border-terracotta-800 rounded-xl px-6 py-3
+  hover:bg-terracotta-50`.
+- **Inputs:** caja con borde visible, label arriba (no flotante):
+  `<label class="block text-[10px] font-bold uppercase tracking-wide
+  text-sand-700 mb-1">` seguido de `<input class="w-full border-[1.5px]
+  border-sand-300 rounded-xl bg-white px-3 py-2.5 text-sm
+  focus:border-terracotta-600 focus:ring-2 focus:ring-terracotta-100
+  outline-none">`.
+
+**3. Motivo decorativo — "Líneas orgánicas finas":** dentro de bloques con
+fondo degradado terracota (el hero del Dashboard, el panel del Login), un
+SVG decorativo posicionado en `absolute inset-0` con `opacity: 0.12-0.15`,
+compuesto de 2-3 trazos ondulados (`<path>` con curvas suaves tipo onda) y
+1-2 círculos finos sin relleno (`stroke`, sin `fill`) — evoca textura de
+piel/cabello de forma abstracta, sin ser literal ni un blob genérico. NO
+usar fotos de stock ni iconografía médica clichê (cruces, estetoscopios de
+fondo, etc.).
+
+**Espaciado:** cards principales pasan de `p-4`/`p-6` a `p-6`/`p-8`; el gap
+entre elementos de grid pasa de `gap-4`/`gap-6` a `gap-4`/`gap-5` en grids
+densos y `gap-6`/`gap-8` en layouts abiertos tipo hero+stats.
+
+**`pages/Login.tsx`:** aplica el mismo hero decorativo (como panel lateral
+en desktop o header en mobile, según el layout actual del archivo — sin
+alterar la lógica de autenticación) y los componentes nuevos (inputs con
+caja, botón primario rectangular).
+
+**`pages/Dashboard.tsx`:** hero de bienvenida ("Buen día, Dra. {nombre}")
+con el degradado+SVG decorativo, debajo el grid de stat-cards con el nuevo
+estilo de card, manteniendo los datos/lógica actuales (no se agregan ni
+quitan métricas — solo se reestructura visualmente cómo se muestran).
+
+**Fuera de alcance de esta ampliación:** todo lo que no sea Login/Dashboard
+(queda para una fase posterior, una vez aprobado el resultado en estas dos
+pantallas); fotos reales (la doctora no tiene fotos listas todavía — se usa
+el motivo SVG decorativo en su lugar); cualquier cambio de lógica, rutas, o
+estructura de datos (sigue fuera de alcance, igual que en Fase 2a).
