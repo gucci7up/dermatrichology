@@ -123,11 +123,9 @@ Bordes redondeados grandes (`rounded-[2rem]`, `rounded-2xl`, `rounded-3xl`)
 ya están en uso extensivo — se mantienen tal cual, encajan con el estilo
 boutique sin cambios.
 
-`components/Layout.tsx` (sidebar): fondo pasa de oscuro (`slate-900`→
-`sand-900` por la sustitución mecánica) a `bg-sand-50` (fondo claro, cambio
-manual — la sustitución mecánica por sí sola dejaría el sidebar oscuro,
-solo con paleta cálida en vez de azulada), item de menú activo usa
-`bg-terracotta-600 text-white`.
+`components/Layout.tsx` (sidebar): ya usa `bg-white`/`slate-100` (claro),
+no oscuro — la sustitución mecánica sola alcanza (`slate-100`→`sand-100`,
+`#d3b3a8`→terracotta), sin cambio manual adicional.
 
 Badges de estado de cita (`Con Seguro`/`Sin Seguro`, `pendiente`/`confirmada`/
 `cancelada` en `AppointmentCard.tsx`) mantienen su lógica semántica de color
