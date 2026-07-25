@@ -129,6 +129,14 @@ const run = async () => {
   assert.equal(appts.body.find((a) => a.id === apptId).estado, 'confirmada', 'appointment status should update');
   console.log('appointment status update works');
 
+  const cedulaApptId = crypto.randomUUID();
+  await call('/appointments', { method: 'POST', body: JSON.stringify({ id: cedulaApptId, paciente_nombre: 'Smoke Cedula Test', paciente_cedula: 'V-12345678', con_seguro: true, especialidad: 'derm', fecha_preferida: '2026-08-02', hora_preferida: '11:00', motivo: 'test', estado: 'pendiente', created_at: new Date().toISOString() }) }, token);
+  const cedulaAppts = await call('/appointments', {}, token);
+  const savedAppt = cedulaAppts.body.find((a) => a.id === cedulaApptId);
+  assert.equal(savedAppt.paciente_cedula, 'V-12345678', 'cedula should round-trip');
+  assert.equal(savedAppt.con_seguro, true, 'con_seguro should round-trip');
+  console.log('appointment cedula/seguro fields work');
+
   let got429 = false;
   for (let i = 0; i < 12; i++) {
     const r = await call('/auth/login', { method: 'POST', body: JSON.stringify({ email: 'ratelimit@test.local', password: 'x' }) });

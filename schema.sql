@@ -20,11 +20,13 @@ CREATE TABLE IF NOT EXISTS appointments (
     paciente_nombre TEXT NOT NULL,
     paciente_telefono TEXT,
     paciente_correo TEXT,
+    paciente_cedula TEXT,
     especialidad TEXT CHECK (especialidad IN ('derm', 'trich')),
     fecha_preferida DATE,
     hora_preferida TEXT,
     fecha_nacimiento DATE,
     motivo TEXT,
+    con_seguro BOOLEAN DEFAULT false,
     estado TEXT CHECK (estado IN ('pendiente', 'confirmada', 'cancelada')) DEFAULT 'pendiente',
     created_at TIMESTAMPTZ DEFAULT NOW()
 );

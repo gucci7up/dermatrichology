@@ -6,9 +6,9 @@ import { assertLengths } from '../lib/validate.js';
 const router = Router();
 
 const APPOINTMENT_COLUMNS = [
-  'id', 'paciente_nombre', 'paciente_telefono', 'paciente_correo',
+  'id', 'paciente_nombre', 'paciente_telefono', 'paciente_correo', 'paciente_cedula',
   'especialidad', 'fecha_preferida', 'hora_preferida', 'fecha_nacimiento',
-  'motivo', 'estado', 'created_at'
+  'motivo', 'con_seguro', 'estado', 'created_at'
 ];
 
 router.get('/', asyncHandler(async (req, res) => {

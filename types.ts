@@ -19,11 +19,13 @@ export interface AppointmentRequest {
   paciente_nombre: string;
   paciente_telefono: string;
   paciente_correo: string;
+  paciente_cedula: string;
   especialidad: 'derm' | 'trich';
   fecha_preferida: string;
   hora_preferida: string; // Añadido para la agenda
   fecha_nacimiento?: string; // Added for prefilling patient data
   motivo: string;
+  con_seguro: boolean;
   estado: 'pendiente' | 'confirmada' | 'cancelada';
   created_at: string;
 }
