@@ -88,10 +88,26 @@ Tailwind actuales por los nuevos tokens equivalentes:
 | `bg-white` (fondo de card sobre bg-cream) | `bg-white` o `bg-cream-card` (sin cambio si ya contrasta) |
 | `border-slate-200`/`border-slate-300` | `border-sand` |
 | `text-slate-900` (texto principal) | `text-charcoal` |
-| `text-blue-600`/`bg-blue-600` (acento/CTA) | `text-terracotta`/`bg-terracotta` |
+| `text-blue-600`/`bg-blue-600` (acento/CTA, uso minoritario en gráficos de Dashboard) | `text-terracotta`/`bg-terracotta` |
 | `hover:bg-black`/`hover:text-blue-800` | `hover:bg-terracotta-dark` |
 | `font-black` en `h1`/`h2`/`h3`/nombres destacados | agregar `font-serif` (Fraunces ya es variable, el peso lo define el propio font-weight de Tailwind) |
 | Resto de texto/labels/botones | sin cambio de familia (Plus Jakarta Sans queda como `font-sans`, ya es el default de Tailwind) |
+
+**Corrección post-exploración de código (detectada al escribir el plan):**
+el acento real y dominante hoy NO es `blue-*` — es un hex fijo hardcodeado
+`#d3b3a8` (mauve/rosado, 97 usos) con hover `#c4a499` (10 usos), repetido
+inline en casi todos los archivos (`Layout.tsx`, `Login.tsx`, `Landing.tsx`,
+`Dashboard.tsx`, `PatientList.tsx`, `PatientDetail.tsx`, `NewPatient.tsx`,
+`NewConsultation.tsx`, `Settings.tsx`, `App.tsx`, `AuthGuard.tsx`,
+`ErrorBoundary.tsx`). Este es el reemplazo prioritario:
+
+| Antes (hex hardcodeado) | Después |
+|---|---|
+| `#d3b3a8` (cualquier uso: bg, text, border, ring, inline style) | `#C15F3C` (terracotta DEFAULT) |
+| `#c4a499` (hover) | `#8C4429` (terracotta dark) |
+
+`blue-*` queda como reemplazo secundario, limitado a los pocos usos en
+gráficos de `Dashboard.tsx` (recharts) — mismo mapeo a terracotta.
 
 Bordes redondeados grandes (`rounded-[2rem]`, `rounded-2xl`, `rounded-3xl`)
 ya están en uso extensivo — se mantienen tal cual, encajan con el estilo
