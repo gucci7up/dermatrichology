@@ -164,11 +164,21 @@ export interface AppSettings {
   updated_at?: string;
 }
 
+export type UserRole = 'admin' | 'doctor' | 'assistant';
+
 export interface UserProfile {
   id: string;
-  role: 'admin' | 'doctor' | 'assistant';
+  email: string;
+  role: UserRole;
   full_name: string;
   updated_at?: string;
+}
+
+export interface NewUserInput {
+  email: string;
+  password: string;
+  role: UserRole;
+  full_name: string;
 }
 
 export interface Prescription {

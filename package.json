@@ -12,7 +12,8 @@
     "preview": "vite preview",
     "server": "node server/index.js",
     "start": "node server/index.js",
-    "create-admin": "node server/scripts/create-admin.js"
+    "create-admin": "node server/scripts/create-admin.js",
+    "test": "node --experimental-test-module-mocks --test \"server/**/*.test.js\""
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",

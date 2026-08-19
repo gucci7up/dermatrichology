@@ -28,6 +28,11 @@ export const AuthGuard: React.FC<{ children: React.ReactNode }> = ({ children })
         return <Navigate to="/" replace />;
     }
 
+    // User management is admin-only (the API enforces this too).
+    if (location.pathname.startsWith('/users') && role !== 'admin') {
+        return <Navigate to="/" replace />;
+    }
+
     // If accessing landing public config, also restrict (already did via menu, but hard route check)
     // Note: /booking is public if we wanted it to be truly public, but Layout excludes it.
     // However, if we are in admin layout mode and user is doctor trying to edit it?

@@ -12,7 +12,8 @@ import {
   ChevronRight,
   LogOut,
   Globe,
-  Search as SearchIcon
+  Search as SearchIcon,
+  UserCog
 } from 'lucide-react';
 import { DB } from '../services/db';
 import { AppSettings } from '../types';
@@ -86,6 +87,7 @@ export const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
     { to: '/consultations', icon: Stethoscope, label: 'Consultas', access: ['admin', 'doctor'] },
     { to: '/agenda', icon: CalendarClock, label: 'Agenda', access: ['admin', 'doctor'] },
     { to: '/reports', icon: FileText, label: 'Reportes', access: ['admin', 'doctor'] },
+    { to: '/users', icon: UserCog, label: 'Usuarios', access: ['admin'] },
     { to: '/settings', icon: Settings, label: 'Configuración', access: ['admin'] },
     { to: '/schedule', icon: CalendarClock, label: 'Agendar Citas', access: ['assistant'] },
   ];

@@ -16,6 +16,7 @@ const Landing = lazy(() => import('./pages/Landing'));
 const Login = lazy(() => import('./pages/Login'));
 const Schedule = lazy(() => import('./pages/Schedule'));
 const Agenda = lazy(() => import('./pages/Agenda'));
+const Users = lazy(() => import('./pages/Users'));
 import { AuthGuard } from './components/AuthGuard';
 import { DB } from './services/db';
 
@@ -122,6 +123,7 @@ const App: React.FC = () => {
                     <Route path="/settings" element={<Settings />} />
                     <Route path="/schedule" element={<Schedule />} />
                     <Route path="/agenda" element={<Agenda />} />
+                    <Route path="/users" element={<Users />} />
                   </Routes>
                 </Layout>
               </AuthGuard>

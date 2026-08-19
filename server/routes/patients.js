@@ -2,8 +2,14 @@ import { Router } from 'express';
 import { query } from '../db.js';
 import { asyncHandler } from '../lib/asyncHandler.js';
 import { assertLengths } from '../lib/validate.js';
+import { requireRole } from '../lib/requireRole.js';
 
 const router = Router();
+
+// The assistant only needs to read the patient list to book appointments;
+// creating and editing clinical records stays with admin and doctor.
+const canRead = requireRole('admin', 'doctor', 'assistant');
+const canWrite = requireRole('admin', 'doctor');
 
 const PATIENT_COLUMNS = [
   'id', 'nombre_completo', 'fecha_nacimiento', 'sexo', 'telefono', 'correo',
@@ -11,18 +17,18 @@ const PATIENT_COLUMNS = [
   'ocupacion', 'created_at'
 ];
 
-router.get('/', asyncHandler(async (req, res) => {
+router.get('/', canRead, asyncHandler(async (req, res) => {
   const { rows } = await query('SELECT * FROM patients ORDER BY created_at DESC');
   res.json(rows);
 }));
 
-router.get('/:id', asyncHandler(async (req, res) => {
+router.get('/:id', canRead, asyncHandler(async (req, res) => {
   const { rows } = await query('SELECT * FROM patients WHERE id = $1', [req.params.id]);
   if (!rows[0]) return res.status(404).json({ error: 'Not found' });
   res.json(rows[0]);
 }));
 
-router.post('/', asyncHandler(async (req, res) => {
+router.post('/', canWrite, asyncHandler(async (req, res) => {
   assertLengths(req.body, 8_000_000);
   const keys = PATIENT_COLUMNS.filter((c) => req.body[c] !== undefined);
   const values = keys.map((k) => req.body[k]);
@@ -38,7 +44,7 @@ router.post('/', asyncHandler(async (req, res) => {
   res.status(204).end();
 }));
 
-router.patch('/:id', asyncHandler(async (req, res) => {
+router.patch('/:id', canWrite, asyncHandler(async (req, res) => {
   assertLengths(req.body, 8_000_000);
   const keys = PATIENT_COLUMNS.filter((c) => c !== 'id' && req.body[c] !== undefined);
   if (keys.length === 0) return res.status(400).json({ error: 'No fields to update' });
@@ -48,7 +54,7 @@ router.patch('/:id', asyncHandler(async (req, res) => {
   res.status(204).end();
 }));
 
-router.delete('/:id', asyncHandler(async (req, res) => {
+router.delete('/:id', canWrite, asyncHandler(async (req, res) => {
   await query('DELETE FROM patients WHERE id = $1', [req.params.id]);
   res.status(204).end();
 }));

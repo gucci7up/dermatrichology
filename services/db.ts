@@ -1,5 +1,5 @@
 import { api } from './api';
-import { Patient, DermHistory, TrichHistory, Session, LabResult, Treatment, AppointmentRequest, AppSettings, UserProfile, Prescription } from '../types';
+import { Patient, DermHistory, TrichHistory, Session, LabResult, Treatment, AppointmentRequest, AppSettings, UserProfile, NewUserInput, Prescription } from '../types';
 
 export const DB = {
   settings: {
@@ -33,6 +33,18 @@ export const DB = {
         console.error('DB: Error fetching profile:', e);
         throw e;
       }
+    },
+    getAll: async (): Promise<UserProfile[]> => {
+      return await api<UserProfile[]>('/profiles');
+    },
+    create: async (user: NewUserInput): Promise<UserProfile> => {
+      return await api<UserProfile>('/profiles', { method: 'POST', body: JSON.stringify(user) });
+    },
+    update: async (id: string, changes: Partial<NewUserInput>): Promise<UserProfile> => {
+      return await api<UserProfile>(`/profiles/${id}`, { method: 'PATCH', body: JSON.stringify(changes) });
+    },
+    delete: async (id: string) => {
+      await api(`/profiles/${id}`, { method: 'DELETE' });
     }
   },
 

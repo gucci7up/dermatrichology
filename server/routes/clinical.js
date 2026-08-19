@@ -1,7 +1,11 @@
 import { Router } from 'express';
 import { createClinicalRouter } from '../lib/crudRouter.js';
+import { requireRole } from '../lib/requireRole.js';
 
 const router = Router();
+
+// Clinical records are off-limits to the assistant role.
+router.use(requireRole('admin', 'doctor'));
 
 router.use(createClinicalRouter({
   path: 'derm-histories',

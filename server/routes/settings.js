@@ -2,6 +2,7 @@ import { Router } from 'express';
 import { query } from '../db.js';
 import { asyncHandler } from '../lib/asyncHandler.js';
 import { assertLengths } from '../lib/validate.js';
+import { requireRole } from '../lib/requireRole.js';
 
 const router = Router();
 
@@ -20,12 +21,13 @@ const SETTINGS_COLUMNS = [
   'doctor_name', 'doctor_profession', 'doctor_photo_url'
 ];
 
-router.get('/', asyncHandler(async (req, res) => {
+// Every signed-in role reads settings (the layout renders them); only admin writes.
+router.get('/', requireRole('admin', 'doctor', 'assistant'), asyncHandler(async (req, res) => {
   const { rows } = await query('SELECT * FROM settings LIMIT 1');
   res.json(rows[0] || DEFAULT_SETTINGS);
 }));
 
-router.put('/', asyncHandler(async (req, res) => {
+router.put('/', requireRole('admin'), asyncHandler(async (req, res) => {
   assertLengths(req.body, 8_000_000);
   const keys = SETTINGS_COLUMNS.filter((c) => req.body[c] !== undefined);
   if (keys.length === 0) return res.status(400).json({ error: 'No fields to update' });
